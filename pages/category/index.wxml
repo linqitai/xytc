@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="common-header-xian"></view>
+  <!-- 搜索框 -->
+  <view class="index-search-box">
+    <navigator class="index-search " hover-class="none" openType="navigate" url="../search/index">
+      <view class="index-cont-search t-c">
+        <icon class="text-center" color="{{searchColor}}" size="{{searchSize}}" type="search"></icon>
+        <text>{{searchName}}</text>
+      </view>
+    </navigator>
+  </view>
+  <view class='classify_list'>
+    <label class="classify {{curClassify==item.category_id?'classify_cur':''}}" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.category_id}}" data-index="{{index}}" bindtap="selectClassify">{{item.name}}</label>
+  </view>
+  <view class="cate-content">
+    <!-- 左侧 一级分类 -->
+    <scroll-view class="cate-left f-28 " scroll-y="true">
+      <text bindtap="selectNav" class="type-nav {{curNav==item.category_id?'selected':''}}" data-id="{{item.category_id}}" data-index="{{index}}" wx:for="{{list[curClassifyIndex].child}}" wx:key="{{index}}">{{item.name}}</text>
+    </scroll-view>
+
+    <!-- 右侧 商品列表 -->
+    <view class="cate-right b-f">
+      <!-- <view class="container goodsList" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'> -->
+      <!-- <refresh-view id='refreshView' backgroundColor="#000" bind:onRefresh="onPullDownRefresh" bind:onPullState="_pullState"/> -->
+        <scroll-view class='goodsList' lower-threshold="50" scroll-top="{{scrollTop}}" scroll-y="true" bindscrolltoupper="scrollToUpper">
+        
+          <view class="itemsBox" data-id="{{item.goods_id}}" data-index="{{index}}" wx:for="{{goodsList}}" wx:key="{{index}}">
+            <view class='items'>
+              <view class="img">
+                <image class='image' src="{{item.image[0].file_path}}" lazy-load="true"></image>
+              </view>
+              <view class="content">
+                <view class='title'>
+                  <text class='text'>{{item.goods_name}}</text>
+                </view>
+                <view class='price' wx:if="{{!item.isOpen}}">
+                  <text class='text'>￥{{item.goods_min_price}}/斤</text>
+                </view>
+              </view>
+              <!-- 多规格 -->
+              <view class="btn" data-index="{{index}}" wx:if="{{item.is_mul_spec==1}}" bindtap='toggleBtn'>
+                <text class="icon icon-{{item.isOpen?'up':'down'}} iconStyle"></text>
+              </view>
+              <!-- 单规格 -->
+              <view class="btn" wx:if="{{item.is_mul_spec==0}}">
+                <text class='icon icon-add2 iconStyle' data-goodsid="{{item.goods_id}}" bindtap='addToCart'></text>
+              </view>
+            </view>
+            <!-- 多规格展示 -->
+            <view class='specification' wx:if="{{item.isOpen}}">
+              <view class='specificationItem' wx:for="{{item.spec}}" wx:for-item="spec" wx:key="{{index}}">
+                <view class='content'>
+                  <view class='line1'>{{spec.spec_name}}斤</view>
+                  <view class='line2'>￥: {{spec.goods_price}}</view>
+                </view>
+                <view class='btn'>
+                  <text class='icon icon-add2 iconStyle' data-goodsid="{{spec.goods_id}}" data-specid='{{spec.spec_sku_id}}' bindtap='addToCart'></text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      <!-- </view> -->
+    </view>
+  </view>
+</view>

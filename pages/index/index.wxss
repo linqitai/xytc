@@ -1,0 +1,34 @@
+/* 搜索框组件 */
+@import "components/search/search.wxss";
+
+/* banner组件 */
+@import "components/banner/banner.wxss";
+
+.cate{
+  background-color: white;
+  padding: 30rpx 0rpx;
+  overflow: hidden;
+}
+.cate .cateItem{
+  float: left;
+  display: flex;
+  flex-direction: column;
+  width: 120rpx;
+  height: 120rpx;
+  padding: 0 28rpx;
+}
+.cate .cateItem .picBox{
+  text-align: center;
+}
+.cate .cateItem .pic{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 70rpx;
+  background-color: forestgreen;
+}
+.cate .cateItem .name{
+  width: 100%;
+  font-size: 26rpx;
+  text-align: center;
+  color: #646464;
+}
