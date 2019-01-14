@@ -6,7 +6,7 @@ App({
   globalData: {
     user_id: null,
   },
-
+  mapKey:'4AFBZ-OADKJ-SAZFN-KYM6M-F6IV3-7ABJ7',
   api_root: '', // api地址
   siteInfo: require('siteinfo.js'),
 
@@ -178,7 +178,11 @@ App({
     wx.showNavigationBarLoading();
     let App = this;
     data.wxapp_id = App.siteInfo.uniacid;
-    data.token = wx.getStorageSync('token');
+    if (data.user_info){
+      console.log("login")
+    }else{
+      data.token = wx.getStorageSync('token');
+    }
     wx.request({
       url: App.api_root + url,
       header: {

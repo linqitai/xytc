@@ -16,8 +16,15 @@
     "pages/address/index",
     "pages/address/create",
     "pages/address/detail",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/address/position/position",
+    "pages/address/position/sureAddress"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "开启地图定位功能后可方便您选择自己的地址"
+    }
+  },
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "",

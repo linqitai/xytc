@@ -1,0 +1,21 @@
+<!-- <view class='wrapper'>
+  <textarea class='sureAddress' bindblur="bindTextAreaBlur" auto-height placeholder="地标性建筑物/小区/花园/" value='{{address}}'/>
+</view> -->
+<view class="page-body">
+  <!-- <view class="page-section">
+    <view class="page-section-title">输入区域高度自适应，不会出现滚动条</view>
+    <view class="textarea-wrp">
+      <textarea bindblur="bindTextAreaBlur" auto-height />
+    </view>
+  </view> -->
+
+  <view class="page-section">
+    <view class="page-section-title">填写楼号门牌有助于送货员快速准确找到您的地址</view>
+    <view class="textarea-wrp">
+      <textarea style="height: 3em" placeholder="详细地址" value='{{address}}' bindinput='bindTextAreaInput'/>
+    </view>
+    <view class="padding-box m-top35 profile-btn">
+      <button bindtap='sure'>确定</button>
+    </view>
+  </view>
+</view>

@@ -30,6 +30,7 @@ Page({
    * 添加新地址
    */
   createAddress: function() {
+    wx.setStorageSync('operate', 'add')
     wx.navigateTo({
       url: './create'
     });
@@ -39,8 +40,9 @@ Page({
    * 编辑地址
    */
   editAddress: function(e) {
+    wx.setStorageSync('operate', 'edit')
     wx.navigateTo({
-      url: "./detail?address_id=" + e.currentTarget.dataset.id
+      url: "./create?address_id=" + e.currentTarget.dataset.id
     });
   },
 

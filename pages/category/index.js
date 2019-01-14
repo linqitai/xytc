@@ -22,26 +22,80 @@ Page({
     this.refreshView = this.selectComponent("#refreshView")
 
     // 获取分类列表
-    this.getCategoryList();
+    // this.getCategoryList();
 
   },
   onShow: function (e) {
-    console.log(e,'e')
+    console.log(wx.getStorageSync('category_id'),"wx.getStorageSync('category_id')")
     // 获取分类列表
     this.getCategoryList();
   },
-  addToCart: function(e) {
-    console.log(e,'e')
+  subToCart: function(e) {
+    console.log(e, 'e')
     let _this = this;
+    let goodsId = e.currentTarget.dataset.goodsid
+    let specId = e.currentTarget.dataset.specid
     var pramas = {
-      goods_id: e.currentTarget.dataset.goodsid,
+      goods_id: goodsId,
+      goods_num: 1,
+      goods_sku_id: specId ? specId : ''
+    }
+    console.log(pramas, "pramas")
+    App._get('cart/sub', pramas, function (result) {
+      if (result.code == 1) {
+        // App.toast('-1')
+        for (var i = 0; i < goodsList.length; i++) {
+          if (specId) {
+            for (var j = 0; j < goodsList[i].spec.length; j++) {
+              if (goodsList[i].spec[j].spec_sku_id == specId) {
+                goodsList[i].spec[j].cart_num = parseInt(goodsList[i].spec[j].cart_num) - 1;
+                break;
+              }
+            }
+          } else {
+            if (goodsList[i].goods_id == goodsId) {
+              goodsList[i].spec[0].cart_num = parseInt(goodsList[i].spec[0].cart_num) - 1;
+              break;
+            }
+          }
+        }
+        _this.setData({
+          goodsList
+        })
+      }
+    });
+  },
+  addToCart: function(e) {
+    let _this = this;
+    let goodsId = e.currentTarget.dataset.goodsid
+    let specId = e.currentTarget.dataset.specid
+    var pramas = {
+      goods_id: goodsId,
       goods_num:1,
-      goods_sku_id: e.currentTarget.dataset.specid?e.currentTarget.dataset.specid:''
+      goods_sku_id: specId ? specId:''
     }
     console.log(pramas,"pramas")
     App._get('cart/add', pramas, function (result) {
       if (result.code == 1) {
-        App.toast('+1')
+        // App.toast('+1')
+        for (var i = 0; i < goodsList.length; i++) {
+          if (specId){
+            for(var j=0;j<goodsList[i].spec.length;j++) {
+              if (goodsList[i].spec[j].spec_sku_id == specId) {
+                goodsList[i].spec[j].cart_num = parseInt(goodsList[i].spec[j].cart_num) + 1;
+                break;
+              }
+            }
+          }else{
+            if (goodsList[i].goods_id == goodsId) {
+              goodsList[i].spec[0].cart_num = parseInt(goodsList[i].spec[0].cart_num) + 1;
+              break;
+            }
+          }
+        }
+        _this.setData({
+          goodsList
+        })
       }
     });
   },
@@ -121,12 +175,27 @@ Page({
     App._get('category/lists', {}, function (result) {
       // console.log(result,"result")
       if(result.code == 1) {
+        var list = result.data.list;
+        var index = '';
+        var category_id = wx.getStorageSync('category_id')
+        if (category_id) {
+          for (var i = 0; i < list.length; i++) {
+            if (list[i].category_id == category_id) {
+              index = i;
+            }
+          }
+        }
+        console.log(index,"index")
         _this.setData({
-          list: result.data.list,
-          curClassify: result.data.list[0].category_id,
-          curNav: result.data.list[0].child[0].category_id
+          list: list,
+          curClassify: index != '' ? category_id:list[0].category_id,
+          curNav: index != '' ? list[index].child[0].category_id:list[0].child[0].category_id,
+          curClassifyIndex: index != '' ? index:0
         });
-        _this.getGoodsList(result.data.list[0].child[0].category_id)
+        console.log(_this.data.curClassify,'curClassify')
+        console.log(_this.data.curNav, 'curNav')
+        var navid = index != '' ? list[index].child[0].category_id : list[0].child[0].category_id
+        _this.getGoodsList(navid)
       }
     });
   },

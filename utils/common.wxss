@@ -41,6 +41,13 @@ page {
   flex-wrap: wrap;
 }
 
+.left{
+  float: left;
+}
+.right{
+  float: right;
+}
+
 .flex-box {
   flex: 1;
 }

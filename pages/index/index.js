@@ -25,7 +25,17 @@ Page({
     // 获取首页数据
     this.getIndexData();
   },
-
+  /**
+   * 跳转到分类页面
+   */
+  toCategoryView: function(e) {
+    var category_id = e.currentTarget.dataset.categoryid;
+    console.log(category_id,"category_id")
+    wx.setStorageSync('category_id', category_id)
+    wx.reLaunch({
+      url: '/pages/category/index'
+    })
+  },
   /**
    * 获取首页数据
    */

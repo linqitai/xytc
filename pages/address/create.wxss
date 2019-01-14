@@ -1,11 +1,35 @@
+.flag{
+  font-size: 28rpx;
+  padding-left: 24rpx;
+}
+.flagTrue{
+  color:#48C23D
+}
+.flagFalse{
+  color:#FF495E
+}
+.dis-flex .detail{
+  display: flex;
+  align-items: center;
+}
+.dis-flex .detail .inputDetail{
+  flex: auto;
+}
+.dis-flex .detail .iconMap{
+  flex: 0 0 50rpx;
+  color: #c7c7c7;
+}
 .profile-list .admin {
   padding-left: 15px;
   font-size: 30rpx;
   color: #333;
 }
-
-.address-box .left-name {
-  width: 85px;
+.left-name {
+  /* width: 85px; */
+  flex: 0 0 190rpx !important;
+}
+.right-cont{
+  flex: auto !important;
 }
 
 .address-cont-title .list {
@@ -99,12 +123,14 @@ picker-view-column view {
   background-color: #eee;
 }
 
-.address-box .right-cont input {
-  width: 100%;
+/* .address-box .right-cont input {
+  flex: auto;
   font-size: 30rpx;
   color: #444;
+} */
+.profile-btn{
+  margin-top: 20rpx;
 }
-
 .profile-btn button {
   background: #ff495e;
   color: white;

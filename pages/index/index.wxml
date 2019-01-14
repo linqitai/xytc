@@ -1,5 +1,5 @@
 <view class="container">
-
+  <view class="common-header-xian"></view>
   <scroll-view bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-y="true" style="position:absolute; top:0; left:0; right:0; bottom:0;">
     <block wx:for="{{items}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
       <!-- 搜索框 -->
@@ -11,13 +11,14 @@
         <include src="components/banner/banner.wxml" />
       </block>
     </block>
-    <view class='cate'>
-      <navigator hover-class="none" url="../category/index?category_id={{item.category_id}}" class='cateItem' wx:for="{{cate}}" wx:key="index">
+    <!-- 一级分类 -->
+    <view class='cate m-top20'>
+      <view class='cateItem' wx:for="{{cate}}" wx:key="index" data-categoryid='{{item.category_id}}' bindtap='toCategoryView'>
         <view class='picBox'><image class='pic' mode="aspectFill" src='{{item.image.file_path}}'></image></view>
         <view class='name'>
           {{item.name}}
         </view>
-      </navigator>
+      </view>
     </view>
     <!-- 商品推荐 -->
     <view class="recommended-index-list m-top20">
