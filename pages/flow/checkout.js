@@ -100,6 +100,7 @@ Page({
    * 选择收货地址
    */
   selectAddress: function() {
+    wx.setStorageSync('operate', 'add');
     wx.navigateTo({
       url: '../address/' + (this.data.exist_address ? 'index?from=flow' : 'create')
     });

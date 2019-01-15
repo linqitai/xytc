@@ -357,6 +357,7 @@ Page({
     });
     var url;
     var operate = wx.getStorageSync('operate')
+    console.log(operate);
     if(operate == 'add') {
       url = 'address/add'
     } else if (operate == 'edit') {
