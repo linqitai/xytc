@@ -63,6 +63,16 @@
   <!-- 商品金额 -->
   <view class="flow-all-money b-f padding-box m-top20">
     <view class="dis-flex flow-all-list">
+      <text class="flex-five">配送时间:</text>
+      <view class="flex-five t-r">
+      <picker bindchange="bindPickerChange" value="{{post_dis_type}}" range="{{distribution_time}}">
+        <view class="picker">
+        {{distribution_time[post_dis_type]}}
+        </view>
+      </picker>
+      </view>
+    </view>
+    <view class="dis-flex flow-all-list">
       <text class="flex-five">商品总金额:</text>
       <view class="flex-five t-r">
         <text class="col-m">￥{{order_total_price}}</text>
@@ -78,6 +88,17 @@
         <view wx:else>
           <text class="col-7">请先选择配送地址</text>
         </view>
+      </view>
+    </view>
+    <view class="dis-flex flow-all-list">
+      <text class="flex-three" style='width:43%'>支付方式:</text>
+      <view class="flex-seven t-r" style=''>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" wx:for="{{pay_type}}">
+          <radio value="{{item.value}}" checked="{{item.checked}}" name="pay_type"/>
+          {{item.name}}
+        </label>
+      </radio-group>
       </view>
     </view>
   </view>

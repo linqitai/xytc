@@ -1,5 +1,4 @@
 let App = getApp();
-
 Page({
 
   /**
@@ -12,13 +11,28 @@ Page({
     address: null, // 默认收货地址
     exist_address: false, // 是否存在收货地址
     goods: {}, // 商品信息
-
+    distribution_time : null, //配送时间
+    pay_type:{},
     disabled: false,
-
+    post_pay_type :10,
+    post_dis_type :0,
     hasError: false,
     error: '',
   },
 
+  radioChange: function (e) {
+    this.setData({
+      post_pay_type : e.detail.value
+    })
+  },
+  
+  bindPickerChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      post_dis_type: e.detail.value,
+     
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -64,6 +78,8 @@ Page({
         goods_id: options.goods_id,
         goods_num: options.goods_num,
         goods_sku_id: options.goods_sku_id,
+        pay_type: options.pay_type,
+        dis_type: options.dis_type,
       }, function(result) {
         callback(result);
       });
@@ -71,7 +87,9 @@ Page({
 
     // 购物车结算
     else if (options.order_type === 'cart') {
-      App._get('order/cart', {}, function(result) {
+      App._get('order/cart', {
+
+        }, function(result) {
         callback(result);
       });
     }
@@ -92,12 +110,12 @@ Page({
    */
   submitOrder: function() {
     let _this = this,
-      options = _this.data.options;
-
+      options = _this.data.options,
+      post_pay_type = _this.data.post_pay_type,
+      post_dis_type = _this.data.post_dis_type;
     if (_this.data.disabled) {
       return false;
     }
-
     if (_this.data.hasError) {
       App.showError(_this.data.error);
       return false;
@@ -114,28 +132,37 @@ Page({
         });
         return false;
       }
-      // 发起微信支付
-      wx.requestPayment({
-        timeStamp: result.data.payment.timeStamp,
-        nonceStr: result.data.payment.nonceStr,
-        package: 'prepay_id=' + result.data.payment.prepay_id,
-        signType: 'MD5',
-        paySign: result.data.payment.paySign,
-        success: function(res) {
-          // 跳转到订单详情
-          wx.redirectTo({
-            url: '../order/detail?order_id=' + result.data.order_id,
-          });
-        },
-        fail: function() {
-          App.showError('订单未支付', function() {
-            // 跳转到未付款订单
+
+      //条件为线上支付 
+      if(post_pay_type==10){
+        // 发起微信支付
+        wx.requestPayment({
+          timeStamp: result.data.payment.timeStamp,
+          nonceStr: result.data.payment.nonceStr,
+          package: 'prepay_id=' + result.data.payment.prepay_id,
+          signType: 'MD5',
+          paySign: result.data.payment.paySign,
+          success: function (res) {
+            // 跳转到订单详情
             wx.redirectTo({
-              url: '../order/index?type=payment',
+              url: '../order/detail?order_id=' + result.data.order_id,
             });
-          });
-        },
-      });
+          },
+          fail: function () {
+            App.showError('订单未支付', function () {
+              // 跳转到未付款订单
+              wx.redirectTo({
+                url: '../order/index?type=payment',
+              });
+            });
+          },
+        });
+      }else{
+        wx.redirectTo({
+          url: '../order/detail?order_id=' + result.data.order_id,
+        });
+      }
+      
     };
 
     // 按钮禁用, 防止二次提交
@@ -152,6 +179,8 @@ Page({
         goods_id: options.goods_id,
         goods_num: options.goods_num,
         goods_sku_id: options.goods_sku_id,
+        pay_type: post_pay_type,
+        dis_type: post_dis_type,
       }, function(result) {
         // success
         console.log('success');
@@ -169,7 +198,10 @@ Page({
 
     // 创建订单-购物车结算
     else if (options.order_type === 'cart') {
-      App._post_form('order/cart', {}, function(result) {
+      App._post_form('order/cart', {
+        pay_type: post_pay_type,
+        dis_type: post_dis_type,
+      }, function(result) {
         // success
         console.log('success');
         callback(result);
@@ -218,6 +250,5 @@ Page({
       url
     });
   }
-
-
 });
+

@@ -16,3 +16,6 @@
 .flow-header-left {
   padding-left: 90rpx;
 }
+.picker{
+  padding:0px;
+}

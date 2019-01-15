@@ -41,13 +41,6 @@ page {
   flex-wrap: wrap;
 }
 
-.left{
-  float: left;
-}
-.right{
-  float: right;
-}
-
 .flex-box {
   flex: 1;
 }
@@ -166,6 +159,7 @@ page {
 
 .f-26 {
   font-size: 26rpx;
+  padding-left:10rpx;
 }
 
 .f-24 {
@@ -260,7 +254,7 @@ page {
 }
 
 .twolist-hidden {
-  display: -webkit-box;
+  /*display: -webkit-box;*/
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
