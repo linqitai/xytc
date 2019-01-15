@@ -23,6 +23,14 @@
     <view class="cate-right b-f">
       <!-- <view class="container goodsList" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'> -->
       <!-- <refresh-view id='refreshView' backgroundColor="#000" bind:onRefresh="onPullDownRefresh" bind:onPullState="_pullState"/> -->
+        <view class='goodsOrder'>
+          <view class="orderType {{currentOrder==0?'select':''}}" data-index='0' bindtap='orderTap'>默认排序</view>
+          <view class="orderType {{currentOrder==1?'select':''}}" data-index='1' bindtap='orderTap'>销量排序</view>
+          <view class="orderType {{currentOrder==2?'select':''}}" data-index='2' bindtap='orderTap'>
+            价格排序
+            <!-- <text class="icon icon-{{sortPrice?'arrow-up':'arrow-down'}}"></text> -->
+          </view>
+        </view>
         <scroll-view class='goodsList' lower-threshold="50" scroll-top="{{scrollTop}}" scroll-y="true" bindscrolltoupper="scrollToUpper">
         
           <view class="itemsBox" data-id="{{item.goods_id}}" data-index="{{index}}" wx:for="{{goodsList}}" wx:key="{{index}}">
@@ -64,6 +72,7 @@
               </view>
             </view>
           </view>
+          <view style='height:60rpx;'></view>
         </scroll-view>
       <!-- </view> -->
     </view>

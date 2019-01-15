@@ -14,6 +14,7 @@ Page({
     category_id:'',
     goodsList:[],
     list: [],
+    currentOrder:''
   },
 
   onLoad: function () {
@@ -98,6 +99,32 @@ Page({
         })
       }
     });
+  },
+  orderTap(e) {
+    var index = e.currentTarget.dataset.index;
+    console.log(index,"index")
+    this.setData({
+      currentOrder:index
+    })
+    // 排序 all默认排序 sales销量排序 price价格排序
+    // sortType: 'all',    // 排序类型
+    //   sortPrice: false,   // 价格从低到高
+    if (index == 0){
+      this.setData({
+        sortType:'all'
+      })
+    }else if(index == 1){
+      this.setData({
+        sortType: 'sales'
+      })
+    } else if (index == 2) {
+      var sortPrice = this.data.sortPrice;
+      this.setData({
+        sortType: 'price',
+        sortPrice: !sortPrice
+      })
+    }
+    this.getGoodsList(this.data.category_id)
   },
   //触摸开始
   handletouchstart: function (event) {
@@ -195,6 +222,9 @@ Page({
         console.log(_this.data.curClassify,'curClassify')
         console.log(_this.data.curNav, 'curNav')
         var navid = index != '' ? list[index].child[0].category_id : list[0].child[0].category_id
+        _this.setData({
+          category_id: navid
+        })
         _this.getGoodsList(navid)
       }
     });
@@ -209,8 +239,8 @@ Page({
     this.setData({
       curClassify,
       curClassifyIndex,
-      curNav: _this.data.list[curClassifyIndex].child[0].category_id
-      // scrollTop: 0
+      curNav: _this.data.list[curClassifyIndex].child[0].category_id,
+      category_id: _this.data.list[curClassifyIndex].child[0].category_id
     });
     this.getGoodsList(_this.data.curNav);
   },
