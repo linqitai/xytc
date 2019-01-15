@@ -62,7 +62,7 @@
             <view class='specification' wx:if="{{item.isOpen}}">
               <view class='specificationItem' wx:for="{{item.spec}}" wx:for-item="spec" wx:key="{{index}}">
                 <view class='content'>
-                  <view class='line1'>{{spec.spec_name}}斤</view>
+                  <view class='line1'>{{spec.spec_name}}</view>
                   <view class='line2'>￥: {{spec.goods_price}}</view>
                 </view>
                 <view class='btn'>
