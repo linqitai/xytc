@@ -17,7 +17,7 @@
         <text class="title f-32 twolist-hidden">{{detail.goods_name}}</text>
       </view>
       <view class="money-box">
-        <text class="num">￥{{goods_price}}</text>
+        <text class="num">￥{{goods_price}}{{unit}}</text>
         <text class="del" wx:if="{{line_price>0}}">￥{{line_price}}</text>
       </view>
       <view class="goods-sales-box f-28 dis-flex">
