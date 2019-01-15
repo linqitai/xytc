@@ -37,6 +37,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options,"options")
     // 当前页面参数
     this.data.options = options;
     console.log(options);
@@ -101,6 +102,7 @@ Page({
    */
   selectAddress: function() {
     wx.setStorageSync('operate', 'add');
+    wx.setStorageSync('_from', 'flow')
     wx.navigateTo({
       url: '../address/' + (this.data.exist_address ? 'index?from=flow' : 'create')
     });

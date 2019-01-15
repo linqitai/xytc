@@ -366,9 +366,24 @@ Page({
     // 提交到后端
     App._post_form(url, values, function(result) {
       App.showSuccess(result.msg, function() {
-        wx.redirectTo({
-          url: `/pages/address/index`
-        });
+        console.log(wx.getStorageSync('_from'),"wx.getStorageSync('_from')")
+        if (wx.getStorageSync('_from')=='flow'){
+          var addToUrl = wx.getStorageSync('addToUrl');
+          if (addToUrl){
+            wx.redirectTo({
+              url: "/pages/flow/checkout?" + addToUrl
+            });
+          }else{
+            wx.redirectTo({
+              url: "/pages/flow/checkout?order_type=cart"
+            });
+          }
+        }else{
+          wx.redirectTo({
+            url: `/pages/address/index`
+          });
+        }
+        
       });
     }, false, function() {
       // 解除禁用
