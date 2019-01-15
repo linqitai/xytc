@@ -43,7 +43,8 @@
                   <text class='text'>{{item.goods_name}}</text>
                 </view>
                 <view class='price' wx:if="{{!item.isOpen}}">
-                  <text class='text'>￥{{item.goods_min_price}}/斤</text>
+                  <text class='text' wx:if="{{item.is_mul_spec==0}}">￥{{item.goods_min_price}}{{item.spec[0].unit}}</text>
+                  <text class='text' wx:if="{{item.is_mul_spec==1}}">￥{{item.goods_min_price}}~{{item.goods_max_price}}</text>
                 </view>
               </view>
               <!-- 多规格 -->
@@ -61,7 +62,7 @@
             <view class='specification' wx:if="{{item.isOpen}}">
               <view class='specificationItem' wx:for="{{item.spec}}" wx:for-item="spec" wx:key="{{index}}">
                 <view class='content'>
-                  <view class='line1'>{{spec.spec_name}}斤</view>
+                  <view class='line1'>{{spec.spec_name}}</view>
                   <view class='line2'>￥: {{spec.goods_price}}</view>
                 </view>
                 <view class='btn'>

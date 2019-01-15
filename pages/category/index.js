@@ -216,12 +216,12 @@ Page({
         _this.setData({
           list: list,
           curClassify: index != '' ? category_id:list[0].category_id,
-          curNav: index != '' ? list[index].child[0].category_id:list[0].child[0].category_id,
+          curNav: index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id),
           curClassifyIndex: index != '' ? index:0
         });
         console.log(_this.data.curClassify,'curClassify')
         console.log(_this.data.curNav, 'curNav')
-        var navid = index != '' ? list[index].child[0].category_id : list[0].child[0].category_id
+        var navid = index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id)
         _this.setData({
           category_id: navid
         })
@@ -239,8 +239,8 @@ Page({
     this.setData({
       curClassify,
       curClassifyIndex,
-      curNav: _this.data.list[curClassifyIndex].child[0].category_id,
-      category_id: _this.data.list[curClassifyIndex].child[0].category_id
+      curNav: _this.data.list[curClassifyIndex].child ? _this.data.list[curClassifyIndex].child[0].category_id : _this.data.list[curClassifyIndex].category_id,
+      category_id: _this.data.list[curClassifyIndex].child ? _this.data.list[curClassifyIndex].child[0].category_id : _this.data.list[curClassifyIndex].category_id
     });
     this.getGoodsList(_this.data.curNav);
   },

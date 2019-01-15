@@ -22,7 +22,7 @@ Page({
     goods_price: 0, // 商品价格
     line_price: 0, // 划线价格
     stock_num: 0, // 库存数量
-
+    unit:"/斤",
     goods_num: 1, // 商品数量
     goods_sku_id: 0, // 规格id
     cart_total_num: 0, // 购物车商品总数量
@@ -71,6 +71,7 @@ Page({
     data.goods_price = data.detail.spec[0].goods_price;
     data.line_price = data.detail.spec[0].line_price;
     data.stock_num = data.detail.spec[0].stock_num;
+    data.unit = data.detail.spec[0].unit;
     // 初始化商品多规格
     if (data.detail.spec_type === 20) {
       data.specData = _this.initManySpecData(data.specData);
