@@ -6,7 +6,7 @@
 
 .cate{
   background-color: white;
-  padding: 30rpx 0rpx;
+  padding: 20rpx 0rpx 30rpx 0;
   overflow: hidden;
 }
 .cate .cateItem{
@@ -15,7 +15,8 @@
   flex-direction: column;
   width: 120rpx;
   height: 120rpx;
-  padding: 0 28rpx;
+  padding: 0 15rpx;
+  margin-top: 10rpx;
 }
 .cate .cateItem .picBox{
   text-align: center;

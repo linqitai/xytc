@@ -9,6 +9,14 @@ Page({
   onLoad: function(options) {
     // 当前页面参数
     this.data.options = options;
+    // wx.clearStorageSync();
+    wx.setStorageSync('address_id', '')
+    wx.setStorageSync('name', '')
+    wx.setStorageSync('phone', '')
+    wx.setStorageSync('region', '')
+    wx.setStorageSync('address', '')
+    wx.setStorageSync('longitude', '')
+    wx.setStorageSync('latitude', '')
   },
 
   onShow: function() {
@@ -30,6 +38,13 @@ Page({
    * 添加新地址
    */
   createAddress: function() {
+    wx.setStorageSync('address_id', '')
+    wx.setStorageSync('name', '')
+    wx.setStorageSync('phone', '')
+    wx.setStorageSync('region', '')
+    wx.setStorageSync('address', '')
+    wx.setStorageSync('longitude', '')
+    wx.setStorageSync('latitude', '')
     wx.setStorageSync('operate', 'add')
     wx.navigateTo({
       url: './create'
