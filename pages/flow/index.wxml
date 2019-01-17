@@ -18,7 +18,8 @@
                   <text class="col-7 f-24">{{item.goods_sku.goods_attr}}</text>
                 </view>
                 <view class="wx-goods_price">
-                  <text class="dish-item-money">￥{{item.goods_price}} </text>
+                  <text class="dish-item-money">￥{{item.goods_price}}</text>
+                  <text class='line'>￥{{item.spec[0].line_price}}</text>
                 </view>
               </navigator>
               <view class="selectNumber">

@@ -1,0 +1,15 @@
+<view class="container m-b6 p-bottom">
+  <view class="common-header-xian"></view>
+  <custom-ul class="coupon-list" wx:if="{{list.length}}">
+    <custom-li wx:for="{{list}}" wx:for-item="item" wx:key="this">
+      {{item.name}}
+    </custom-li>
+  </custom-ul>
+  <view wx:else>
+    <view class="yoshop-notcont">
+      <text class="iconfont icon-meiyougengduo"></text>
+      <text class="cont">亲，您还没有收货列表</text>
+    </view>
+  </view>
+  
+</view>

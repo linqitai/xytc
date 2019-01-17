@@ -17,15 +17,21 @@ Page({
     post_pay_type :10,
     post_dis_type :0,
     hasError: false,
+    couponOptions: ['满100元减10元', '满50元减3元'],
+    couponIndex: 0,
     error: '',
   },
-
+  bindCouponPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      couponIndex: e.detail.value
+    })
+  },
   radioChange: function (e) {
     this.setData({
       post_pay_type : e.detail.value
     })
   },
-  
   bindPickerChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({

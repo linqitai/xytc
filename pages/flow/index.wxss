@@ -122,6 +122,16 @@
   overflow: hidden;
 }
 
+.wx-goods_price .line{
+  font-size: 26rpx;
+  color: #999;
+  text-decoration: line-through;
+  float: left;
+  margin-left: 20rpx;
+  height: 26rpx;
+  line-height: 46rpx;
+}
+
 .flow-dete {
   position: absolute;
   bottom: 25rpx;

@@ -114,8 +114,6 @@
 }
 .goodsList .items .content .price{
   flex: auto;
-  font-size: 34rpx;
-  color: #E36A1E;
   position: relative;
 }
 .goodsList .items .content .price .text{
@@ -124,14 +122,22 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
+  font-size: 34rpx;
+  color: #E36A1E;
 }
-.goodsList .items .content .price .line{
+.goodsList .items .content .line_price{
+  flex: auto;
+  position: relative;
+}
+.goodsList .items .content .line_price .text{
   /* 让文字垂直居中 */
   position: absolute;
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
-  font-size: 24rpx;
+  font-size: 30rpx;
+  color: #999;
+  text-decoration: line-through;
 }
 .goodsList .btn{
   flex: 0 0 150rpx; 

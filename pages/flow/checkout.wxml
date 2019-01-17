@@ -90,11 +90,21 @@
         </view>
       </view>
     </view>
+    <!-- <view class="dis-flex flow-all-list" wx:if="{{couponOptions}}">
+      <text class="flex-five">优惠券:</text>
+      <view class="flex-five t-r">
+        <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}">
+          <view class="picker">
+            {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
+          </view>
+        </picker>
+      </view>
+    </view> -->
     <view class="dis-flex flow-all-list">
       <text class="flex-three" style='width:43%'>支付方式:</text>
       <view class="flex-seven t-r" style=''>
       <radio-group class="radio-group" bindchange="radioChange">
-        <label class="radio" wx:for="{{pay_type}}">
+        <label class="radio" wx:for="{{pay_type}}" wx:key="index">
           <radio value="{{item.value}}" checked="{{item.checked}}" name="pay_type"/>
           {{item.name}}
         </label>
@@ -102,7 +112,6 @@
       </view>
     </view>
   </view>
-
   <!-- 提交订单 -->
   <view class="flow-fixed-footer b-f m-top10">
     <view class="dis-flex chackout-box">
