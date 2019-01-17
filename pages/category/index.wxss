@@ -114,7 +114,7 @@
 }
 .goodsList .items .content .price{
   flex: auto;
-  font-size: 38rpx;
+  font-size: 34rpx;
   color: #E36A1E;
   position: relative;
 }
@@ -124,6 +124,14 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
+}
+.goodsList .items .content .price .line{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  font-size: 24rpx;
 }
 .goodsList .btn{
   flex: 0 0 150rpx; 
