@@ -202,6 +202,11 @@
   flex: auto;
   color: #E36A1E;
 }
+.specification .specificationItem .content .line_sprice{
+  color: #999;
+  text-decoration: line-through;
+  font-size: 24rpx;
+}
 
 .cate-right-cont {
   width: 100%;
