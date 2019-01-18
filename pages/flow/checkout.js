@@ -1,4 +1,5 @@
 let App = getApp();
+var couponList = [];
 Page({
 
   /**
@@ -17,27 +18,10 @@ Page({
     post_pay_type :10,
     post_dis_type :0,
     hasError: false,
-    couponOptions: ['满100元减10元', '满50元减3元'],
+    couponOptions: [],
     couponIndex: 0,
+    couponId: '',
     error: '',
-  },
-  bindCouponPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      couponIndex: e.detail.value
-    })
-  },
-  radioChange: function (e) {
-    this.setData({
-      post_pay_type : e.detail.value
-    })
-  },
-  bindPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      post_dis_type: e.detail.value,
-     
-    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -55,8 +39,38 @@ Page({
   onShow: function() {
     // 获取当前订单信息
     this.getOrderData();
-  },
 
+  },
+  bindCouponPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      couponIndex: e.detail.value,
+      couponId: couponList[e.detail.value].id
+    })
+    console.log(this.data.couponId,"couponId")
+  },
+  /**
+   * 获取优惠券列表
+   */
+  getCouponList() {
+    var _this = this;
+    // _this.data.order_total_price
+    App._get('coupon/lists', {
+      money: this.data.order_total_price
+    }, function (result) {
+      console.log(result,"conponResult")
+      couponList = result.data.data;
+      var couponOptions = [];
+      for (var i = 0; i < couponList.length;i++) {
+        couponOptions.push(`满${couponList[i].invest_money}减${couponList[i].money}`)
+      }
+      _this.setData({
+        couponOptions: couponOptions,
+        couponId: couponList[0].id
+      })
+      console.log(_this.data.couponId,"getCouponList couponId")
+    });
+  },
   /**
    * 获取当前订单信息
    */
@@ -77,6 +91,7 @@ Page({
         App.showError(_this.data.error);
       }
       _this.setData(result.data);
+      _this.getCouponList();
     };
 
     // 立即购买
@@ -87,6 +102,7 @@ Page({
         goods_sku_id: options.goods_sku_id,
         pay_type: options.pay_type,
         dis_type: options.dis_type,
+        coupon_id:_this.data.couponId
       }, function(result) {
         callback(result);
       });
@@ -102,7 +118,18 @@ Page({
     }
 
   },
+  radioChange: function (e) {
+    this.setData({
+      post_pay_type: e.detail.value
+    })
+  },
+  bindPickerChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      post_dis_type: e.detail.value,
 
+    })
+  },
   /**
    * 选择收货地址
    */
