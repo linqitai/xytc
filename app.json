@@ -19,7 +19,8 @@
     "pages/address/detail",
     "pages/login/login",
     "pages/address/position/position",
-    "pages/address/position/sureAddress"
+    "pages/address/position/sureAddress",
+    "pages/join/join"
   ],
   "permission": {
     "scope.userLocation": {
