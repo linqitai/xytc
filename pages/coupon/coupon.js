@@ -1,5 +1,5 @@
 let App = getApp();
-var couponList = []
+var couponListArr = []
 Page({
 
   /**
@@ -7,13 +7,25 @@ Page({
    */
   data: {
     couponList: [],
+    page:1,
+    windowHeight: '',
+    isLastPage: false
   },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    //设置scroll-view高度
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res,"res")
+        that.setData({
+          windowHeight: res.windowHeight
+        });
+      }
+    });
   },
 
   /**
@@ -23,24 +35,41 @@ Page({
     // 获取当前订单信息
     this.getList();
   },
-  getList() {
-
+  scroll(e){
+    // console.log(e.detail)
+  },
+  scrollToBottom() {
+    console.log('scrollToBottom')
+    var _this = this;
+    console.log(_this.data.isLastPage, "_this.data.isLastPage")
+    if (_this.data.isLastPage == false) {
+      _this.setData({
+        page: _this.data.page + 1
+      })
+      _this.getList();
+    }
+    if (_this.data.page == _this.data.last_page && _this.data.isLastPage == false){
+      _this.data.isLastPage = true;
+      // App.toast("数据已经加载完毕")
+      return;
+    }
   },
   getList() {
     var _this = this;
     App._get('coupon/lists', {
-      money: 0
+      money: 0,
+      page: _this.data.page
     }, function (result) {
-      console.log(result, "conponResult")
-      
-      couponList = result.data.data
+      var couponList = result.data.data
       for(var i=0;i<couponList.length;i++) {
         var time = couponList[i].add_time.text;
-        console.log(time.split(' ')[0],"time.split(' ')[0]")
+        // console.log(time.split(' ')[0],"time.split(' ')[0]")
         couponList[i].add_time.date = time.split(' ')[0]
+        couponListArr.push(couponList[i])
       }
       _this.setData({
-        couponList: couponList
+        couponList: couponListArr,
+        last_page: result.data.last_page
       })
     });
   },
