@@ -320,6 +320,7 @@ Page({
         goods_sku_id: options.goods_sku_id,
         pay_type: post_pay_type,
         dis_type: post_dis_type,
+        coupon_id: _this.data.couponId
       }, function(result) {
         // success
         console.log('success');

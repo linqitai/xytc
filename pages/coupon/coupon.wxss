@@ -1,5 +1,9 @@
 .container{
   padding: 8rpx;
+  height: 100%;
+}
+.coupon-list{
+  height: 100%;
 }
 .item{
   display: flex;
