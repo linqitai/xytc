@@ -1,8 +1,21 @@
 <view class="container m-b6 p-bottom">
   <view class="common-header-xian"></view>
-  <custom-ul class="coupon-list" wx:if="{{list.length}}">
-    <custom-li wx:for="{{list}}" wx:for-item="item" wx:key="this">
-      {{item.name}}
+  <custom-ul class="coupon-list" wx:if="{{couponList.length}}">
+    <custom-li class="item" wx:for="{{couponList}}" wx:for-item="item" wx:key="this">
+      <view class='itemLeft'>
+        <view class='line1'>
+          <text style="font-size:24rpx;">￥</text>{{item.money}}<text style="font-size:28rpx;"> 满{{item.invest_money}}减{{item.money}}</text>
+        </view>
+        <view class='line2'>
+          <text class='text'>{{item.c_type.name}}</text>
+        </view>
+        <view class='line3'>
+          {{item.add_time.date}}~{{item.end_time.text}}
+        </view>
+      </view>
+      <view class='itemRight'>
+        <label class='toUseBtn' bindtap="toUseBtn">去使用</label>
+      </view>
     </custom-li>
   </custom-ul>
   <view wx:else>

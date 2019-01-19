@@ -1,11 +1,12 @@
 let App = getApp();
+var couponList = []
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [{ name: '满100元减10元' }, { name: '满50元减3元'}],
+    couponList: [],
   },
   
   /**
@@ -24,6 +25,30 @@ Page({
   },
   getList() {
 
+  },
+  getList() {
+    var _this = this;
+    App._get('coupon/lists', {
+      money: 0
+    }, function (result) {
+      console.log(result, "conponResult")
+      
+      couponList = result.data.data
+      for(var i=0;i<couponList.length;i++) {
+        var time = couponList[i].add_time.text;
+        console.log(time.split(' ')[0],"time.split(' ')[0]")
+        couponList[i].add_time.date = time.split(' ')[0]
+      }
+      _this.setData({
+        couponList: couponList
+      })
+    });
+  },
+  toUseBtn(){
+    console.log("you click me")
+    wx.switchTab({
+      url: '/pages/category/index',
+    })
   },
   /**
    * 快捷导航 显示/隐藏

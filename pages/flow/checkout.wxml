@@ -90,7 +90,7 @@
         </view>
       </view>
     </view>
-    <!-- <view class="dis-flex flow-all-list" wx:if="{{couponOptions}}">
+    <view class="dis-flex flow-all-list" wx:if="{{couponOptions.length}}">
       <text class="flex-five">优惠券:</text>
       <view class="flex-five t-r">
         <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}">
@@ -99,7 +99,7 @@
           </view>
         </picker>
       </view>
-    </view> -->
+    </view>
     <view class="dis-flex flow-all-list">
       <text class="flex-three" style='width:43%'>支付方式:</text>
       <view class="flex-seven t-r" style=''>
@@ -125,7 +125,7 @@
   </view>
 
   <!-- 快捷导航 -->
-  <view class="filter-menu {{nav_select?'active':''}}">
+  <!-- <view class="filter-menu {{nav_select?'active':''}}">
     <view class="filter-menu-list ts-5">
       <custom-ul>
         <custom-li bindtap="nav" data-index="home">
@@ -144,6 +144,6 @@
       </custom-ul>
     </view>
     <view bindtap="commonNav" class="filter-menu-title"></view>
-  </view>
+  </view> -->
 
 </view>
