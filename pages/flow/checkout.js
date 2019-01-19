@@ -1,5 +1,6 @@
 let App = getApp();
 var couponList = [];
+var post_pay_typeCouponList = [];
 Page({
 
   /**
@@ -41,35 +42,53 @@ Page({
     this.getOrderData();
 
   },
-  bindCouponPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      couponIndex: e.detail.value,
-      couponId: couponList[e.detail.value].id
-    })
-    console.log(this.data.couponId,"couponId")
+  
+  getCouponOptions(couponList){
+    var couponOptions = [];
+    for (var i = 0; i < couponList.length; i++) {
+      if (couponList[i].c_type.type == 1) {// c_type 里面 type 1是优惠券 2是折扣券
+        couponOptions.push(`满${couponList[i].invest_money}减${couponList[i].money}`)
+      } else if (couponList[i].c_type.type == 2) {
+        var zhekou = '';
+        var money = couponList[i].money.split('');
+        for (var j = 0; j < money.length; j++) {
+          if (money[j] == '0' || money[j] == '.') {
+
+          } else {
+            zhekou = zhekou + money[j]
+          }
+        }
+        couponOptions.push(`满${couponList[i].invest_money}打${zhekou}折`)
+      }
+    }
+    return couponOptions
   },
   /**
    * 获取优惠券列表
    */
   getCouponList() {
     var _this = this;
-    // _this.data.order_total_price
     App._get('coupon/lists', {
       money: this.data.order_total_price
     }, function (result) {
       console.log(result,"conponResult")
-      couponList = result.data.data;
-      var couponOptions = [];
-      for (var i = 0; i < couponList.length;i++) {
-        couponOptions.push(`满${couponList[i].invest_money}减${couponList[i].money}`)
-      }
-      _this.setData({
-        couponOptions: couponOptions,
-        couponId: couponList[0].id
-      })
-      console.log(_this.data.couponId,"getCouponList couponId")
+      couponList = result.data.data;// 接口中拿到的初始数据
+      _this.masterMethod4getSubMoney()
     });
+  },
+  selectCoupons(list,post_pay_type){
+    console.log(list,'list')
+    console.log(post_pay_type, 'post_pay_type')
+    var _this = this;
+    var couponOptions = [];
+    for (var i = 0; i < list.length;i++) {
+      // console.log(list[i].c_type.pay_status?'yes':'no')
+      // console.log(list[i].c_type.pay_status,"list[i].c_type.pay_status")
+      if (list[i].c_type.pay_status.value == post_pay_type || list[i].c_type.pay_status.value == 0){
+        couponOptions.push(list[i])
+      }
+    }
+    return couponOptions;
   },
   /**
    * 获取当前订单信息
@@ -118,17 +137,101 @@ Page({
     }
 
   },
+  // 根据当前page_type获取所减免的价格或者折扣
+  getSubMoney(post_pay_typeCouponList){
+    console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
+    var _this = this;
+    var subMoney = [];
+    var type = '';
+    var money = '';
+    for (var i = 0; i < post_pay_typeCouponList.length;i++) {
+      console.log(`id:${post_pay_typeCouponList[i].id},coupon_id:${_this.data.couponId}`)
+      if (post_pay_typeCouponList[i].id == _this.data.couponId) {
+        type = post_pay_typeCouponList[i].c_type.type
+        if (type == 1) {// c_type 里面 type 1是优惠券 2是折扣券
+          money = post_pay_typeCouponList[i].money
+        } else if (type == 2) {
+          var zhekou = '';
+          var moneyArr = post_pay_typeCouponList[i].money.split('');
+          for (var j = 0; j < moneyArr.length; j++) {
+            if (moneyArr[j] == '0' || moneyArr[j] == '.') {
+
+            } else {
+              zhekou = zhekou + moneyArr[j]
+            }
+          }
+          money = zhekou
+        }
+        console.log(type,"type")
+        console.log(money,"money")
+        subMoney.push(type)
+        subMoney.push(money)
+        return subMoney;
+      }
+    }
+  },
+  masterMethod4getSubMoney() {
+    var _this = this;
+    post_pay_typeCouponList = _this.selectCoupons(couponList, _this.data.post_pay_type) //当前所选post_pay_type所对应的数据
+    var showCouponOptions = _this.getCouponOptions(post_pay_typeCouponList)
+    _this.setData({
+      couponOptions: showCouponOptions,
+      couponId: post_pay_typeCouponList[0].id
+    })
+    console.log(this.data.couponId, "couponId")
+    var subMoney = _this.getSubMoney(post_pay_typeCouponList)
+    console.log(subMoney, 'subMoney')
+    // =======================================
+    _this.getReal_pay_price(subMoney)
+  },
+  getReal_pay_price(subMoney) {
+    var _this = this
+    var real_pay_price = ''
+    var order_total_price = _this.data.order_total_price
+    if (subMoney[0] == 1) {
+      console.log(_this.data.order_total_price, "order_total_price")
+      real_pay_price = order_total_price - subMoney[1]
+    } else if (subMoney[0] == 2) {
+      console.log(_this.data.order_total_price, "order_total_price")
+      real_pay_price = order_total_price * subMoney[1] * (subMoney[1].length == 1 ? 0.1 : subMoney[1].length == 2 ? 0.01:1)
+    }
+    console.log(real_pay_price, "real_pay_price")
+    _this.setData({
+      order_pay_price: real_pay_price
+    })
+  },
+  bindCouponPickerChange: function (e) {
+    var _this = this
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      couponIndex: e.detail.value,
+      couponId: post_pay_typeCouponList[e.detail.value].id // 这里有问题 =》couponList
+    })
+    console.log(this.data.couponId, "couponId")
+    var subMoney = _this.getSubMoney(post_pay_typeCouponList)
+    console.log(subMoney, 'subMoney')
+    // =======================================
+    _this.getReal_pay_price(subMoney)
+  },
+  
   radioChange: function (e) {
+    var _this = this
     this.setData({
       post_pay_type: e.detail.value
     })
+    console.log(this.data.post_pay_type,"post_pay_type")
+    this.masterMethod4getSubMoney()
+    this.setData({
+      couponIndex: 0
+    })
   },
-  bindPickerChange(e) {
+  // 配送时间的选择
+  bindTimePickerChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      post_dis_type: e.detail.value,
-
+      post_dis_type: e.detail.value
     })
+    console.log(this.data.couponId, "couponId")
   },
   /**
    * 选择收货地址

@@ -7,14 +7,14 @@
           <text style="font-size:24rpx;">￥</text>{{item.money}}<text style="font-size:28rpx;"> 满{{item.invest_money}}减{{item.money}}</text>
         </view>
         <view class='line2'>
-          <text class='text'>{{item.c_type.name}}</text>
+          <text class='text'>{{item.c_type.name}}({{item.c_type.pay_status.value==0?'全部可用':item.c_type.pay_status.value==10?'在线支付用':item.c_type.pay_status.value==20?'货到付款用':''}})</text>
         </view>
         <view class='line3'>
           {{item.add_time.date}}~{{item.end_time.text}}
         </view>
       </view>
       <view class='itemRight'>
-        <label class='toUseBtn' bindtap="toUseBtn">去使用</label>
+        <label class="toUseBtn {{item.use_time.text=='未使用'?'orange':'gray'}}" bindtap="toUseBtn">{{item.use_time.text=='未使用'?'去使用':'已使用'}}</label>
       </view>
     </custom-li>
   </custom-ul>

@@ -65,7 +65,7 @@
     <view class="dis-flex flow-all-list">
       <text class="flex-five">配送时间:</text>
       <view class="flex-five t-r">
-      <picker bindchange="bindPickerChange" value="{{post_dis_type}}" range="{{distribution_time}}">
+      <picker bindchange="bindTimePickerChange" value="{{post_dis_type}}" range="{{distribution_time}}">
         <view class="picker">
         {{distribution_time[post_dis_type]}}
         </view>
@@ -90,16 +90,6 @@
         </view>
       </view>
     </view>
-    <view class="dis-flex flow-all-list" wx:if="{{couponOptions.length}}">
-      <text class="flex-five">优惠券:</text>
-      <view class="flex-five t-r">
-        <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}">
-          <view class="picker">
-            {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
-          </view>
-        </picker>
-      </view>
-    </view>
     <view class="dis-flex flow-all-list">
       <text class="flex-three" style='width:43%'>支付方式:</text>
       <view class="flex-seven t-r" style=''>
@@ -109,6 +99,16 @@
           {{item.name}}
         </label>
       </radio-group>
+      </view>
+    </view>
+    <view class="dis-flex flow-all-list" wx:if="{{couponOptions.length}}">
+      <text class="flex-five">优惠券:</text>
+      <view class="flex-five t-r">
+        <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}">
+          <view class="picker">
+            {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
+          </view>
+        </picker>
       </view>
     </view>
   </view>
