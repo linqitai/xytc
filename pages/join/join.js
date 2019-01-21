@@ -19,6 +19,7 @@ Page({
     this.getUserInfo();
   },
   getUserInfo(){
+    var that = this;
     App._post_form('user.index/store_info', {},
       function (res) {//成功
         console.log(res, "res")
@@ -26,6 +27,11 @@ Page({
           console.log(res.data.userInfo.name)
           console.log(res.data.userInfo.phone)
           console.log(res.data.userInfo.licence_image)
+          that.setData({
+            name: res.data.userInfo.name,
+            phone: res.data.userInfo.phone,
+            licence_image: res.data.userInfo.licence_image
+          })
         }
       }
     )
