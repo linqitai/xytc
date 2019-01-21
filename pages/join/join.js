@@ -35,22 +35,19 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
       success: res => {
-        console.log(res,"resres")
         let tempFilePaths = res.tempFiles;
-        console.log(tempFilePaths, "tempFilePaths")
         that.setData({
           pic: tempFilePaths[0].path
         })
-        console.log(tempFilePaths[0].path,"tempFilePaths[0].path")
         wx.uploadFile({
-          url: 'user.index/store_image',      //此处换上你的接口地址
+          url: App.api_root + 'user.index/store_image&wxapp_id=10001&token=' + wx.getStorageSync('token'),      //此处换上你的接口地址
           filePath: tempFilePaths[0].path,
-          name: 'file',
+          name: 'licence_image',
           success: function (res) {
-            console.log(res,'res')
+            //console.log(res,'res')
           },
           fail: function (res) {
-            console.log('fail');
+            //console.log('fail');
           },
         })
       }
