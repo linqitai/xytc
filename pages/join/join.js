@@ -23,7 +23,9 @@ Page({
       function (res) {//成功
         console.log(res, "res")
         if (res.code == 1) {
-          
+          console.log(res.data.userInfo.name)
+          console.log(res.data.userInfo.phone)
+          console.log(res.data.userInfo.licence_image)
         }
       }
     )
@@ -44,7 +46,12 @@ Page({
           filePath: tempFilePaths[0].path,
           name: 'licence_image',
           success: function (res) {
-            //console.log(res,'res')
+            console.log(res,'res')
+            var pic = JSON.parse(res.data).data
+            console.log(pic,'pic')
+            that.setData({
+              tempFilePaths:pic
+            })
           },
           fail: function (res) {
             //console.log('fail');
