@@ -45,20 +45,22 @@ Page({
   
   getCouponOptions(couponList){
     var couponOptions = [];
-    for (var i = 0; i < couponList.length; i++) {
-      if (couponList[i].c_type.type == 1) {// c_type 里面 type 1是优惠券 2是折扣券
-        couponOptions.push(`满${couponList[i].invest_money}减${couponList[i].money}`)
-      } else if (couponList[i].c_type.type == 2) {
-        var zhekou = '';
-        var money = couponList[i].money.split('');
-        for (var j = 0; j < money.length; j++) {
-          if (money[j] == '0' || money[j] == '.') {
+    if (couponList.length>0){
+      for (var i = 0; i < couponList.length; i++) {
+        if (couponList[i].c_type.type == 1) {// c_type 里面 type 1是优惠券 2是折扣券
+          couponOptions.push(`满${couponList[i].invest_money}减${couponList[i].money}`)
+        } else if (couponList[i].c_type.type == 2) {
+          var zhekou = '';
+          var money = couponList[i].money.split('');
+          for (var j = 0; j < money.length; j++) {
+            if (money[j] == '0' || money[j] == '.') {
 
-          } else {
-            zhekou = zhekou + money[j]
+            } else {
+              zhekou = zhekou + money[j]
+            }
           }
+          couponOptions.push(`满${couponList[i].invest_money}打${zhekou}折`)
         }
-        couponOptions.push(`满${couponList[i].invest_money}打${zhekou}折`)
       }
     }
     return couponOptions
@@ -71,13 +73,13 @@ Page({
     App._get('coupon/lists', {
       money: this.data.order_total_price
     }, function (result) {
-      console.log(result,"conponResult")
+      // console.log(result,"conponResult")
       couponList = result.data.data;// 接口中拿到的初始数据
       _this.masterMethod4getSubMoney()
     });
   },
   selectCoupons(list,post_pay_type){
-    console.log(list,'list')
+    // console.log(list,'list')
     console.log(post_pay_type, 'post_pay_type')
     var _this = this;
     var couponOptions = [];
@@ -139,7 +141,7 @@ Page({
   },
   // 根据当前page_type获取所减免的价格或者折扣
   getSubMoney(post_pay_typeCouponList){
-    console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
+    // console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
     var _this = this;
     var subMoney = [];
     var type = '';
@@ -176,7 +178,7 @@ Page({
     var showCouponOptions = _this.getCouponOptions(post_pay_typeCouponList)
     _this.setData({
       couponOptions: showCouponOptions,
-      couponId: post_pay_typeCouponList[0].id
+      couponId: post_pay_typeCouponList.length>0?post_pay_typeCouponList[0].id:0
     })
     console.log(this.data.couponId, "couponId")
     var subMoney = _this.getSubMoney(post_pay_typeCouponList)
@@ -188,17 +190,20 @@ Page({
     var _this = this
     var real_pay_price = ''
     var order_total_price = _this.data.order_total_price
-    if (subMoney[0] == 1) {
-      console.log(_this.data.order_total_price, "order_total_price")
-      real_pay_price = order_total_price - subMoney[1]
-    } else if (subMoney[0] == 2) {
-      console.log(_this.data.order_total_price, "order_total_price")
-      real_pay_price = order_total_price * subMoney[1] * (subMoney[1].length == 1 ? 0.1 : subMoney[1].length == 2 ? 0.01:1)
+    console.log(subMoney,"subMoneysubMoneysubMoneysubMoney")
+    if (subMoney){
+      if (subMoney[0] == 1) {
+        console.log(_this.data.order_total_price, "order_total_price")
+        real_pay_price = order_total_price - subMoney[1]
+      } else if (subMoney[0] == 2) {
+        console.log(_this.data.order_total_price, "order_total_price")
+        real_pay_price = order_total_price * subMoney[1] * (subMoney[1].length == 1 ? 0.1 : subMoney[1].length == 2 ? 0.01 : 1)
+      }
+      console.log(real_pay_price, "real_pay_price")
+      _this.setData({
+        order_pay_price: real_pay_price
+      })
     }
-    console.log(real_pay_price, "real_pay_price")
-    _this.setData({
-      order_pay_price: real_pay_price
-    })
   },
   bindCouponPickerChange: function (e) {
     var _this = this

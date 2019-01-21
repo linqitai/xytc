@@ -67,7 +67,7 @@
       <view class="flex-five t-r">
       <picker bindchange="bindTimePickerChange" value="{{post_dis_type}}" range="{{distribution_time}}">
         <view class="picker">
-        {{distribution_time[post_dis_type]}}
+        {{distribution_time[post_dis_type]}}<text class="iconfont icon-xiangyoujiantou"></text>
         </view>
       </picker>
       </view>

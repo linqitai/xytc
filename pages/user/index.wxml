@@ -74,8 +74,21 @@
     <navigator url="../coupon/coupon">
       <view class="user-order-title dis-flex b-f">
         <view class="flex-box">
-          <text class="iconfont icon-help common-icon"></text>
+          <text class="iconfont icon-coupon common-icon"></text>
           <text class="user-orderName h4">我的优惠券</text>
+        </view>
+        <view class="flex-box">
+          <view class="user-orderContBox">
+            <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="../join/join">
+      <view class="user-order-title dis-flex b-f">
+        <view class="flex-box">
+          <text class="iconfont icon-merchantJoin common-icon"></text>
+          <text class="user-orderName h4">商户认证</text>
         </view>
         <view class="flex-box">
           <view class="user-orderContBox">
