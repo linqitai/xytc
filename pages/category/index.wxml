@@ -40,7 +40,7 @@
               </navigator>
               <view class="content">
                 <view class='title'>
-                  <text class='text'>{{item.goods_name}}</text>
+                  <text class='text f-28'>{{item.goods_name}}</text>
                 </view>
                 <view class='price' wx:if="{{!item.isOpen}}">
                   <!-- <text class='text' wx:if="{{item.is_mul_spec==0}}">￥{{item.goods_min_price}}{{item.spec[0].unit}}</text> -->
