@@ -42,8 +42,8 @@
             </view>
             <view class="content">
               <view class='line1 f-28 onelist-hidden'>{{item.goods_name}}</view>
-              <view class="line2 f-28 onelist-hidden" wx:if="{{item.goods_noshow!=1}}">￥{{item.spec[0].goods_price}}</view>
-              <view class="line3 f-28 onelist-hidden">￥{{item.spec[0].single_money}}{{item.spec[0].single_unit}}</view>
+              <view class="line2 f-24 onelist-hidden">{{item.goods_content}}</view>
+              <view class="line3 f-28 onelist-hidden">{{item.goods_show_price}}</view>
             </view>
           </view>
         </navigator>
@@ -66,12 +66,14 @@
         </view>
         <view class="right">
           <view class="cont">
-            <text class="f-30 title twolist-hidden m-top10">{{item.goods_name}}</text>
-            <text class="goods_price f-34 f-w">￥{{item.spec[0].goods_price}}</text>
+            <text class="f-28 title twolist-hidden m-top10">{{item.goods_name}}</text>
+            <text class="goods_price f-26 f-w">￥{{item.spec[0].single_money}}{{item.spec[0].single_unit}}</text>
           </view>
+          <!-->
           <view class="cont">
-            <text class="single_price f-34 col-m f-w">￥{{item.spec[0].single_money}}{{item.spec[0].single_unit}}</text>
+            <text class="single_price f-26 col-m f-w">￥{{item.spec[0].goods_price}}</text>
           </view>
+          -->
         </view>
       </navigator>
     </view>

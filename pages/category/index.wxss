@@ -122,7 +122,7 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
-  font-size: 30rpx;
+  font-size: 26rpx;
   color: #E36A1E;
 }
 .goodsList .items .content .line_price{
@@ -135,7 +135,7 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
-  font-size: 30rpx;
+  font-size: 24rpx;
   color: #999;
   text-decoration: line-through;
 }
