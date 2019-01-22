@@ -18,6 +18,13 @@ page {
   background: #f7f7f7;
 }
 
+.left{
+  float: left;
+}
+.right{
+  float: right;
+}
+
 .b-f {
   background: #fff;
 }

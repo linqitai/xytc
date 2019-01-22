@@ -3,8 +3,8 @@
   <view class="dis-flex">
     <view class="diy-search flex-box angle-{{item.style.searchStyle}} text-{{item.style.textAlign}}">
       <navigator class="cont" hover-class="none" openType="navigate" url="../search/index">
-        <text class="iconfont icon-sousuo f-30"></text>
-        <text class="f-28">{{item.params.placeholder}}</text>
+        <text class="iconfont icon-sousuo f-30 right"></text>
+        <text class="f-28 left">请输入菜品名称搜索</text>
       </navigator>
     </view>
   </view>
