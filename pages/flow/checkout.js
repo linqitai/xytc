@@ -243,7 +243,8 @@ Page({
    */
   selectAddress: function() {
     wx.setStorageSync('operate', 'add');
-    wx.setStorageSync('_from', 'flow')
+    wx.setStorageSync('_from', 'flow');// 记得在我的页面要清空
+    console.log(wx.getStorageSync('_from'), "wx.getStorageSync('_from')")
     wx.navigateTo({
       url: '../address/' + (this.data.exist_address ? 'index?from=flow' : 'create')
     });

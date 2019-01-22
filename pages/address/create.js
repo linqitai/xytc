@@ -9,7 +9,8 @@ Page({
    */
   data: {
     disabled: false,
-    nav_select: false, // 快捷导航
+    nav_select: false, // 
+    isOnLoad: 0,
     name:'',
     phone:'',
     region: '',
@@ -47,6 +48,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('================onLoad=====================')
+    wx.setStorageSync('fromAddress', 0)
     var that = this;
     var operate = wx.getStorageSync('operate')
     console.log(operate, "operate")
@@ -56,15 +59,16 @@ Page({
       // console.log(that.data, 'init data')
       /*判断是第一次加载还是从position页面返回
       如果从position页面返回，会传递用户选择的地点*/
-      console.log(options.address,"options.address")
+      console.log(options.address, "options.address")
       if (options.address != null && options.address != '') {
         //设置变量 address 的值
         that.setData({
           address: options.address
         });
       }
-    }else{
+    } else {
       if (options.address_id) {
+        console.log(options.address_id,"options.address_id")
         // 获取当前地址信息
         that.setData({
           address_id: options.address_id
@@ -75,6 +79,7 @@ Page({
     var name = wx.getStorageSync('name')
     var phone = wx.getStorageSync('phone')
     that.setData({
+      isOnLoad: 1,
       name: name || '',
       phone: phone || '',
       longitude: wx.getStorageSync('longitude') || '',
@@ -89,16 +94,54 @@ Page({
         height: 50
       }]
     })
+    console.log(`${that.data.longitude},${that.data.latitude}`)
     var region = wx.getStorageSync('region');
     // console.log(region,"getStorageSync.region")
-    if (region){
+    if (region) {
       this.setData({
         region: region
       })
-    }else{
+    } else {
       that.getLocation();
     }
     that.getPolygon();
+  },
+  onShow(){
+    // var that = this;
+    // console.log('================onShow=====================')
+    // if (wx.getStorageSync('fromAddress') == 1) {
+    //   console.log(wx.getStorageSync('address'), "wx.getStorageSync('address')")
+    //   console.log(`${wx.getStorageSync('longitude')},${wx.getStorageSync('latitude')}`, 'getStorageSync')
+    //   var address_id = wx.getStorageSync('address_id')
+    //   that.getAddressDetail(address_id);
+    //   var name = wx.getStorageSync('name')
+    //   var phone = wx.getStorageSync('phone')
+    //   that.setData({
+    //     name: wx.getStorageSync('name') || '',
+    //     phone: wx.getStorageSync('phone') || '',
+    //     longitude: wx.getStorageSync('longitude') || '',
+    //     latitude: wx.getStorageSync('latitude') || '',
+    //     address: wx.getStorageSync('address'),
+    //     markers: [{
+    //       iconPath: '/images/location.png',
+    //       id: 0,
+    //       longitude: wx.getStorageSync('longitude') || '',
+    //       latitude: wx.getStorageSync('latitude') || '',
+    //       width: 50,
+    //       height: 50
+    //     }]
+    //   })
+    //   var region = wx.getStorageSync('region');
+    //   // console.log(region,"getStorageSync.region")
+    //   if (region) {
+    //     that.setData({
+    //       region: region
+    //     })
+    //   } else {
+    //     that.getLocation();
+    //   }
+    //   that.getPolygon();
+    // }
   },
   /**
    * @description 射线法判断点是否在多边形内部
@@ -196,7 +239,7 @@ Page({
           }
           var poly = res.data[i]
           var r = that.rayCasting(p, poly)
-          // console.log(r,'r')
+          console.log(r,'r')
           if(r != 'out'){
             flag = true
           }
@@ -205,7 +248,7 @@ Page({
           polygons
         })
         // console.log(that.data.polygons,"polygons")
-        // console.log(flag,'flag')
+        console.log(flag,'flag')
         that.setData({
           flag: flag
         })
@@ -224,8 +267,8 @@ Page({
         // console.log(location, "location")
         const longitude = res.longitude;
         const latitude = res.latitude;
-        wx.setStorageSync('longitude', longitude);
-        wx.setStorageSync('latitude', latitude);
+        // wx.setStorageSync('longitude', longitude);
+        // wx.setStorageSync('latitude', latitude);
         // const longitude = location[0];
         // const latitude = location[1];
         that.setData({
@@ -274,7 +317,7 @@ Page({
   },
   onChangeAddress: function (e) {
     var that = this;
-    wx.reLaunch({
+    wx.navigateTo({
       url: `/pages/address/position/position?latitude=${that.data.latitude}&longitude=${that.data.longitude}`
     });
   },

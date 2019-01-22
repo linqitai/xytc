@@ -5,18 +5,18 @@
   <view class='contentBox'>
     <view class='inputBox'>
       <label class='label'>商户姓名:</label>
-      <input class='input'  placeholder="输入框" placeholder-class="inputP" bindinput='getName'/>
+      <input class='input'  placeholder="输入框" placeholder-class="inputP" bindinput='getName' value='{{name}}'/>
     </view>
     <view class='inputBox'>
       <label class='label'>联系电话:</label>
-      <input class='input' type='number' maxlength='11' placeholder="输入框" placeholder-class="inputP" bindinput='getPhone'/>
+      <input class='input' type='number' maxlength='11' placeholder="输入框" placeholder-class="inputP" bindinput='getPhone' value='{{phone}}'/>
     </view>
     <view class='indentityBox'>
       <label class='indentityLabel'>商户信息(营业执照):</label>
       <view class='uploadIndentityBox'>
         <view class='frontbackBox' bindtap="upload">
-          <image class='image' mode='aspectFit' src='{{pic}}'></image>
-          <text wx:if="{{!pic}}" class="iconfont icon-add indentityIcon"></text>
+          <image class='image' mode='aspectFit' src='{{licence_image}}'></image>
+          <text wx:if="{{!licence_image}}" class="iconfont icon-add indentityIcon"></text>
         </view>
       </view>
     </view>

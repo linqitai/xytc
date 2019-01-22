@@ -1,6 +1,5 @@
 {
     "navigationBarTitleText": "全部分类",
-    "enablePullDownRefresh": true,
     "usingComponents": {
       "refresh-view": "/components/RefreshView/refresh-view"
     }

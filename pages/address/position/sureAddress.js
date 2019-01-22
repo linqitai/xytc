@@ -18,7 +18,11 @@ Page({
   },
   sure: function() {
     wx.setStorageSync('address', this.data.address)
-    wx.redirectTo({
+    wx.setStorageSync('fromAddress', 1)
+    // wx.navigateBack({
+    //   delta: 1
+    // });
+    wx.navigateTo({
       url: `/pages/address/create?address=${this.data.address}`
     });
   }

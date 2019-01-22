@@ -9,7 +9,7 @@ Page({
   data: {
     name:'',
     phone:"",
-    pic:'',
+    licence_image:'',
     tempFilePaths:''
   },
   /**
@@ -19,13 +19,22 @@ Page({
     this.getUserInfo();
   },
   getUserInfo(){
+    var that = this;
     App._post_form('user.index/store_info', {},
       function (res) {//成功
         console.log(res, "res")
         if (res.code == 1) {
-          console.log(res.data.userInfo.name)
-          console.log(res.data.userInfo.phone)
-          console.log(res.data.userInfo.licence_image)
+          console.log(res.data.userInfo.name,"name")
+          console.log(res.data.userInfo.phone,"phone")
+          console.log(res.data.userInfo.licence_image,'licence_image')
+          var name = res.data.userInfo.name;
+          var phone = res.data.userInfo.phone;
+          var licence_image = res.data.userInfo.licence_image;
+          that.setData({
+            name,
+            phone,
+            licence_image
+          })
         }
       }
     )

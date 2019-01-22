@@ -47,7 +47,7 @@
     <view class="padding-box profile-btn">
       <button formType="submit" disabled="{{disabled}}">保存</button>
     </view>
-    <view class="flag {{flag ? 'flagTrue':'flagFalse'}}" wx:if="{{address}}">
+    <view class="flag {{flag ? 'flagTrue':'flagFalse'}}" wx:if="{{!flag}}">
       {{flag?'所选定位在配送范围内':'所选定位不在配送范围内'}}
     </view>
     <!-- <view class="padding-box m-top20 ">
