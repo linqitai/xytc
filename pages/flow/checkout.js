@@ -112,7 +112,7 @@ Page({
         App.showError(_this.data.error);
       }
       _this.setData(result.data);
-      _this.getCouponList();
+      // _this.getCouponList();// 获取优惠券列表
     };
 
     // 立即购买

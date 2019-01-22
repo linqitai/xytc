@@ -23,13 +23,13 @@ App({
    */
   onShow: function(options) {
     // 获取小程序基础信息
-    this.getWxappBase(function(wxapp) {
-      // 设置navbar标题、颜色
-      wx.setNavigationBarColor({
-        frontColor: wxapp.navbar.top_text_color.text,
-        backgroundColor: wxapp.navbar.top_background_color
-      })
-    });
+    // this.getWxappBase(function(wxapp) {
+    //   // 设置navbar标题、颜色
+    //   wx.setNavigationBarColor({
+    //     frontColor: wxapp.navbar.top_text_color.text,
+    //     backgroundColor: wxapp.navbar.top_background_color
+    //   })
+    // });
   },
 
   /**
@@ -260,9 +260,9 @@ App({
         title: wxapp.navbar.wxapp_title
       });
     } else {
-      App.getWxappBase(function() {
-        App.setTitle();
-      });
+      // App.getWxappBase(function() {
+      //   App.setTitle();
+      // });
     }
   },
 

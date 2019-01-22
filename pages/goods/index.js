@@ -20,6 +20,8 @@ Page({
 
     detail: {}, // 商品详情信息
     goods_price: 0, // 商品价格
+    single_money: 0,// 单价
+    single_unit: '',// 单位
     line_price: 0, // 划线价格
     stock_num: 0, // 库存数量
     unit:"/斤",
@@ -27,6 +29,8 @@ Page({
     goods_sku_id: 0, // 规格id
     cart_total_num: 0, // 购物车商品总数量
     specData: {}, // 多规格信息
+    specValue:1,
+    
   },
 
   // 记录规格的数组
@@ -54,6 +58,9 @@ Page({
       // 初始化商品详情数据
       let data = _this.initGoodsDetailData(result.data);
       _this.setData(data);
+      _this.setData({
+        specValue: _this.data.detail.is_mul_spec ? _this.data.detail.spec_rel[0].spec_value:1
+      });
     });
   },
 
@@ -69,6 +76,8 @@ Page({
     // 商品价格/划线价/库存
     data.goods_sku_id = data.detail.spec[0].spec_sku_id;
     data.goods_price = data.detail.spec[0].goods_price;
+    data.single_money = data.detail.spec[0].single_money;
+    data.single_unit = data.detail.spec[0].single_unit;
     data.line_price = data.detail.spec[0].line_price;
     data.stock_num = data.detail.spec[0].stock_num;
     data.unit = data.detail.spec[0].unit;
@@ -100,6 +109,7 @@ Page({
   modelTap: function(e) {
     let attrIdx = e.currentTarget.dataset.attrIdx,
       itemIdx = e.currentTarget.dataset.itemIdx,
+      specValue = e.currentTarget.dataset.specvalue,
       specData = this.data.specData;
     for (let i in specData.spec_attr) {
       for (let j in specData.spec_attr[i].spec_items) {
@@ -115,6 +125,10 @@ Page({
     this.setData({
       specData
     });
+    this.setData({
+      specValue
+    });
+    console.log(specValue,"specValue")
     // 更新商品规格信息
     this.updateSpecGoods();
   },

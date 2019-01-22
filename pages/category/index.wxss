@@ -122,7 +122,7 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
-  font-size: 34rpx;
+  font-size: 30rpx;
   color: #E36A1E;
 }
 .goodsList .items .content .line_price{
@@ -195,7 +195,10 @@
 }
 .specification .specificationItem .content .line1{
   flex: auto;
-  font-size: 32rpx;
+  font-size: 24rpx;
+  color: #646464;
+}
+.specification .specificationItem .content .goods_price{
   color: #646464;
 }
 .specification .specificationItem .content .line2{
@@ -205,7 +208,7 @@
 .specification .specificationItem .content .line_sprice{
   color: #999;
   text-decoration: line-through;
-  font-size: 24rpx;
+  font-size: 18rpx;
 }
 
 .cate-right-cont {

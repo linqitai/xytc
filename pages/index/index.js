@@ -20,11 +20,14 @@ Page({
 
   onLoad: function() {
     // 设置页面标题
-    App.setTitle();
+    // App.setTitle();
     // wx.clearStorageSync();
     wx.setStorageSync('category_id', '')
     // 获取首页数据
     this.getIndexData();
+    this.getCateData();
+    this.getGoodsData();
+    this.getBestGoodsData();
   },
   /**
    * 跳转到分类页面
@@ -38,15 +41,49 @@ Page({
     })
   },
   /**
-   * 获取首页数据
+   * 获取Banner数据
    */
   getIndexData: function() {
     let _this = this;
     App._get('index/page', {}, function(result) {
-      _this.setData(result.data);
+      _this.setData({
+        items: result.data.items
+      });
     });
   },
-
+  /**
+   * 获取分类数据
+   */
+  getCateData: function () {
+    let _this = this;
+    App._get('index/cate_list', {}, function (result) {
+      _this.setData({
+        cate: result.data.cate
+      });
+    });
+  },
+  /**
+   * 获取商品数据
+   */
+  getGoodsData: function () {
+    let _this = this;
+    App._get('index/good_list', {}, function (result) {
+      _this.setData({
+        newest: result.data.newest
+      });
+    });
+  },
+  /**
+   * 获取商品数据
+   */
+  getBestGoodsData: function () {
+    let _this = this;
+    App._get('index/best_list', {}, function (result) {
+      _this.setData({
+        best: result.data.best
+      });
+    });
+  },
   /**
    * 计算图片高度
    */
