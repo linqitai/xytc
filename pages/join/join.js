@@ -98,7 +98,7 @@ Page({
         console.log(res,"res")
         if(res.code==1) {
           App.showSuccess(res.msg,function(){
-            wx.navigateBack();
+            that.getUserInfo();
           })
         }
       },

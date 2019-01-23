@@ -82,14 +82,14 @@ Page({
       isOnLoad: 1,
       name: name || '',
       phone: phone || '',
-      longitude: wx.getStorageSync('longitude') || '',
-      latitude: wx.getStorageSync('latitude') || '',
+      longitude: options.longitude||'',
+      latitude: options.latitude||'',
       address: options.address || '',
       markers: [{
         iconPath: '/images/location.png',
         id: 0,
-        longitude: wx.getStorageSync('longitude') || '',
-        latitude: wx.getStorageSync('latitude') || '',
+        longitude: options.longitude || '',
+        latitude: options.latitude || '',
         width: 50,
         height: 50
       }]
@@ -98,50 +98,22 @@ Page({
     var region = wx.getStorageSync('region');
     // console.log(region,"getStorageSync.region")
     if (region) {
-      this.setData({
-        region: region
-      })
+      var longitude = wx.getStorageSync('longitude')
+      var latitude = wx.getStorageSync('latitude')
+      if (longitude && latitude){
+        that.relGetLocation(longitude,latitude);
+      }else{
+        that.setData({
+          region: region
+        })
+      }
     } else {
       that.getLocation();
     }
     that.getPolygon();
   },
   onShow(){
-    // var that = this;
-    // console.log('================onShow=====================')
-    // if (wx.getStorageSync('fromAddress') == 1) {
-    //   console.log(wx.getStorageSync('address'), "wx.getStorageSync('address')")
-    //   console.log(`${wx.getStorageSync('longitude')},${wx.getStorageSync('latitude')}`, 'getStorageSync')
-    //   var address_id = wx.getStorageSync('address_id')
-    //   that.getAddressDetail(address_id);
-    //   var name = wx.getStorageSync('name')
-    //   var phone = wx.getStorageSync('phone')
-    //   that.setData({
-    //     name: wx.getStorageSync('name') || '',
-    //     phone: wx.getStorageSync('phone') || '',
-    //     longitude: wx.getStorageSync('longitude') || '',
-    //     latitude: wx.getStorageSync('latitude') || '',
-    //     address: wx.getStorageSync('address'),
-    //     markers: [{
-    //       iconPath: '/images/location.png',
-    //       id: 0,
-    //       longitude: wx.getStorageSync('longitude') || '',
-    //       latitude: wx.getStorageSync('latitude') || '',
-    //       width: 50,
-    //       height: 50
-    //     }]
-    //   })
-    //   var region = wx.getStorageSync('region');
-    //   // console.log(region,"getStorageSync.region")
-    //   if (region) {
-    //     that.setData({
-    //       region: region
-    //     })
-    //   } else {
-    //     that.getLocation();
-    //   }
-    //   that.getPolygon();
-    // }
+    
   },
   /**
    * @description 射线法判断点是否在多边形内部
@@ -255,6 +227,26 @@ Page({
       }
     });
   },
+  relGetLocation(longitude, latitude) {
+    console.log(`${longitude},${latitude}`,"relGetLocation")
+    var that = this;
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      //此key需要用户自己申请
+      key: App.mapKey
+    });
+    // console.log('qqmapsdk')
+    // 调用接口
+    that.pointToAddress(longitude, latitude, function (res) {
+      // 得到最终地址
+      // console.log(res, "得到最终地址");
+      that.setData({
+        region: `${res.address_component.province},${res.address_component.city},${res.address_component.district}`
+      })
+      // console.log(that.data.region, "region")
+      wx.setStorageSync('region', that.data.region)
+    })
+  },
   getLocation(){
     var that = this;
     wx.getLocation({
@@ -262,15 +254,8 @@ Page({
       altitude: true,
       success(res) {//经过测试在PC上定位不准确，在手机上就准确了
         // var location = dingwei.gcj02towgs84(res.longitude, res.latitude);//如果定位不准确的解决方法
-        // const speed = res.speed
-        // const accuracy = res.accuracy
-        // console.log(location, "location")
         const longitude = res.longitude;
         const latitude = res.latitude;
-        // wx.setStorageSync('longitude', longitude);
-        // wx.setStorageSync('latitude', latitude);
-        // const longitude = location[0];
-        // const latitude = location[1];
         that.setData({
           longitude: longitude,
           latitude: latitude
@@ -354,8 +339,6 @@ Page({
         // console.log(res.data.result.location.lat, "res.data.result.location.lat")
         const longitude = res.data.result.location.lng;
         const latitude = res.data.result.location.lat;
-        wx.setStorageSync('longitude', longitude);
-        wx.setStorageSync('latitude', latitude);
         // const longitude = location[0];
         // const latitude = location[1];
         that.setData({
@@ -364,6 +347,8 @@ Page({
           address: ''
         })
         wx.setStorageSync('address', '')
+        wx.setStorageSync('longitude', '');
+        wx.setStorageSync('latitude', '');
         // console.log(that.data, "setData bindRegionChange")
       }
     })

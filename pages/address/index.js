@@ -89,12 +89,13 @@ Page({
   editAddress: function(e) {
     wx.setStorageSync('operate', 'edit')
     wx.setStorageSync('address_id', e.currentTarget.dataset.id)
-    wx.setStorageSync('longitude', e.currentTarget.dataset.lon)
-    wx.setStorageSync('latitude', e.currentTarget.dataset.lat)
     console.log(e.currentTarget.dataset.id,"e.currentTarget.dataset.id编辑地址")
     wx.showNavigationBarLoading();
+    // wx.navigateTo({
+    //   url: "./create?address_id=" + e.currentTarget.dataset.id
+    // });
     wx.navigateTo({
-      url: "./create?address_id=" + e.currentTarget.dataset.id
+      url: `./create?address_id=${e.currentTarget.dataset.id}&longitude=${e.currentTarget.dataset.lon}&latitude=${e.currentTarget.dataset.lat}`
     });
   },
 
