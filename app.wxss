@@ -773,7 +773,13 @@
   font-size: 34rpx;
   flex: 2;
 }
-
+.flow-btn-green {
+  background-color: #04B804;
+  color: #fff;
+  text-align: center;
+  line-height: 46px;
+  display: block;
+}
 .flow-btn {
   background-color: #ff495e;
   color: #fff;
