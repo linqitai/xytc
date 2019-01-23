@@ -48,6 +48,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.setNavigationBarTitle({
+      title: wx.getStorageSync('operate')=='add'?"新增收获地址":"编辑收获地址",
+    })
     console.log('================onLoad=====================')
     wx.setStorageSync('fromAddress', 0)
     var that = this;
