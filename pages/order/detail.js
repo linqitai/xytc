@@ -56,7 +56,27 @@ Page({
       }
     });
   },
-
+  /**
+   * 发起货到付款
+   */
+  offlinePay(e) {
+    let _this = this;
+    let order_id = e.currentTarget.dataset.id;
+    App.showModel("此操作会把订单改为货到付款，是否继续？", function (res) {
+      if (res.confirm) {
+        App._post_form('user.order/update_offline', { order_id }, function (result) {
+          console.log(result)
+          if (result.code == 1) {
+            App.showSuccess(result.msg, function () {
+              _this.getOrderDetail(order_id);
+            })
+          }
+        });
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
+    })
+  },
   /**
    * 发起付款
    */

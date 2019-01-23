@@ -115,7 +115,18 @@ App({
       }
     });
   },
-
+  showModel: function (msg, callback) {
+    wx.showModal({
+      title: '友情提示',
+      content: msg,
+      success: function (res) {
+        // callback && (setTimeout(function() {
+        //   callback();
+        // }, 1500));
+        callback && callback(res);
+      }
+    });
+  },
   /**
    * get请求
    */

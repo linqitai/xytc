@@ -89,6 +89,14 @@ page {
   box-sizing: border-box;
   flex: 0 0 25%;
 }
+.flex-p3 {
+  box-sizing: border-box;
+  flex: 0 0 30%;
+}
+.flex-p7 {
+  box-sizing: border-box;
+  flex: 0 0 70%;
+}
 
 .t-l {
   text-align: left;
