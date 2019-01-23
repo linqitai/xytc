@@ -60,7 +60,7 @@
         </view>
         <view class="flow-list-right">
           <text class="h4 twolist-hidden">{{item.goods_name}}</text>
-          <text class="p f-22 col-7">{{item.goods_attr}}</text>
+          <text class="p f-22 col-7">{{item.goods_price}}{{item.spec.unit}}</text>
           <view class="flow-list-cont">
             <text class="flow-cont">￥{{item.goods_price}}</text>
             <text class="small">×{{item.total_num}}</text>
