@@ -44,7 +44,7 @@
                 </view>
                 <view class='price' wx:if="{{!item.isOpen}}">
                   <view class='line1' wx:if="{{item.is_mul_spec==0}}">
-                    <text class='goods_price0' wx:if="{{item.spec[0].goods_price}}">￥{{item.spec[0].goods_price}}</text> 
+                    <text class='goods_price0' wx:if="{{item.spec[0].goods_price}}">{{item.spec[0].goods_price}}</text> 
                     <text class="line_price">￥{{item.spec[0].line_price}}</text>
                   </view>
                   <text class='text' wx:if="{{item.is_mul_spec==1}}">￥{{item.goods_min_single_price}}~{{item.goods_max_single_price}}{{item.goods_unit}}</text>
