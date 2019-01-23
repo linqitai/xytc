@@ -48,6 +48,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.setNavigationBarTitle({
+      title: wx.getStorageSync('operate')=='add'?"新增收获地址":"编辑收获地址",
+    })
     console.log('================onLoad=====================')
     wx.setStorageSync('fromAddress', 0)
     var that = this;
@@ -82,14 +85,14 @@ Page({
       isOnLoad: 1,
       name: name || '',
       phone: phone || '',
-      longitude: options.longitude||'',
-      latitude: options.latitude||'',
+      longitude: options.longitude || wx.getStorageSync('longitude'),
+      latitude: options.latitude || wx.getStorageSync('latitude'),
       address: options.address || '',
       markers: [{
         iconPath: '/images/location.png',
         id: 0,
-        longitude: options.longitude || '',
-        latitude: options.latitude || '',
+        longitude: options.longitude || wx.getStorageSync('longitude'),
+        latitude: options.latitude || wx.getStorageSync('latitude'),
         width: 50,
         height: 50
       }]
@@ -232,6 +235,7 @@ Page({
     });
   },
   relGetLocation(longitude, latitude) {
+    console.log(this.data.markers,"markers")
     console.log(`${longitude},${latitude}`,"relGetLocation")
     var that = this;
     // 实例化API核心类
@@ -331,20 +335,13 @@ Page({
       region: e.detail.value
     })
     wx.setStorageSync('region', e.detail.value)
-    // console.log(e.detail.value,"setStorageSync.region")
     var region = e.detail.value.join('')
     var url = `https://apis.map.qq.com/ws/geocoder/v1/?address=${region}&key=${App.mapKey}`
-    // console.log(url,"url")
     wx.request({
       url: url,
       success(res) {
-        // console.log(res,"getLongLat")
-        // console.log(res.data.result.location.lng,"res.data.result.location.lng")
-        // console.log(res.data.result.location.lat, "res.data.result.location.lat")
         const longitude = res.data.result.location.lng;
         const latitude = res.data.result.location.lat;
-        // const longitude = location[0];
-        // const latitude = location[1];
         that.setData({
           longitude: longitude,
           latitude: latitude,
@@ -353,7 +350,6 @@ Page({
         wx.setStorageSync('address', '')
         wx.setStorageSync('longitude', '');
         wx.setStorageSync('latitude', '');
-        // console.log(that.data, "setData bindRegionChange")
       }
     })
   },
