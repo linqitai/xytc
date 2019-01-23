@@ -21,8 +21,8 @@
         <text class="num" wx:if="{{detail.is_mul_spec==1}}">￥{{goods_price}}({{specValue}}{{specData.spec_attr[0].group_name}})</text>
         <text class="del" wx:if="{{line_price>0}}">￥{{line_price}}</text>
       </view>
-      <view class="goods-sales-box f-28 dis-flex" wx:if="{{detail.is_mul_spec==1}}">
-        <text class="flex-box num">单价：{{single_money=='0.00'?'':single_money}}{{single_unit}}</text>
+      <view class="goods-sales-box f-28 dis-flex">
+        <text class="flex-box num">{{single_money}}</text>
         <text class="flex-box stock">销量：{{detail.goods_sales}}</text>
       </view>
     </view>
