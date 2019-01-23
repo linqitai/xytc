@@ -101,6 +101,10 @@ Page({
       var longitude = wx.getStorageSync('longitude')
       var latitude = wx.getStorageSync('latitude')
       if (longitude && latitude){
+        that.setData({
+          longitude,
+          latitude
+        })
         that.relGetLocation(longitude,latitude);
       }else{
         that.setData({
