@@ -360,8 +360,10 @@ Page({
         // const latitude = location[1];
         that.setData({
           longitude: longitude,
-          latitude: latitude
+          latitude: latitude,
+          address: ''
         })
+        wx.setStorageSync('address', '')
         // console.log(that.data, "setData bindRegionChange")
       }
     })

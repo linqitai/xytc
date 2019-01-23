@@ -29,7 +29,7 @@
     <view class="cart bright789_view_hide {{showView?'bright789_view_show':''}}">
       <view class="modal_cont_box">
         <scroll-view class="goods-list-box" scroll-y="true">
-          <view class="cf tmall-types" wx:for="{{specData.spec_attr}}" wx:for-item="attr" wx:for-index="attr_idx" wx:key="key">
+          <view class="cf tmall-types" wx:for="{{specData.spec_attr}}" wx:for-item="attr" wx:for-index="attr_idx" wx:key="key" wx:if="{{specData.spec_attr[0].spec_items.length>1}}">
             <!-- <view class="tipstxt" data-id="{{attr.group_id}}">{{attr.group_name}}</view> -->
             <view class="cf cartypelist" wx:for="{{attr.spec_items}}" wx:for-index="item_idx" wx:key="ikey">
               <view bindtap="modelTap" class="cartypeitem {{item.checked?'cur':''}}" data-attr-idx="{{attr_idx}}" data-item-idx="{{item_idx}}" data-specvalue='{{item.spec_value}}'>{{item.spec_value}}{{attr.group_name}}</view>
