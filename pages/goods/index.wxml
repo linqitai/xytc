@@ -1,4 +1,4 @@
-<import src="../../wxParse/wxParse.wxml"></import>
+ <import src="../../wxParse/wxParse.wxml"></import>
 <scroll-view bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-y="true" style="position:absolute; top:0; left:0; right:0; bottom:0;">
   <view class="container" wx:if="{{detail.goods_id}}">
     <view bindtap="imgPreview">
@@ -21,7 +21,7 @@
         <text class="num" wx:if="{{detail.is_mul_spec==1}}">￥{{goods_price}}({{specValue}}{{specData.spec_attr[0].group_name}})</text>
         <text class="del" wx:if="{{line_price>0}}">￥{{line_price}}</text>
       </view>
-      <view class="goods-sales-box f-28 dis-flex">
+      <view class="goods-sales-box f-24 dis-flex">
         <text class="flex-box num">{{single_money}}</text>
         <text class="flex-box stock">销量：{{detail.goods_sales}}</text>
       </view>

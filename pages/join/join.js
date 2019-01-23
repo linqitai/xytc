@@ -10,7 +10,8 @@ Page({
     name:'',
     phone:"",
     licence_image:'',
-    tempFilePaths:''
+    pic:'',
+    store_cert:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -30,10 +31,12 @@ Page({
           var name = res.data.userInfo.name;
           var phone = res.data.userInfo.phone;
           var licence_image = res.data.userInfo.licence_image;
+          var store_cert = res.data.userInfo.store_cert;
           that.setData({
             name,
             phone,
-            licence_image
+            licence_image,
+            store_cert
           })
         }
       }
@@ -48,7 +51,7 @@ Page({
       success: res => {
         let tempFilePaths = res.tempFiles;
         that.setData({
-          pic: tempFilePaths[0].path
+          licence_image: tempFilePaths[0].path
         })
         wx.uploadFile({
           url: App.api_root + 'user.index/store_image&wxapp_id=10001&token=' + wx.getStorageSync('token'),      //此处换上你的接口地址
@@ -59,7 +62,7 @@ Page({
             var pic = JSON.parse(res.data).data
             console.log(pic,'pic')
             that.setData({
-              tempFilePaths:pic
+              pic:pic
             })
           },
           fail: function (res) {
@@ -86,7 +89,7 @@ Page({
     var params = {
       name: that.data.name,
       phone: that.data.phone,
-      licence_image: that.data.tempFilePaths,
+      licence_image: that.data.pic,
     }
     var method = "POST";
     console.log(params,"----------params---------------")

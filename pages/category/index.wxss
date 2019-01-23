@@ -78,16 +78,16 @@
   display: flex;
   flex-direction: row;
   border-bottom: 1rpx solid #fcfcfc;
-  height: 140rpx;
-  padding: 28rpx 20rpx;
+  height: 130rpx;
+  padding: 22rpx 20rpx;
 }
 .goodsList .items .img{
-  flex: 0 0 140rpx; 
+  flex: 0 0 130rpx; 
   height: 100%;
 }
 .goodsList .items .img .image{
-  width: 140rpx;
-  height: 140rpx;
+  width: 130rpx;
+  height: 130rpx;
   background-color: #11877C;
   /* border-radius: 100%; */
   background-size: 100%;
@@ -136,6 +136,7 @@
   transform:translateY(-50%);
   /* 让文字垂直居中 */
   color: #E36A1E;
+  font-size: 26rpx;
 }
 .goodsList .items .content .price .line1{
   /* 让文字垂直居中 */
@@ -143,6 +144,9 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
+}
+.goodsList .items .content .price .line1 .goods_price0{
+  font-size: 18rpx;
 }
 .price .line1 .line_price{
   /* 让文字垂直居中 */
@@ -152,7 +156,7 @@
   /* 让文字垂直居中 */
   text-decoration: line-through;
   color: #999;
-  font-size: 28rpx;
+  font-size: 16rpx;
 }
 .goodsList .items .content .line_price{
   flex: auto;
@@ -208,14 +212,11 @@
   font-size: 50rpx;
   color: #0FB053;
 }
-.specification{
-
-}
 .specification .specificationItem{
   display: flex;
   border-bottom: 1rpx solid #fcfcfc;
   height: 90rpx;
-  padding: 28rpx 20rpx;
+  padding: 22rpx 20rpx;
 }
 .specification .specificationItem .content{
   flex: auto;
