@@ -41,9 +41,9 @@
               <image mode="aspectFill" src="{{item.image[0].file_path}}"></image>
             </view>
             <view class="content">
-              <view class='line1 f-28 onelist-hidden'>{{item.goods_name}}</view>
-              <view class="line2 f-24 onelist-hidden">{{item.goods_content}}</view>
-              <view class="line3 f-28 onelist-hidden">{{item.goods_show_price}}</view>
+              <view class='line1 f-24 onelist-hidden'>{{item.goods_name}}</view>
+              <view class="line2 f-22 onelist-hidden">{{item.goods_content}}</view>
+              <view class="line3 f-24 onelist-hidden">{{item.goods_show_price}}</view>
             </view>
           </view>
         </navigator>
