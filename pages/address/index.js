@@ -18,7 +18,6 @@ Page({
     wx.setStorageSync('address', '')
     wx.setStorageSync('longitude', '')
     wx.setStorageSync('latitude', '')
-    wx.setStorageSync('_from', '')
     wx.setStorageSync('addToUrl', '')
   },
   
@@ -89,6 +88,11 @@ Page({
    */
   editAddress: function(e) {
     wx.setStorageSync('operate', 'edit')
+    wx.setStorageSync('address_id', e.currentTarget.dataset.id)
+    wx.setStorageSync('longitude', e.currentTarget.dataset.lon)
+    wx.setStorageSync('latitude', e.currentTarget.dataset.lat)
+    console.log(e.currentTarget.dataset.id,"e.currentTarget.dataset.id编辑地址")
+    wx.showNavigationBarLoading();
     wx.navigateTo({
       url: "./create?address_id=" + e.currentTarget.dataset.id
     });
@@ -125,7 +129,10 @@ Page({
     App._post_form('address/setDefault', {
       address_id
     }, function(result) {
-      _this.data.options.from === 'flow' && wx.navigateBack();
+      console.log(wx.getStorageSync('_from'),"wx.getStorageSync('_from')")
+      if (wx.getStorageSync('_from') == 'flow'){
+        wx.navigateBack();
+      }
     });
     return false;
   },

@@ -24,7 +24,7 @@
         </view>
         <view class="list address-right">
           <text class="iconfont icon-edit1"></text>
-          <text bindtap="editAddress" class="title" data-id="{{item.address_id}}">编辑</text>
+          <text bindtap="editAddress" class="title" data-lon='{{item.lon}}' data-lat='{{item.lat}}' data-id="{{item.address_id}}">编辑</text>
           <text class="iconfont icon-lajixiang"></text>
           <text bindtap="removeAddress" class="title" data-id="{{item.address_id}}">删除</text>
         </view>

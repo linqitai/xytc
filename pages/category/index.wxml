@@ -43,11 +43,16 @@
                   <text class='text f-28'>{{item.goods_name}}</text>
                 </view>
                 <view class='price' wx:if="{{!item.isOpen}}">
-                  <text class='text f-26' wx:if="{{item.is_mul_spec==0}}">{{item.spec[0].goods_price}}  -- {{item.spec[0].single_money}}</text>
+                  <!-- <text class='text' wx:if="{{item.is_mul_spec==0}}">￥{{item.goods_min_price}}{{item.spec[0].unit}}</text> -->
+                  <view class='line1' wx:if="{{item.is_mul_spec==0}}">
+                    <text class='goods_price' wx:if="{{item.spec[0].goods_price}}">￥{{item.spec[0].goods_price}}{{item.spec[0].unit?spec.unit:''}}</text> <text class="line_price">￥{{item.spec[0].line_price}}</text>
+                  </view>
                   <text class='text' wx:if="{{item.is_mul_spec==1}}">￥{{item.goods_min_single_price}}~{{item.goods_max_single_price}}{{item.goods_unit}}</text>
+                  <!-- <view class='line1'><text class='goods_price'>￥{{item.spec[0].goods_price}}({{item.spec[0].unit?spec.unit:''}})</text> <text class="line_sprice">￥{{item.spec[0].line_price}}</text></view>
+                  <view class='line2'>￥{{item.spec[0].single_money}}{{item.spec[0].single_unit}}</view> -->
                 </view>
-                <view class='line_price' wx:if="{{item.is_mul_spec==0}}">
-                  <text class="text" wx:if="{{item.spec[0].line_price>0}}">￥{{item.spec[0].line_price}}</text>
+                <view class='single_price' wx:if="{{item.is_mul_spec==0}}">
+                  <text class="text" wx:if="{{item.spec[0].line_price>0}}">￥{{item.spec[0].single_money}}{{item.spec[0].single_unit?item.spec[0].single_unit:''}}</text>
                 </view>
               </view>
               <!-- 多规格 -->

@@ -125,6 +125,35 @@
   font-size: 26rpx;
   color: #E36A1E;
 }
+.goodsList .items .content .single_price{
+  flex: auto;
+  position: relative;
+}
+.goodsList .items .content .single_price .text{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  color: #E36A1E;
+}
+.goodsList .items .content .price .line1{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+}
+.price .line1 .line_price{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  text-decoration: line-through;
+  color: #999;
+  font-size: 28rpx;
+}
 .goodsList .items .content .line_price{
   flex: auto;
   position: relative;
