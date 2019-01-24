@@ -18,7 +18,7 @@ Page({
     wx.setStorageSync('address', '')
     wx.setStorageSync('longitude', '')
     wx.setStorageSync('latitude', '')
-    wx.setStorageSync('addToUrl', '')
+    // wx.setStorageSync('addToUrl', '')
   },
   
   onShow: function() {

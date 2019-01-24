@@ -262,7 +262,10 @@ Page({
         goods_num: _this.data.goods_num,
         goods_sku_id: _this.data.goods_sku_id,
       })
+      console.log(addToUrl,"addToUrl立刻购买")
       wx.setStorageSync('addToUrl', addToUrl)
+      console.log(wx.getStorageSync('addToUrl'), "addToUrl")
+      wx.setStorageSync('order_type', 'buyNow')
       wx.navigateTo({
         url: '../flow/checkout?' + addToUrl
       });
