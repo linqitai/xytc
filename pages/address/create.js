@@ -264,10 +264,10 @@ Page({
         // var location = dingwei.gcj02towgs84(res.longitude, res.latitude);//如果定位不准确的解决方法
         const longitude = res.longitude;
         const latitude = res.latitude;
-        that.setData({
-          longitude: longitude,
-          latitude: latitude
-        })
+        // that.setData({
+        //   longitude: longitude,
+        //   latitude: latitude
+        // })
         // 实例化API核心类
         qqmapsdk = new QQMapWX({
           //此key需要用户自己申请
@@ -399,13 +399,15 @@ Page({
         console.log(wx.getStorageSync('_from'),"wx.getStorageSync('_from')")
         if (wx.getStorageSync('_from')=='flow'){
           var addToUrl = wx.getStorageSync('addToUrl');
+          console.log(addToUrl,"addToUrl")
+          console.log(wx.getStorageSync('order_type'),"wx.getStorageSync('order_type')")
           if (addToUrl){
             wx.redirectTo({
               url: "/pages/flow/checkout?" + addToUrl
             });
           }else{
             wx.redirectTo({
-              url: "/pages/flow/checkout?order_type=cart"
+              url: `/pages/flow/checkout?order_type=${wx.getStorageSync('order_type')}` + addToUrl
             });
           }
         }else{
