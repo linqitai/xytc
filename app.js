@@ -102,6 +102,16 @@ App({
   /**
    * 显示失败提示框
    */
+  showToast: function (msg) {
+    wx.showToast({
+      title: msg,
+      icon: 'none',
+      duration: 1500
+    })
+  },
+  /**
+   * 显示失败提示框
+   */
   showError: function(msg, callback) {
     wx.showModal({
       title: '友情提示',
@@ -111,7 +121,7 @@ App({
         // callback && (setTimeout(function() {
         //   callback();
         // }, 1500));
-        callback && callback();
+        callback && callback(res);
       }
     });
   },
