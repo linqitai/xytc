@@ -1,9 +1,7 @@
 let App = getApp();
 var couponList = [];
 var post_pay_typeCouponList = [];
-const { $Message } = require('../../dist/base/index');
 Page({
-
   /**
    * 页面的初始数据
    */
