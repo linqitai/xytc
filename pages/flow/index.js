@@ -118,6 +118,7 @@ Page({
    * 购物车结算
    */
   submit: function(t) {
+    wx.setStorageSync('order_type', 'cart')
     wx.navigateTo({
       url: '../flow/checkout?order_type=cart'
     });

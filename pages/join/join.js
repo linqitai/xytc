@@ -9,8 +9,9 @@ Page({
   data: {
     name:'',
     phone:"",
+    licence_image:'',
     pic:'',
-    tempFilePaths:''
+    store_cert:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -24,13 +25,18 @@ Page({
       function (res) {//成功
         console.log(res, "res")
         if (res.code == 1) {
-          console.log(res.data.userInfo.name)
-          console.log(res.data.userInfo.phone)
-          console.log(res.data.userInfo.licence_image)
+          console.log(res.data.userInfo.name,"name")
+          console.log(res.data.userInfo.phone,"phone")
+          console.log(res.data.userInfo.licence_image,'licence_image')
+          var name = res.data.userInfo.name;
+          var phone = res.data.userInfo.phone;
+          var licence_image = res.data.userInfo.licence_image;
+          var store_cert = res.data.userInfo.store_cert;
           that.setData({
-            name: res.data.userInfo.name,
-            phone: res.data.userInfo.phone,
-            licence_image: res.data.userInfo.licence_image
+            name,
+            phone,
+            licence_image,
+            store_cert
           })
         }
       }
@@ -45,7 +51,7 @@ Page({
       success: res => {
         let tempFilePaths = res.tempFiles;
         that.setData({
-          pic: tempFilePaths[0].path
+          licence_image: tempFilePaths[0].path
         })
         wx.uploadFile({
           url: App.api_root + 'user.index/store_image&wxapp_id=10001&token=' + wx.getStorageSync('token'),      //此处换上你的接口地址
@@ -56,7 +62,7 @@ Page({
             var pic = JSON.parse(res.data).data
             console.log(pic,'pic')
             that.setData({
-              tempFilePaths:pic
+              pic:pic
             })
           },
           fail: function (res) {
@@ -83,7 +89,7 @@ Page({
     var params = {
       name: that.data.name,
       phone: that.data.phone,
-      licence_image: that.data.tempFilePaths,
+      licence_image: that.data.pic,
     }
     var method = "POST";
     console.log(params,"----------params---------------")
@@ -92,7 +98,7 @@ Page({
         console.log(res,"res")
         if(res.code==1) {
           App.showSuccess(res.msg,function(){
-            wx.navigateBack();
+            that.getUserInfo();
           })
         }
       },

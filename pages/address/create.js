@@ -9,7 +9,8 @@ Page({
    */
   data: {
     disabled: false,
-    nav_select: false, // 快捷导航
+    nav_select: false, // 
+    isOnLoad: 0,
     name:'',
     phone:'',
     region: '',
@@ -47,6 +48,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.setNavigationBarTitle({
+      title: wx.getStorageSync('operate')=='add'?"新增收获地址":"编辑收获地址",
+    })
+    console.log('================onLoad=====================')
+    wx.setStorageSync('fromAddress', 0)
     var that = this;
     var operate = wx.getStorageSync('operate')
     console.log(operate, "operate")
@@ -56,15 +62,16 @@ Page({
       // console.log(that.data, 'init data')
       /*判断是第一次加载还是从position页面返回
       如果从position页面返回，会传递用户选择的地点*/
-      console.log(options.address,"options.address")
+      console.log(options.address, "options.address")
       if (options.address != null && options.address != '') {
         //设置变量 address 的值
         that.setData({
           address: options.address
         });
       }
-    }else{
+    } else {
       if (options.address_id) {
+        console.log(options.address_id,"options.address_id")
         // 获取当前地址信息
         that.setData({
           address_id: options.address_id
@@ -75,30 +82,45 @@ Page({
     var name = wx.getStorageSync('name')
     var phone = wx.getStorageSync('phone')
     that.setData({
+      isOnLoad: 1,
       name: name || '',
       phone: phone || '',
-      longitude: wx.getStorageSync('longitude') || '',
-      latitude: wx.getStorageSync('latitude') || '',
+      longitude: options.longitude || wx.getStorageSync('longitude'),
+      latitude: options.latitude || wx.getStorageSync('latitude'),
       address: options.address || '',
       markers: [{
         iconPath: '/images/location.png',
         id: 0,
-        longitude: wx.getStorageSync('longitude') || '',
-        latitude: wx.getStorageSync('latitude') || '',
+        longitude: options.longitude || wx.getStorageSync('longitude'),
+        latitude: options.latitude || wx.getStorageSync('latitude'),
         width: 50,
         height: 50
       }]
     })
+    console.log(`${that.data.longitude},${that.data.latitude}`)
     var region = wx.getStorageSync('region');
     // console.log(region,"getStorageSync.region")
-    if (region){
-      this.setData({
-        region: region
-      })
-    }else{
+    if (region) {
+      var longitude = wx.getStorageSync('longitude')
+      var latitude = wx.getStorageSync('latitude')
+      if (longitude && latitude){
+        that.setData({
+          longitude,
+          latitude
+        })
+        that.relGetLocation(longitude,latitude);
+      }else{
+        that.setData({
+          region: region
+        })
+      }
+    } else {
       that.getLocation();
     }
     that.getPolygon();
+  },
+  onShow(){
+    
   },
   /**
    * @description 射线法判断点是否在多边形内部
@@ -196,7 +218,7 @@ Page({
           }
           var poly = res.data[i]
           var r = that.rayCasting(p, poly)
-          // console.log(r,'r')
+          console.log(r,'r')
           if(r != 'out'){
             flag = true
           }
@@ -205,12 +227,33 @@ Page({
           polygons
         })
         // console.log(that.data.polygons,"polygons")
-        // console.log(flag,'flag')
+        console.log(flag,'flag')
         that.setData({
           flag: flag
         })
       }
     });
+  },
+  relGetLocation(longitude, latitude) {
+    console.log(this.data.markers,"markers")
+    console.log(`${longitude},${latitude}`,"relGetLocation")
+    var that = this;
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      //此key需要用户自己申请
+      key: App.mapKey
+    });
+    // console.log('qqmapsdk')
+    // 调用接口
+    that.pointToAddress(longitude, latitude, function (res) {
+      // 得到最终地址
+      // console.log(res, "得到最终地址");
+      that.setData({
+        region: `${res.address_component.province},${res.address_component.city},${res.address_component.district}`
+      })
+      // console.log(that.data.region, "region")
+      wx.setStorageSync('region', that.data.region)
+    })
   },
   getLocation(){
     var that = this;
@@ -219,19 +262,12 @@ Page({
       altitude: true,
       success(res) {//经过测试在PC上定位不准确，在手机上就准确了
         // var location = dingwei.gcj02towgs84(res.longitude, res.latitude);//如果定位不准确的解决方法
-        // const speed = res.speed
-        // const accuracy = res.accuracy
-        // console.log(location, "location")
         const longitude = res.longitude;
         const latitude = res.latitude;
-        wx.setStorageSync('longitude', longitude);
-        wx.setStorageSync('latitude', latitude);
-        // const longitude = location[0];
-        // const latitude = location[1];
-        that.setData({
-          longitude: longitude,
-          latitude: latitude
-        })
+        // that.setData({
+        //   longitude: longitude,
+        //   latitude: latitude
+        // })
         // 实例化API核心类
         qqmapsdk = new QQMapWX({
           //此key需要用户自己申请
@@ -274,7 +310,7 @@ Page({
   },
   onChangeAddress: function (e) {
     var that = this;
-    wx.reLaunch({
+    wx.navigateTo({
       url: `/pages/address/position/position?latitude=${that.data.latitude}&longitude=${that.data.longitude}`
     });
   },
@@ -299,27 +335,21 @@ Page({
       region: e.detail.value
     })
     wx.setStorageSync('region', e.detail.value)
-    // console.log(e.detail.value,"setStorageSync.region")
     var region = e.detail.value.join('')
     var url = `https://apis.map.qq.com/ws/geocoder/v1/?address=${region}&key=${App.mapKey}`
-    // console.log(url,"url")
     wx.request({
       url: url,
       success(res) {
-        // console.log(res,"getLongLat")
-        // console.log(res.data.result.location.lng,"res.data.result.location.lng")
-        // console.log(res.data.result.location.lat, "res.data.result.location.lat")
         const longitude = res.data.result.location.lng;
         const latitude = res.data.result.location.lat;
-        wx.setStorageSync('longitude', longitude);
-        wx.setStorageSync('latitude', latitude);
-        // const longitude = location[0];
-        // const latitude = location[1];
         that.setData({
           longitude: longitude,
-          latitude: latitude
+          latitude: latitude,
+          address: ''
         })
-        // console.log(that.data, "setData bindRegionChange")
+        wx.setStorageSync('address', '')
+        wx.setStorageSync('longitude', '');
+        wx.setStorageSync('latitude', '');
       }
     })
   },
@@ -369,13 +399,15 @@ Page({
         console.log(wx.getStorageSync('_from'),"wx.getStorageSync('_from')")
         if (wx.getStorageSync('_from')=='flow'){
           var addToUrl = wx.getStorageSync('addToUrl');
+          console.log(addToUrl,"addToUrl")
+          console.log(wx.getStorageSync('order_type'),"wx.getStorageSync('order_type')")
           if (addToUrl){
             wx.redirectTo({
               url: "/pages/flow/checkout?" + addToUrl
             });
           }else{
             wx.redirectTo({
-              url: "/pages/flow/checkout?order_type=cart"
+              url: `/pages/flow/checkout?order_type=${wx.getStorageSync('order_type')}` + addToUrl
             });
           }
         }else{

@@ -78,16 +78,16 @@
   display: flex;
   flex-direction: row;
   border-bottom: 1rpx solid #fcfcfc;
-  height: 140rpx;
-  padding: 28rpx 20rpx;
+  height: 120rpx;
+  padding: 22rpx 20rpx;
 }
 .goodsList .items .img{
-  flex: 0 0 140rpx; 
+  flex: 0 0 120rpx; 
   height: 100%;
 }
 .goodsList .items .img .image{
-  width: 140rpx;
-  height: 140rpx;
+  width: 110rpx;
+  height: 110rpx;
   background-color: #11877C;
   /* border-radius: 100%; */
   background-size: 100%;
@@ -97,7 +97,6 @@
   display: flex;
   flex-direction: column;
   align-content:center;
-  margin-left: 10rpx;
 }
 .goodsList .items .content .title{
   flex: auto; 
@@ -122,8 +121,41 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
-  font-size: 34rpx;
+  font-size: 26rpx;
   color: #E36A1E;
+}
+.goodsList .items .content .single_price{
+  flex: auto;
+  position: relative;
+}
+.goodsList .items .content .single_price .text{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  color: #E36A1E;
+  font-size: 24rpx;
+}
+.goodsList .items .content .price .line1{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+}
+.goodsList .items .content .price .line1 .goods_price0{
+  font-size: 18rpx;
+}
+.price .line1 .line_price{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  text-decoration: line-through;
+  color: #999;
+  font-size: 16rpx;
 }
 .goodsList .items .content .line_price{
   flex: auto;
@@ -135,12 +167,12 @@
   top:50%;
   transform:translateY(-50%);
   /* 让文字垂直居中 */
-  font-size: 30rpx;
+  font-size: 24rpx;
   color: #999;
   text-decoration: line-through;
 }
 .goodsList .btn{
-  flex: 0 0 150rpx; 
+  flex: 0 0 130rpx; 
   position: relative;
   display: flex;
   flex-direction: row;
@@ -155,7 +187,7 @@
   color: #0FB053;
 }
 .goodsList .btn .text{
-  flex: 0 0 50rpx;
+  flex: 0 0 30rpx;
   /* float: left; */
   /* width: 50rpx; */
   height: 50rpx;
@@ -179,14 +211,11 @@
   font-size: 50rpx;
   color: #0FB053;
 }
-.specification{
-
-}
 .specification .specificationItem{
   display: flex;
   border-bottom: 1rpx solid #fcfcfc;
   height: 90rpx;
-  padding: 28rpx 20rpx;
+  padding: 22rpx 20rpx;
 }
 .specification .specificationItem .content{
   flex: auto;
@@ -195,7 +224,10 @@
 }
 .specification .specificationItem .content .line1{
   flex: auto;
-  font-size: 32rpx;
+  font-size: 24rpx;
+  color: #646464;
+}
+.specification .specificationItem .content .goods_price{
   color: #646464;
 }
 .specification .specificationItem .content .line2{
@@ -205,7 +237,7 @@
 .specification .specificationItem .content .line_sprice{
   color: #999;
   text-decoration: line-through;
-  font-size: 24rpx;
+  font-size: 18rpx;
 }
 
 .cate-right-cont {

@@ -28,10 +28,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options,"options")
     // 当前页面参数
     this.data.options = options;
-    console.log(options);
+    console.log(options,"options");
   },
 
   /**
@@ -112,11 +111,11 @@ Page({
         App.showError(_this.data.error);
       }
       _this.setData(result.data);
-      _this.getCouponList();
+      // _this.getCouponList();// 获取优惠券列表
     };
 
     // 立即购买
-    if (options.order_type === 'buyNow') {
+    if (wx.getStorageSync('order_type') === 'buyNow') {
       App._get('order/buyNow', {
         goods_id: options.goods_id,
         goods_num: options.goods_num,
@@ -130,14 +129,13 @@ Page({
     }
 
     // 购物车结算
-    else if (options.order_type === 'cart') {
+    else if (wx.getStorageSync('order_type') === 'cart') {
       App._get('order/cart', {
 
         }, function(result) {
         callback(result);
       });
     }
-
   },
   // 根据当前page_type获取所减免的价格或者折扣
   getSubMoney(post_pay_typeCouponList){
@@ -243,7 +241,8 @@ Page({
    */
   selectAddress: function() {
     wx.setStorageSync('operate', 'add');
-    wx.setStorageSync('_from', 'flow')
+    wx.setStorageSync('_from', 'flow');// 记得在我的页面要清空
+    console.log(wx.getStorageSync('_from'), "wx.getStorageSync('_from')")
     wx.navigateTo({
       url: '../address/' + (this.data.exist_address ? 'index?from=flow' : 'create')
     });
@@ -318,7 +317,7 @@ Page({
     });
 
     // 创建订单-立即购买
-    if (options.order_type === 'buyNow') {
+    if (wx.getStorageSync('order_type') === 'buyNow') {
       App._post_form('order/buyNow', {
         goods_id: options.goods_id,
         goods_num: options.goods_num,
@@ -342,7 +341,7 @@ Page({
     }
 
     // 创建订单-购物车结算
-    else if (options.order_type === 'cart') {
+    else if (wx.getStorageSync('order_type') === 'cart') {
       App._post_form('order/cart', {
         pay_type: post_pay_type,
         dis_type: post_dis_type,

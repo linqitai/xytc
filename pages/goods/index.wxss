@@ -289,7 +289,7 @@
 
 .goods-cont-li .wxParse-inline {
   font-size: 30rpx;
-  padding: 20rpx 10rpx;
+  padding: 20rpx 30rpx;
 }
 
 .goods-cont-li image {

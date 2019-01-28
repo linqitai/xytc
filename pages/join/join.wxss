@@ -67,6 +67,9 @@
   color: #ff1f1f;
   letter-spacing: 2rpx;
 }
+.green{
+  color: green;
+}
 .labelTextarea{
   flex: 0 0 200rpx;
   color: #919191;

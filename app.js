@@ -23,13 +23,13 @@ App({
    */
   onShow: function(options) {
     // 获取小程序基础信息
-    this.getWxappBase(function(wxapp) {
-      // 设置navbar标题、颜色
-      wx.setNavigationBarColor({
-        frontColor: wxapp.navbar.top_text_color.text,
-        backgroundColor: wxapp.navbar.top_background_color
-      })
-    });
+    // this.getWxappBase(function(wxapp) {
+    //   // 设置navbar标题、颜色
+    //   wx.setNavigationBarColor({
+    //     frontColor: wxapp.navbar.top_text_color.text,
+    //     backgroundColor: wxapp.navbar.top_background_color
+    //   })
+    // });
   },
 
   /**
@@ -115,7 +115,18 @@ App({
       }
     });
   },
-
+  showModel: function (msg, callback) {
+    wx.showModal({
+      title: '友情提示',
+      content: msg,
+      success: function (res) {
+        // callback && (setTimeout(function() {
+        //   callback();
+        // }, 1500));
+        callback && callback(res);
+      }
+    });
+  },
   /**
    * get请求
    */
@@ -260,9 +271,9 @@ App({
         title: wxapp.navbar.wxapp_title
       });
     } else {
-      App.getWxappBase(function() {
-        App.setTitle();
-      });
+      // App.getWxappBase(function() {
+      //   App.setTitle();
+      // });
     }
   },
 

@@ -33,12 +33,12 @@
           </picker>
         </view>
       </view>
-      <view class="dis-flex list address-box">
+      <view class="dis-flex list address-box" bindtap='onChangeAddress'>
         <view class="left-name">
           <text class="f-30">详细地址</text>
         </view>
         <view class="right-cont dis-flex detail">
-          <input class='inputDetail' name="detail" placeholder="请输入街道小区楼层" bindtap='onChangeAddress' type="text" data-name="address" value='{{address}}' readOnly></input>
+          <input class='inputDetail' name="detail" placeholder="请输入街道小区楼层" type="text" data-name="address" value='{{address}}' readOnly></input>
           <!-- <text class="icon icon-map iconMap"></text> -->
           <!-- <input name="detail" placeholder="请输入街道小区楼层" type="text" bindtap='onChangeAddress'></input> -->
         </view>
@@ -47,7 +47,7 @@
     <view class="padding-box profile-btn">
       <button formType="submit" disabled="{{disabled}}">保存</button>
     </view>
-    <view class="flag {{flag ? 'flagTrue':'flagFalse'}}" wx:if="{{address}}">
+    <view class="flag {{flag ? 'flagTrue':'flagFalse'}}" wx:if="{{!flag}}">
       {{flag?'所选定位在配送范围内':'所选定位不在配送范围内'}}
     </view>
     <!-- <view class="padding-box m-top20 ">

@@ -1,0 +1,9 @@
+<view class='marketingBox'>
+  <view class="marketingLeft">
+    left
+  </view>
+  <view class='marketingRight'>
+    <view class='top'>top</view>
+    <view class='bottom'>bottom</view>
+  </view>
+</view>

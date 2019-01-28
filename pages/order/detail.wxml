@@ -60,7 +60,7 @@
         </view>
         <view class="flow-list-right">
           <text class="h4 twolist-hidden">{{item.goods_name}}</text>
-          <text class="p f-22 col-7">{{item.goods_attr}}</text>
+          <text class="p f-22 col-7">{{item.goods_price}}{{item.spec.unit}}</text>
           <view class="flow-list-cont">
             <text class="flow-cont">￥{{item.goods_price}}</text>
             <text class="small">×{{item.total_num}}</text>
@@ -82,8 +82,8 @@
         <text class="flex-five">订单详情</text>
       </view>
       <view class="dis-flex flow-all-list-cont">
-        <text class="flex-five col-7">期望配送时间:</text>
-        <text class="flex-five col-m t-r">{{order.distribution_day.value}}{{order.distribution_time}}</text>
+        <text class="flex-p3 col-7">期望配送时间:</text>
+        <text class="flex-p7 col-m t-r">{{order.distribution_day.value}}{{order.distribution_time}}</text>
       </view>
       <view class="dis-flex flow-all-list-cont">
         <text class="flex-five col-7">支付方式:</text>
@@ -116,6 +116,9 @@
       </view>
       <view class="flex-box chackout-right-detail" wx:if="{{order.offline_status==10}}">
         <text bindtap="payOrder" class="flow-btn" wx:if="{{order.pay_status.value===10}}">去付款</text>
+      </view>
+      <view class="flex-box chackout-right-detail" wx:if="{{order.offline_status==10}}">
+        <text bindtap="offlinePay" class="flow-btn-green" wx:if="{{order.pay_status.value===10}}" data-id="{{order.order_id}}">货到付款</text>
       </view>
     </view>
     <view class="flow-btn h3" wx:if="{{order.delivery_status.value===20 && order.receipt_status.value===10}}">

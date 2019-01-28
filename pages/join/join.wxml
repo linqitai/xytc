@@ -1,28 +1,29 @@
 <scroll-view class='wrapper' scroll-y>
   <view class='contentBox'>
-    <label class='inputBoxTextarea2'>================</label>
+    <label class="inputBoxTextarea2 {{store_cert?'green':''}}">{{store_cert?'认证通过':'您的资料正在审核中'}}</label>
   </view>
   <view class='contentBox'>
     <view class='inputBox'>
       <label class='label'>商户姓名:</label>
-      <input class='input'  placeholder="输入框" placeholder-class="inputP" bindinput='getName'/>
+      <input class='input'  placeholder="输入框" placeholder-class="inputP" bindinput='getName' value='{{name}}'/>
     </view>
     <view class='inputBox'>
       <label class='label'>联系电话:</label>
-      <input class='input' type='number' maxlength='11' placeholder="输入框" placeholder-class="inputP" bindinput='getPhone'/>
+      <input class='input' type='number' maxlength='11' placeholder="输入框" placeholder-class="inputP" bindinput='getPhone' value='{{phone}}'/>
     </view>
     <view class='indentityBox'>
       <label class='indentityLabel'>商户信息(营业执照):</label>
       <view class='uploadIndentityBox'>
         <view class='frontbackBox' bindtap="upload">
-          <image class='image' mode='aspectFit' src='{{pic}}'></image>
-          <text wx:if="{{!pic}}" class="iconfont icon-add indentityIcon"></text>
+          <!-- <image class='' mode='aspectFit' src="{{licence_image}}'"></image> -->
+          <image style='height:100%;width:100%;' src="{{licence_image}}" mode="aspectFill"/>
+          <text wx:if="{{!licence_image}}" class="iconfont icon-add indentityIcon"></text>
         </view>
       </view>
     </view>
     <view class='line'></view>
   </view>
-  <view class='contentBox2'>
+  <view class='contentBox2' wx:if="{{store_cert==0}}">
     <button type="primary" bindtap='publishEvent'> 提交 </button>
   </view>
 </scroll-view>

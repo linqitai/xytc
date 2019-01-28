@@ -469,7 +469,7 @@
 }
 
 .title-footer .cont {
-  background: #f7f7f7;
+  /* background: #f7f7f7; */
   padding: 0 12rpx;
   font-size: 28rpx;
   z-index: 10;
@@ -539,7 +539,7 @@
 
 .index_sale .content text {
   font-size: 26rpx;
-  margin: 5rpx 10rpx;
+  margin: 1rpx 0rpx;
   width: 100%;
 }
 
@@ -677,6 +677,7 @@
   font-size: 26rpx;
   color: #777;
   margin-top: 6rpx;
+  padding-right: 80rpx;
 }
 
 .flow-shopList {
@@ -772,7 +773,13 @@
   font-size: 34rpx;
   flex: 2;
 }
-
+.flow-btn-green {
+  background-color: #04B804;
+  color: #fff;
+  text-align: center;
+  line-height: 46px;
+  display: block;
+}
 .flow-btn {
   background-color: #ff495e;
   color: #fff;

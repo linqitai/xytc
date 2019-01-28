@@ -4,8 +4,32 @@
 /* banner组件 */
 @import "components/banner/banner.wxss";
 
+/* 促销栏目 */
+@import "components/marketing/marketing.wxss";
+
+.category-list .right .cont .title{
+  color: #646464;
+}
+.category-list .right .cont .goods_price{
+  color: #ff495e;
+}
+.category-list .right .cont .single_price{
+  color: orange;
+}
+.page-column .content .line1{
+  color: #646464;
+}
+.page-column .content .line2{
+  color: #999;
+}
+.page-column .content .line3{
+  color:#E36A1E;
+}
+
+.swiper-box{
+  box-shadow: 0 14rpx 20rpx #dbdbdb;
+}
 .cate{
-  background-color: white;
   padding: 20rpx 0rpx 30rpx 0;
   overflow: hidden;
 }
