@@ -45,7 +45,7 @@
     </view>
   </view>
   <view class="m-top20">
-    <navigator url="../address/index">
+    <!-- <navigator url="../address/index">
       <view class="user-order-title dis-flex b-f m-top20">
         <view class="flex-box">
           <text class="iconfont icon-map common-icon"></text>
@@ -57,7 +57,7 @@
           </view>
         </view>
       </view>
-    </navigator>
+    </navigator> -->
     <navigator url="../user/help">
       <view class="user-order-title dis-flex b-f">
         <view class="flex-box">

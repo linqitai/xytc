@@ -1,6 +1,15 @@
 /* common.wxss */
 @import "/utils/common.wxss";
-
+.flag{
+  font-size: 28rpx;
+  padding-left: 24rpx;
+}
+.flagTrue{
+  color:#48C23D
+}
+.flagFalse{
+  color:#FF495E
+}
 .common-header-xian {
   border-top: 1rpx solid #eee;
   position: fixed;

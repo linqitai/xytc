@@ -1,13 +1,4 @@
-.flag{
-  font-size: 28rpx;
-  padding-left: 24rpx;
-}
-.flagTrue{
-  color:#48C23D
-}
-.flagFalse{
-  color:#FF495E
-}
+
 .dis-flex .detail{
   display: flex;
   align-items: center;

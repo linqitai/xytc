@@ -1,6 +1,6 @@
 <view class="container p-bottom">
   <!-- 配送地址 -->
-  <view catchtap="selectAddress">
+  <view>
     <view wx:if="{{address.address_id}}">
       <view class="b-f">
         <view class="flow-checkout-header">
@@ -14,9 +14,6 @@
             <view class="flow-checkout-address">
               {{address.region.province}} {{address.region.city}} {{address.region.region}} {{address.detail}}
             </view>
-          </view>
-          <view class="flow-header-right pr-12">
-            <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
           </view>
         </view>
       </view>
