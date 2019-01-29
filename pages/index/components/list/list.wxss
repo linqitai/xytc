@@ -1,0 +1,46 @@
+.tabMargL{
+  margin-left: 40rpx;
+}
+.listBox{
+  margin-top: 50rpx;
+}
+.listBox .tab{
+  padding-left: 24rpx;
+  font-size: 32rpx;
+}
+.listBox .tab .text{
+  padding-top: 30rpx;
+  padding-bottom: 14rpx;
+  box-sizing: content-box;
+}
+.listBox .tab .active{
+  color: #7CB342;
+  border-bottom: 4rpx solid #7CB342;
+}
+/* 分类 */
+.classify_list{
+  margin-top: 30rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap; 
+  background-color: #fff;
+  border-top: 1rpx solid #f1f1f1;
+  border-bottom: 1rpx solid #EAEAEA;
+  z-index: 10;
+}
+.classify{
+  padding: 8rpx 24rpx;
+  font-size: 28rpx;
+  border-radius: 28rpx;
+  color: #646464;
+  /* margin-right: 13rpx; */
+}
+.classify_cur{
+  color: black;
+  font-weight: bold;
+}
+.goodsListAddStyle{
+  padding: 0 24rpx;
+}

@@ -1,0 +1,16 @@
+<view class='listBox'>
+  <view class='tab'>
+    <text class="text {{tabIndex==0?'active':''}}" data-index='0' bindtap='switchTab'>为你推荐</text>
+    <text class="text tabMargL {{tabIndex==1?'active':''}}" data-index='1' bindtap='switchTab'>我的清单</text>
+  </view>
+  <view class='view0'>
+    <view class='classify_list'>
+      <label class="classify {{curClassifyIndex==index?'classify_cur':''}}" wx:for="{{cateList}}" wx:key="{{index}}" data-id="{{item.category_id}}" data-index="{{index}}" bindtap="selectClassify">{{item.name}}</label>
+    </view>
+    <view class='goodsList'>
+      <view class='itemsTitle'>新鲜蔬菜</view>
+      <!-- 商品列表item for 循环-->
+      <include src="../../../../components/goodsList/goodsList.wxml" />
+    </view>
+  </view>  
+</view>

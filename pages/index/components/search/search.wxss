@@ -3,7 +3,7 @@
 
 .diy-search-box {
   position: unset;
-  background: #f1f1f2;
+  /* background: #f1f1f2; */
   padding: 10px 24rpx;
 }
 .diy-search-box .ewmBox{
@@ -31,7 +31,7 @@
 .diy-search-box .diy-search {
   width: 90%;
   border-bottom: 0;
-  background: #fff;
+  background: #f1f1f1;
   overflow: hidden;
   position: relative;
   color: #fff;

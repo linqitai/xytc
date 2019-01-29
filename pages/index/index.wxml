@@ -8,59 +8,12 @@
       </block>
     </block>
     <!-- 一级分类 -->
-    <view class='cate m-top20'>
-      <view class='cateItem' wx:for="{{cate}}" wx:key="index" data-categoryid='{{item.category_id}}' bindtap='toCategoryView'>
-        <view class='picBox'><image class='pic' mode="aspectFill" src='{{item.image.file_path}}'></image></view>
-        <view class='name'>
-          {{item.name}}
-        </view>
-      </view>
-    </view>
+    <include src="components/cate/cate.wxml" />
+    <!-- 促销 -->
     <include src="components/marketing/marketing.wxml" />
-    <!-- 商品推荐 -->
-    <!-- <view class="recommended-index-list m-top20">
-      <view class="title-header b-f t-c f-32 col-3">新品推荐</view>
-    </view> -->
-    <!-- <view class="index_sale ">
-      <scroll-view scroll-x="true">
-        <navigator hover-class="none" style="display: inline-block;" url="../goods/index?goods_id={{item.goods_id}}" wx:for="{{newest}}" wx:key="this">
-          <view class="page-column">
-            <view class="sale_img">
-              <image mode="aspectFill" src="{{item.image[0].file_path}}"></image>
-            </view>
-            <view class="content">
-              <view class='line1 f-24 onelist-hidden'>{{item.goods_name}}</view>
-              <view class="line2 f-22 onelist-hidden">{{item.goods_content}}</view>
-              <view class="line3 f-24 onelist-hidden">{{item.goods_show_price}}</view>
-            </view>
-          </view>
-        </navigator>
-      </scroll-view>
-    </view> -->
-
-    <!-- 猜您喜欢 -->
-    <!-- <view class="title-hrbg" style="margin-top:10rpx">
-      <text class="cont">
-        <text class="iconfont icon-huo col-m"></text>猜您喜欢
-      </text>
-      <view class="hr"></view>
-    </view> -->
-    <!-- <view class="category-list">
-      <navigator class="list b-f" hover-class="none" url="../goods/index?goods_id={{item.goods_id}}" wx:for="{{best}}" wx:key="this">
-        <view class="left">
-          <view class="img">
-            <image class="goodsImg" mode="scaleToFill" src="{{item.image[0].file_path}}"></image>
-          </view>
-        </view>
-        <view class="right">
-          <view class="cont">
-            <text class="f-28 title twolist-hidden m-top10">{{item.goods_name}}</text>
-            <text class="goods_price f-26 f-w">￥{{item.spec[0].single_money}}{{item.spec[0].single_unit}}</text>
-          </view>
-        </view>
-      </navigator>
-    </view> -->
-
+    <!-- 为你推荐 我的清单-->
+    <include src="components/list/list.wxml" />
+    
     <!-- 底线 -->
     <view class="title-footer p-r">
       <text class="f-24 col-9 cont">我是有底线的</text>

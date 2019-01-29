@@ -3,11 +3,33 @@
     <view class='title'>品牌秒杀</view>
     <view class='desc'>限量年货疯抢 部分2件5折</view>
     <view class='imgbox'>
-      <image class='img' src='https://vshop.chinaxywl.com/uploads/201901171723145804c1016.jpg'></image>
+      <image class='img' mode="aspectFill" src='https://vshop.chinaxywl.com/uploads/201901171723145804c1016.jpg'></image>
     </view>
   </view>
   <view class='marketingRight'>
-    <view class='top'>top</view>
-    <view class='bottom'>bottom</view>
+    <view class='top box'>
+      <view class='boxLeft'>
+        <view class='title'>
+          <view class='text'>生鲜狂欢</view>
+        </view>
+        <view class='desc'>全场8.8折起</view>
+      </view>
+      <view class='boxRight'>
+        <image class='img' mode="aspectFill" src='https://vshop.chinaxywl.com/uploads/201901171723145804c1016.jpg'></image>
+    
+      </view>
+    </view>
+    <view class='bottom box'>
+      <view class='boxLeft'>
+        <view class='title'>
+          <view class='text'>生鲜狂欢</view>
+        </view>
+        <view class='desc'>全场8.8折起</view>
+      </view>
+      <view class='boxRight'>
+        <image class='img' mode="aspectFill" src='https://vshop.chinaxywl.com/uploads/201901171723145804c1016.jpg'></image>
+    
+      </view>
+    </view>
   </view>
 </view>

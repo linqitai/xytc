@@ -1,0 +1,8 @@
+<view class='cate m-top20'>
+  <view class='cateItem' wx:for="{{cate}}" wx:key="index" data-categoryid='{{item.category_id}}' bindtap='toCategoryView'>
+    <view class='picBox'><image class='pic' mode="aspectFill" src='{{item.image.file_path}}'></image></view>
+    <view class='name'>
+      {{item.name}}
+    </view>
+  </view>
+</view>
