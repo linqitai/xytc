@@ -205,7 +205,7 @@ Page({
         real_pay_price = order_total_price - subMoney[1]
       } else if (subMoney[0] == 2) {
         console.log(_this.data.order_total_price, "order_total_price")
-        real_pay_price = (order_total_price * subMoney[1] * (subMoney[1].length == 1 ? 0.1 : subMoney[1].length == 2 ? 0.01 : 1)).toFixed(3)
+        real_pay_price = (order_total_price * subMoney[1] * (subMoney[1].length == 1 ? 0.1 : subMoney[1].length == 2 ? 0.01 : 1)).toFixed(2)
       }else{
         console.log(_this.data.order_total_price, "order_total_price")
         real_pay_price = order_total_price
