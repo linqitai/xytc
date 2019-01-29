@@ -1,6 +1,10 @@
 <view class='marketingBox'>
   <view class="marketingLeft">
-    left
+    <view class='title'>品牌秒杀</view>
+    <view class='desc'>限量年货疯抢 部分2件5折</view>
+    <view class='imgbox'>
+      <image class='img' src='https://vshop.chinaxywl.com/uploads/201901171723145804c1016.jpg'></image>
+    </view>
   </view>
   <view class='marketingRight'>
     <view class='top'>top</view>
