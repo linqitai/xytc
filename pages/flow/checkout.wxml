@@ -12,17 +12,17 @@
               <text class="col-m"></text>
             </view>
             <view class="flow-checkout-address">
-              {{address.region.province}} {{address.region.city}} {{address.region.region}} {{address.detail}}
+              {{address.detail}}
             </view>
           </view>
         </view>
       </view>
     </view>
     <view wx:else>
-      <view class="flow-checkout-header">
+      <view class="flow-checkout-header" bindtap='toJoin'>
         <text class="iconfont icon-dingwei1"></text>
         <view class="flow-header-left">
-          <view class="f-28 col-6">去选择配送地址
+          <view class="f-28 col-6">去认证成为商户
           </view>
         </view>
         <view class="flow-header-right p-r15">

@@ -1,6 +1,6 @@
 <scroll-view class='wrapper' scroll-y>
-  <view class='contentBox'>
-    <!-- <label class="inputBoxTextarea2 {{store_cert?'green':''}}">{{store_cert?'认证通过':'您的资料正在审核中'}}</label> -->
+  <view class='contentBox' wx:if="{{store_cert!=0}}">
+    <label class="inputBoxTextarea2 {{store_cert==2?'green':''}}">{{store_cert==2?'认证通过':'您的资料正在审核中'}}</label>
   </view>
   <view class='contentBox'>
     <view class='inputBox'>
@@ -11,8 +11,12 @@
       <label class='label'>联系电话:</label>
       <input class='input' type='number' maxlength='11' placeholder="输入框" placeholder-class="inputP" bindinput='getPhone' value='{{phone}}'/>
     </view>
+    <view class='inputBox'>
+      <label class='label'>收货地址:</label>
+      <input class='input' placeholder="请填写能准确收到货物的地址" type="text" data-name="address" bindinput='getAddress' value='{{address}}'></input>
+    </view>
     <view class='indentityBox'>
-      <label class='indentityLabel'>商户信息(营业执照):</label>
+      <!-- <label class='indentityLabel'>商？户信息(营业执照):</label> -->
       <view class='uploadIndentityBox'>
         <view class='frontbackBox' bindtap="upload">
           <!-- <image class='' mode='aspectFit' src="{{licence_image}}'"></image> -->
@@ -23,7 +27,7 @@
     </view>
     <view class='line'></view>
   </view>
-  <view class='contentBox'>
+  <!-- <view class='contentBox'>
     <view class='inputBox'>
       <label class='label'>所在地区:</label>
       <picker mode="region" bindchange="bindRegionChange">
@@ -35,11 +39,11 @@
       <label class='label'>详细地址:</label>
       <input class='input' placeholder="请填写街道小区楼层" type="text" data-name="address" value='{{address}}' readOnly></input>
     </view>
-  </view>
+  </view> -->
   <view class='contentBox2' wx:if="{{store_cert==0}}">
     <button type="primary" bindtap='publishEvent'> 提交 </button>
   </view>
-  <view class="flag {{flag ? 'flagTrue':'flagFalse'}}" wx:if="{{address}}">
+  <!-- <view class="flag {{flag ? 'flagTrue':'flagFalse'}}" wx:if="{{address}}">
       {{flag?'所选定位在配送范围内':'所选定位不在配送范围内'}}
     </view>
     <map
@@ -51,5 +55,5 @@
       polygons="{{polygons}}"
       show-location
       style="width: 100%; height: 300px;"
-    ></map>
+    ></map> -->
 </scroll-view>

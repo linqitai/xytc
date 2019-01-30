@@ -40,11 +40,11 @@ Page({
    * 生命周期函数--页面展示
    */
   onShow() {
-    var address = wx.getStorageSync('address')
-    console.log(address,"address")
-    this.setData({
-      address
-    })
+    // var address = wx.getStorageSync('address')
+    // console.log(address,"address")
+    // this.setData({
+    //   address
+    // })
   },
   /**
    * 获取配送范围
@@ -215,16 +215,18 @@ Page({
           console.log(res.data.userInfo.licence_image,'licence_image')
           var name = res.data.userInfo.name;
           var phone = res.data.userInfo.phone;
+          var address = res.data.userInfo.address;
           var licence_image = res.data.userInfo.licence_image;
           var store_cert = res.data.userInfo.store_cert;
           that.setData({
             name,
             phone,
+            address,
             licence_image,
             store_cert
           })
-          that.getLocation();
-          that.getPolygon();
+          // that.getLocation();
+          // that.getPolygon();
         }
       }
     )
@@ -274,12 +276,23 @@ Page({
       phone: e.detail.value
     })
   },
+  getAddress(e) {
+    console.log(e.detail.value)
+    this.setData({
+      address: e.detail.value
+    })
+  },
   publishEvent:function(){
     var that = this;
     var params = {
       name: that.data.name,
       phone: that.data.phone,
+      address: that.data.address,
       licence_image: that.data.pic,
+    }
+    if (App.hasNull(params)){
+      App.showError("请填写或完善信息");
+      return;
     }
     var method = "POST";
     console.log(params,"----------params---------------")

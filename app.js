@@ -38,7 +38,20 @@ App({
   setApiRoot: function() {
     this.api_root = this.siteInfo.siteroot + 'index.php?s=/api/';
   },
-
+  hasNull: function (params) {
+    var keys = Object.keys(params);
+    for (var i = 0; i < keys.length; i++) {
+      console.log(params[keys[i]], "params[keys[i]]")
+      var obj = params[keys[i]];
+      if (obj === 0) {
+        return false;
+      }
+      if (!obj || obj == '') {
+        return true;
+      }
+    }
+    return false;
+  },
   /**
    * 获取小程序基础信息
    */
