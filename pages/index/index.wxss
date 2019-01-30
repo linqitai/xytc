@@ -3,6 +3,9 @@
 
 /* banner组件 */
 @import "components/banner/banner.wxss";
+.container{
+  height: 100%;
+}
 .category-list .right .cont .title{
   color: #646464;
 }

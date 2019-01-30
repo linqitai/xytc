@@ -12,7 +12,7 @@ Component({
   properties: {
     backgroundColor: {
       type: String,
-      value: "#0FB053"
+      value: "#ffffff"
     },
     refreshHeight: {
       type: Number,
@@ -20,7 +20,7 @@ Component({
     },
     textColor: {
       type: String,
-      value: "white"
+      value: "#228B22"
     }
   },
 

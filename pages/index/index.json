@@ -1,3 +1,8 @@
 {
-    "navigationBarTitleText": "美厨生鲜"
+    "navigationBarTitleText": "美厨生鲜",
+    "navigationBarBackgroundColor": "#228B22",
+    "navigationBarTextStyle": "white",
+    "usingComponents": {
+      "refresh-view": "/components/RefreshView/refresh-view"
+    }
 }

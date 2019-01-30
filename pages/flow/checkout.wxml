@@ -1,6 +1,6 @@
 <view class="container p-bottom">
   <!-- 配送地址 -->
-  <view catchtap="selectAddress">
+  <view>
     <view wx:if="{{address.address_id}}">
       <view class="b-f">
         <view class="flow-checkout-header">
@@ -12,20 +12,17 @@
               <text class="col-m"></text>
             </view>
             <view class="flow-checkout-address">
-              {{address.region.province}} {{address.region.city}} {{address.region.region}} {{address.detail}}
+              {{address.detail}}
             </view>
-          </view>
-          <view class="flow-header-right pr-12">
-            <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
           </view>
         </view>
       </view>
     </view>
     <view wx:else>
-      <view class="flow-checkout-header">
+      <view class="flow-checkout-header" bindtap='toJoin'>
         <text class="iconfont icon-dingwei1"></text>
         <view class="flow-header-left">
-          <view class="f-28 col-6">去选择配送地址
+          <view class="f-28 col-6">去认证成为商户
           </view>
         </view>
         <view class="flow-header-right p-r15">
@@ -78,18 +75,7 @@
         <text class="col-m">￥{{order_total_price}}</text>
       </view>
     </view>
-    <view class="dis-flex flow-all-list">
-      <text class="flex-five">配送费用:</text>
-      <view class="flex-five t-r">
-        <view wx:if="{{address.address_id}}">
-          <text class="col-m" wx:if="{{intra_region}}">+￥{{express_price}}</text>
-          <text wx:else>不在配送范围</text>
-        </view>
-        <view wx:else>
-          <text class="col-7">请先选择配送地址</text>
-        </view>
-      </view>
-    </view>
+  
     <view class="dis-flex flow-all-list">
       <text class="flex-three" style='width:43%'>支付方式:</text>
       <view class="flex-seven t-r" style=''>

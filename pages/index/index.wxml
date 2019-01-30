@@ -1,7 +1,6 @@
-<view class="container">
-  <view class="common-header-xian"></view>
-  <scroll-view bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-y="true" style="position:absolute; top:0; left:0; right:0; bottom:0;">
-    <include src="components/search/search.wxml" />
+<refresh-view id='refreshView' bind:onRefresh="onPullDownRefresh"/>
+<view class="container" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'>
+  <include src="components/search/search.wxml" />
     <block wx:for="{{items}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
       <!-- banner轮播  wx:if="{{item.type === 'banner'}}" -->
       <block wx:if="{{item.type === 'banner'}}">
@@ -83,11 +82,8 @@
       <text class="f-24 col-9 cont">我是有底线的</text>
       <view class="hr"></view>
     </view>
-  </scroll-view>
-
   <!-- 返回顶部 -->
   <view bindtap="goTop" class="widget-goTop" wx:if="{{floorstatus}}">
     <text class="iconfont icon-fanhuidingbu"></text>
   </view>
-
 </view>

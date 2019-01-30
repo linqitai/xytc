@@ -104,6 +104,7 @@ Page({
 
     // 获取订单信息回调方法
     let callback = function(result) {
+      console.log(result.data,"result.data获取订单信息回调方法")
       if (result.code !== 1) {
         console.log(result.msg,"result.msg")
         App.showError(result.msg);
@@ -368,6 +369,16 @@ Page({
       }, function(result) {
         // fail
         console.log('fail');
+        if (result.data.code == 0) {
+          if (result.data.msg.indexOf('商户') > -1) {
+            wx.navigateTo({
+              url: "../join/join",
+            })
+          } else {
+            wx.navigateBack()
+          }
+
+        }
       }, function() {
         // complete
         console.log('complete');
@@ -391,9 +402,14 @@ Page({
         // fail
         console.log(result,'==fail==');
         if (result.data.code==0) {
-          wx.navigateTo({
-            url: "../join/join",
-          })
+          if (result.data.msg.indexOf('商户')>-1){
+            wx.navigateTo({
+              url: "../join/join",
+            })
+          }else{
+            wx.navigateBack()
+          }
+          
         }
       }, function() {
         // complete
@@ -404,7 +420,11 @@ Page({
     }
 
   },
-
+  toJoin() {
+    wx.navigateTo({
+      url: "../join/join",
+    })
+  },
   /**
    * 快捷导航 显示/隐藏
    */

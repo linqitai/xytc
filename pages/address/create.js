@@ -119,9 +119,7 @@ Page({
     }
     that.getPolygon();
   },
-  onShow(){
-    
-  },
+  
   /**
    * @description 射线法判断点是否在多边形内部
    * @param {Object} p 待判断的点，格式：{ x: X坐标, y: Y坐标 }
