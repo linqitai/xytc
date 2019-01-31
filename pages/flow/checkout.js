@@ -256,7 +256,8 @@ Page({
     console.log(this.data.post_pay_type,"post_pay_type")
     this.masterMethod4getSubMoney()
     this.setData({
-      couponIndex: 0
+      couponIndex: 0,
+      order_pay_price:_this.data.order_total_price
     })
   },
   // 配送时间的选择
