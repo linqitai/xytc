@@ -233,7 +233,7 @@ Page({
   },
   upload: function () {
     let that = this;
-    if(that.data.store_cert==1){ // 1为认证通过
+    if (that.data.store_cert == 1 || that.data.store_cert == 2){ // 1为认证通过
       return;
     }
     wx.chooseImage({
