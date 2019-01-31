@@ -15,7 +15,7 @@
       </view>
     </view>
 
-    <!-- 物流信息 -->
+    <!-- 物流信息 
     <view class="flow-all-money b-f padding-box m-top20" wx:if="{{order.delivery_status.value === 20}}">
       <view class="dis-flex flow-all-list-cont">
         <text class="col-7">快递公司: {{order.express_company}}</text>
@@ -24,6 +24,7 @@
         <text class="col-7" selectable="{{true}}">快递单号: {{order.express_no}}</text>
       </view>
     </view>
+    -->
 
     <!-- 商品列表 -->
     <view class="order-cont b-f m-top20">
@@ -93,10 +94,12 @@
         <text class="flex-five col-7">商品金额:</text>
         <text class="flex-five col-m t-r">￥{{order.total_price}}</text>
       </view>
+      <!-->
       <view class="dis-flex flow-all-list-cont">
         <text class="flex-five col-7">配送费用:</text>
         <text class="flex-five col-m t-r">+￥{{order.express_price}}</text>
       </view>
+      -->
       <view class="dis-flex flow-all-list-cont" wx:if="{{order.coupon_money!=0}}">
         <text class="flex-five col-7">优惠券抵扣:</text>
         <text class="flex-five col-m t-r">-￥{{order.coupon_money}}</text>

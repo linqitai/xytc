@@ -61,7 +61,7 @@
                 </view>
                 <view class="order-right">
                   <view class="dis-flex">
-                    <view class="flex-box" wx:if="{{item.pay_status.value===10}}">
+                    <view class="flex-box" wx:if="{{item.delivery_status.value===10 && item.pay_status.value===10}}">
                       <view bindtap="cancelOrder" class="btn-default" data-id="{{item.order_id}}">取消</view>
                     </view>
                     <view class="" wx:if="{{item.pay_status.value===10 && item.offline_status==10}}">
