@@ -21,7 +21,7 @@
         <view class='frontbackBox' bindtap="upload">
           <!-- <image class='' mode='aspectFit' src="{{licence_image}}'"></image> -->
           <image style='height:100%;width:100%;' src="{{licence_image}}" mode="aspectFill"/>
-          <text wx:if="{{store_cert==0}}" class="iconfont icon-add indentityIcon"></text>
+          <text wx:if="{{store_cert!=1}}" class="iconfont icon-add indentityIcon"></text>
         </view>
       </view>
     </view>
