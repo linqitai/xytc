@@ -26,14 +26,15 @@ Page({
         });
       }
     });
+    // 获取当前订单信息
+    couponListArr = []
+    this.getList();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 获取当前订单信息
-    this.getList();
   },
   scroll(e){
     // console.log(e.detail)
