@@ -75,18 +75,7 @@
         <text class="col-m">￥{{order_total_price}}</text>
       </view>
     </view>
-    <view class="dis-flex flow-all-list">
-      <text class="flex-five">配送费用:</text>
-      <view class="flex-five t-r">
-        <view wx:if="{{address.address_id}}">
-          <text class="col-m" wx:if="{{intra_region}}">+￥{{express_price}}</text>
-          <text wx:else>不在配送范围</text>
-        </view>
-        <view wx:else>
-          <text class="col-7">请先选择配送地址</text>
-        </view>
-      </view>
-    </view>
+  
     <view class="dis-flex flow-all-list">
       <text class="flex-three" style='width:43%'>支付方式:</text>
       <view class="flex-seven t-r" style=''>

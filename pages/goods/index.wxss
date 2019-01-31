@@ -82,7 +82,7 @@
 
 .money-box .num {
   color: #ff495e;
-  font-size: 40rpx;
+  font-size: 30rpx;
   margin-top: 10rpx;
 }
 

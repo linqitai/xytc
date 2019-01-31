@@ -1,10 +1,10 @@
 <scroll-view class='wrapper' scroll-y>
   <view class='contentBox' wx:if="{{store_cert!=0}}">
-    <label class="inputBoxTextarea2 {{store_cert==2?'green':''}}">{{store_cert==2?'认证通过':'您的资料正在审核中'}}</label>
+    <label class="inputBoxTextarea2 {{store_cert==1?'green':''}}">{{store_cert==1?'认证通过':'您的资料正在审核中'}}</label>
   </view>
   <view class='contentBox'>
     <view class='inputBox'>
-      <label class='label'>商户姓名:</label>
+      <label class='label'>商户名称:</label>
       <input class='input'  placeholder="输入框" placeholder-class="inputP" bindinput='getName' value='{{name}}'/>
     </view>
     <view class='inputBox'>

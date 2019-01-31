@@ -370,6 +370,16 @@ Page({
       }, function(result) {
         // fail
         console.log('fail');
+        if (result.data.code == 0) {
+          if (result.data.msg.indexOf('商户') > -1) {
+            wx.navigateTo({
+              url: "../join/join",
+            })
+          } else {
+            wx.navigateBack()
+          }
+
+        }
       }, function() {
         // complete
         console.log('complete');
@@ -393,12 +403,12 @@ Page({
         // fail
         console.log(result,'==fail==');
         if (result.data.code==0) {
-          if (result.data.msg.indexOf('采购')>-1){
-            wx.navigateBack()
-          }else{
+          if (result.data.msg.indexOf('商户')>-1){
             wx.navigateTo({
               url: "../join/join",
             })
+          }else{
+            wx.navigateBack()
           }
           
         }

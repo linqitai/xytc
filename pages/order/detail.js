@@ -62,7 +62,7 @@ Page({
   offlinePay(e) {
     let _this = this;
     let order_id = e.currentTarget.dataset.id;
-    App.showModel("此操作会把订单改为货到付款，是否继续？", function (res) {
+    App.showModel("是否将订单改为货到付款？", function (res) {
       if (res.confirm) {
         App._post_form('user.order/update_offline', { order_id }, function (result) {
           console.log(result)
