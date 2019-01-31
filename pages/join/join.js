@@ -290,6 +290,7 @@ Page({
       address: that.data.address,
       licence_image: that.data.pic,
     }
+    console.log(params);
     if (App.hasNull(params)){
       App.showError("请填写或完善信息");
       return;
