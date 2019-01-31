@@ -2,7 +2,9 @@
   padding: 18rpx 0;
   border-bottom: 1rpx solid #eee;
 }
-
+.flow-checkout-admin{
+  font-size: 26rpx;
+}
 .flow-distribution .flow-dis {
   font-size: 30rpx;
 }

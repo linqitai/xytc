@@ -16,12 +16,12 @@
       <input class='input' placeholder="请填写能准确收到货物的地址" type="text" data-name="address" bindinput='getAddress' value='{{address}}'></input>
     </view>
     <view class='indentityBox'>
-      <!-- <label class='indentityLabel'>商？户信息(营业执照):</label> -->
+      <label class='indentityLabel'>户信息(营业执照):</label>
       <view class='uploadIndentityBox'>
         <view class='frontbackBox' bindtap="upload">
           <!-- <image class='' mode='aspectFit' src="{{licence_image}}'"></image> -->
           <image style='height:100%;width:100%;' src="{{licence_image}}" mode="aspectFill"/>
-          <text wx:if="{{!licence_image}}" class="iconfont icon-add indentityIcon"></text>
+          <text wx:if="{{store_cert==0}}" class="iconfont icon-add indentityIcon"></text>
         </view>
       </view>
     </view>
