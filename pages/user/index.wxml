@@ -71,7 +71,7 @@
         </view>
       </view>
     </navigator>
-    <navigator url="../coupon/coupon"  open-type='redirect'>
+    <navigator url="../coupon/coupon"  open-type='navigate'>
       <view class="user-order-title dis-flex b-f">
         <view class="flex-box">
           <text class="iconfont icon-coupon common-icon"></text>
