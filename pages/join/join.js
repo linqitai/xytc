@@ -245,6 +245,10 @@ Page({
         that.setData({
           licence_image: tempFilePaths[0].path
         })
+        wx.showLoading({
+          title: '上传中',
+          mask: true
+        })
         wx.uploadFile({
           url: App.api_root + 'user.index/store_image&wxapp_id=10001&token=' + wx.getStorageSync('token'),      //此处换上你的接口地址
           filePath: tempFilePaths[0].path,
@@ -256,6 +260,7 @@ Page({
             that.setData({
               pic:pic
             })
+            wx.hideLoading()
           },
           fail: function (res) {
             //console.log('fail');
