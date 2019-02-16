@@ -1,0 +1,59 @@
+<view class="container">
+  <view class='ewmBox'>
+    <image mode="aspectFill" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQEJ8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYlI5czA0THNjdmsxMDAwME0wM3UAAgSr2GRcAwQAAAAA"></image>
+  </view>
+  <view class="m-top20 list">
+    <navigator url="./performance/performance"  open-type='navigate'>
+      <view class="user-order-title dis-flex">
+        <view class="flex-box">
+          <!-- <text class="iconfont icon-help common-icon"></text> -->
+          <text class="user-orderName h4">总业绩</text>
+        </view>
+        <view class="flex-box">
+          <view class="user-orderContBox">
+            <text class="f-30 margR">{{all_achievement}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="./performance/performance"  open-type='navigate'>
+      <view class="user-order-title dis-flex">
+        <view class="flex-box">
+          <!-- <text class="iconfont icon-coupon common-icon"></text> -->
+          <text class="user-orderName h4">上月业绩</text>
+        </view>
+        <view class="flex-box">
+          <view class="user-orderContBox">
+            <text class="f-30 margR">{{last_achievement}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="./performance/performance"  open-type='navigate'>
+      <view class="user-order-title dis-flex">
+        <view class="flex-box">
+          <!-- <text class="iconfont icon-coupon common-icon"></text> -->
+          <text class="user-orderName h4">本月业绩</text>
+        </view>
+        <view class="flex-box">
+          <view class="user-orderContBox">
+            <text class="f-30 margR">{{now_achievement}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="./merchant/merchant"  open-type='navigate'>
+      <view class="user-order-title dis-flex">
+        <view class="flex-box">
+          <!-- <text class="iconfont icon-coupon common-icon"></text> -->
+          <text class="user-orderName h4">我推广的商家</text>
+        </view>
+        <view class="flex-box">
+          <view class="user-orderContBox">
+            <text class="f-30 margR">{{salesmans_count}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</view>

@@ -34,7 +34,6 @@ Page({
    */
   onLoad: function(options) {
     this.getUserInfo();
-    
   },
   /**
    * 生命周期函数--页面展示
@@ -214,7 +213,7 @@ Page({
           console.log(res.data.userInfo.phone,"phone")
           console.log(res.data.userInfo.licence_image,'licence_image')
           var name = res.data.userInfo.name;
-          var phone = res.data.userInfo.phone;
+          var phone = res.data.userInfo.phone||'';
           var address = res.data.userInfo.address;
           var licence_image = res.data.userInfo.licence_image;
           var store_cert = res.data.userInfo.store_cert;
@@ -246,7 +245,6 @@ Page({
           licence_image: tempFilePaths[0].path
         })
         wx.showLoading({
-          title: '上传中',
           mask: true
         })
         wx.uploadFile({
