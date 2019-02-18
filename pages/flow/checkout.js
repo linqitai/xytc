@@ -84,6 +84,9 @@ Page({
   selectCoupons(list,post_pay_type){
     // console.log(list,'list')
     console.log(post_pay_type, 'post_pay_type')
+    if (!list){
+      return;
+    }
     var _this = this;
     var couponOptions = [];
     for (var i = 0; i < list.length;i++) {
@@ -182,6 +185,9 @@ Page({
     var _this = this;
     
     post_pay_typeCouponList = _this.selectCoupons(couponList[_this.data.post_pay_type==10?0:1], _this.data.post_pay_type) //当前所选post_pay_type所对应的数据
+    if (!post_pay_typeCouponList){
+      return;
+    }
     console.log(_this.data.post_pay_type, "_this.data.post_pay_type")
     console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
     var showCouponOptions = _this.getCouponOptions(post_pay_typeCouponList) //把数据改造成所要显示的数据
