@@ -117,15 +117,17 @@
       <view bindtap="cancelOrder" class="flex-box chackout-left-detail t-c">
         取消订单
       </view>
+      <!-->
       <view class="flex-box chackout-right-detail" wx:if="{{order.offline_status==10}}">
         <text bindtap="payOrder" class="flow-btn" wx:if="{{order.pay_status.value===10}}">去付款</text>
       </view>
       <view class="flex-box chackout-right-detail" wx:if="{{order.offline_status==10}}">
         <text bindtap="offlinePay" class="flow-btn-green" wx:if="{{order.pay_status.value===10}}" data-id="{{order.order_id}}">货到付款</text>
       </view>
+      -->
     </view>
-    <view class="flow-btn h3" wx:if="{{order.delivery_status.value===20 && order.receipt_status.value===10}}">
-      <view bindtap="receipt">确认收货</view>
+    <view class="flow-btn h3" wx:if="{{order.delivery_status.value===20 && order.receipt_status.value===10 && order.type==2}}">
+      <view bindtap="payOrder">确认付款</view>
     </view>
   </view>
 

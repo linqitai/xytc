@@ -66,12 +66,12 @@
                     </view>
                     <view class="" wx:if="{{item.pay_status.value===10 && item.type==2}}">
                     <!-->
-                      <view bindtap="offlinePay" class="btn-green" data-id="{{item.order_id}}">货到付款</view> -->
+                      <view bindtap="offlinePay" class="btn-green" data-id="{{item.order_id}}">货到付款</view> 
                       <view bindtap="payOrder" class="btn-main" data-id="{{item.order_id}}">付款</view>
-                      
+                      -->
                     </view>
-                    <view class="flex-box" wx:if="{{item.delivery_status.value===20 && item.receipt_status.value === 10}}">
-                      <view bindtap="receipt" class="btn-main" data-id="{{item.order_id}}">确认收货</view>
+                    <view class="flex-box" wx:if="{{item.delivery_status.value===20 && item.receipt_status.value === 10 && item.type==2}}">
+                      <view bindtap="payOrder" class="btn-main" data-id="{{item.order_id}}">确认付款</view>
                     </view>
                   </view>
                 </view>

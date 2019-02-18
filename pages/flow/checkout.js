@@ -14,7 +14,7 @@ Page({
     distribution_time : null, //配送时间
     pay_type:{},
     disabled: false,
-    post_pay_type :10,
+    post_pay_type :20,
     post_dis_type :0,
     hasError: false,
     couponOptions: [],
