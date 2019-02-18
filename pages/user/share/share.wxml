@@ -1,6 +1,6 @@
 <view class="container">
-  <view class='ewmBox'>
-    <image mode="aspectFill" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQEJ8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYlI5czA0THNjdmsxMDAwME0wM3UAAgSr2GRcAwQAAAAA"></image>
+  <view class='ewmBox' bindlongpress='savePhoto'>
+    <image mode="aspectFill" src="{{imgurl}}"></image>
   </view>
   <view class="m-top20 list">
     <navigator url="./performance/performance"  open-type='navigate'>
@@ -16,32 +16,28 @@
         </view>
       </view>
     </navigator>
-    <navigator url="./performance/performance"  open-type='navigate'>
-      <view class="user-order-title dis-flex">
-        <view class="flex-box">
-          <!-- <text class="iconfont icon-coupon common-icon"></text> -->
-          <text class="user-orderName h4">上月业绩</text>
-        </view>
-        <view class="flex-box">
-          <view class="user-orderContBox">
-            <text class="f-30 margR">{{last_achievement}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
-          </view>
+    <view class="user-order-title dis-flex" bindtap='toPerformance' data-time_type='1'>
+      <view class="flex-box">
+        <!-- <text class="iconfont icon-coupon common-icon"></text> -->
+        <text class="user-orderName h4">上月业绩</text>
+      </view>
+      <view class="flex-box">
+        <view class="user-orderContBox">
+          <text class="f-30 margR">{{last_achievement}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
         </view>
       </view>
-    </navigator>
-    <navigator url="./performance/performance"  open-type='navigate'>
-      <view class="user-order-title dis-flex">
-        <view class="flex-box">
-          <!-- <text class="iconfont icon-coupon common-icon"></text> -->
-          <text class="user-orderName h4">本月业绩</text>
-        </view>
-        <view class="flex-box">
-          <view class="user-orderContBox">
-            <text class="f-30 margR">{{now_achievement}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
-          </view>
+    </view>
+    <view class="user-order-title dis-flex" bindtap='toPerformance' data-time_type='2'>
+      <view class="flex-box">
+        <!-- <text class="iconfont icon-coupon common-icon"></text> -->
+        <text class="user-orderName h4">本月业绩</text>
+      </view>
+      <view class="flex-box">
+        <view class="user-orderContBox">
+          <text class="f-30 margR">{{now_achievement}}</text><text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
         </view>
       </view>
-    </navigator>
+    </view>
     <navigator url="./merchant/merchant"  open-type='navigate'>
       <view class="user-order-title dis-flex">
         <view class="flex-box">
