@@ -86,12 +86,18 @@
         <text class="flex-p3 col-7">期望配送时间:</text>
         <text class="flex-p7 col-m t-r">{{order.distribution_day.value}}{{order.distribution_time}}</text>
       </view>
+      <!-->
       <view class="dis-flex flow-all-list-cont">
         <text class="flex-five col-7">支付方式:</text>
         <text class="flex-five col-m t-r">{{order.pay_type}}</text>
       </view>
+      -->
       <view class="dis-flex flow-all-list-cont">
-        <text class="flex-five col-7">商品金额:</text>
+        <text class="flex-five col-7">支付状态：</text>
+        <text class="flex-five col-m t-r">{{order.type==2?"可支付":"等待确认"}}</text>
+      </view>
+      <view class="dis-flex flow-all-list-cont">
+        <text class="flex-five col-7">商品原价:</text>
         <text class="flex-five col-m t-r">￥{{order.total_price}}</text>
       </view>
       <!-->
