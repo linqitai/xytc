@@ -76,15 +76,15 @@
       </view>
     </view>
   
-    <view class="dis-flex flow-all-list">
-      <text class="flex-three" style='width:43%'>支付方式:</text>
-      <view class="flex-seven t-r" style=''>
-      <radio-group class="radio-group" bindchange="radioChange">
-        <label class="radio" wx:for="{{pay_type}}" wx:key="index">
-          <radio value="{{item.value}}" checked="{{item.checked}}" name="pay_type"/>
-          {{item.name}}
-        </label>
-      </radio-group>
+    <view class="flow-all-list" style='overflow:hidden'>
+      <text class="" style='width:43%;float:left'>支付方式:</text>
+      <view class="" style='float:right'>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{pay_type}}" wx:key="index">
+            <radio value="{{item.value}}" checked="{{item.checked}}" name="pay_type"/>
+            <label>{{item.name}}</label>
+          </label>
+        </radio-group>
       </view>
     </view>
     <view class="dis-flex flow-all-list" wx:if="{{couponOptions.length}}">

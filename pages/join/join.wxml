@@ -5,7 +5,20 @@
   <view class='contentBox'>
     <view class='inputBox'>
       <label class='label'>商户名称:</label>
-      <input class='input'  placeholder="输入框" placeholder-class="inputP" bindinput='getName' value='{{name}}'/>
+      <input class='input' placeholder="输入框" placeholder-class="inputP" bindinput='getName' value='{{name}}'/>
+    </view>
+    <view class='inputBox'>
+      <label class='label'>联系人:</label>
+      <input class='input' placeholder="输入框" placeholder-class="inputP" bindinput='getSales_name' value='{{sales_name}}'/>
+    </view>
+    <view class='inputBox'>
+      <label class='label'>性别:</label>
+      <!-- <input class='input' placeholder="输入框" placeholder-class="inputP" bindinput='getSales_sex' value='{{sales_sex}}'/> -->
+      <picker name="picker_hx" class="input" value="{{sexArr[sex_index].id}}" data-selecthx="{{sexArr[sex_index].name}}" range="{{sexArr}}" range-key="{{'name'}}"  bindchange="bindPickerChange_sex"  >
+        <view class="picker" style='padding-left:0'>
+         <label style='color:#c7c7c7'>{{sexArr[sex_index].name?'':'选择框'}}</label>{{sexArr[sex_index].name}}
+        </view>
+      </picker>
     </view>
     <view class='inputBox'>
       <label class='label'>联系电话:</label>
@@ -16,7 +29,7 @@
       <input class='input' placeholder="请填写能准确收到货物的地址" type="text" data-name="address" bindinput='getAddress' value='{{address}}'></input>
     </view>
     <view class='indentityBox'>
-      <label class='indentityLabel'>户信息(营业执照):</label>
+      <label class='indentityLabel'>商户信息(营业执照):</label>
       <view class='uploadIndentityBox'>
         <view class='frontbackBox' bindtap="upload">
           <!-- <image class='' mode='aspectFit' src="{{licence_image}}'"></image> -->
