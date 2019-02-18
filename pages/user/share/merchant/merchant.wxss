@@ -1,31 +1,31 @@
 .wrapper{
   background-color: #228B22;
   width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
 .container{
-  padding: 8rpx;
+  width: 100%;
   height: 100%;
 }
 .coupon-list{
-  height: 100%;
+  width: 96%;
+  margin-left: 2%;
 }
 .item{
   display: flex;
-  padding: 8rpx;
   align-items: center;
   height: 160rpx;
+  background-color: white;
+  border-bottom: 1rpx solid #efefef;
 }
 .item .itemLeft{
   flex: auto;
   height: 100%;
-  border-radius: 16rpx;
-  background-color: rgba(255, 222, 205,0.7);
 }
 .item .itemRight{
   flex: 0 0 200rpx;
-  border-left: 2rpx dashed rgb(233, 86, 2);
-  border-radius: 16rpx;
-  background-color: rgba(255, 222, 205,0.7);
   height: 160rpx;
   line-height: 160rpx;
   text-align: center;

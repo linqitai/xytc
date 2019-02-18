@@ -1,22 +1,39 @@
 let App = getApp();
-var couponListArr = []
+var listArr = []
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    couponList: [],
+    list: [],
     page: 1,
     windowHeight: '',
-    isLastPage: false
+    isLastPage: false,
+    last_page: 1,
+    begin_time: '',
+    end_time: '',
+    salesman_id: '',
+    time_type:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options,'options')
     var that = this;
+    if (options.salesman_id){
+      that.setData({
+        salesman_id: options.salesman_id
+      })
+    }
+    if (options.time_type) {
+      that.setData({
+        begin_time: options.begin_time,
+        end_time: options.end_time
+      })
+    }
     //设置scroll-view高度
     wx.getSystemInfo({
       success: function (res) {
@@ -27,10 +44,29 @@ Page({
       }
     });
     // 获取当前订单信息
-    couponListArr = []
+    listArr = []
     this.getList();
   },
-
+  bindBeginDateChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      begin_time: e.detail.value
+    })
+    if (this.data.end_time) {
+      listArr = [];
+      this.getList();
+    }
+  },
+  bindEndDateChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      end_time: e.detail.value
+    })
+    if (this.data.begin_time) {
+      listArr = [];
+      this.getList();
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -57,21 +93,29 @@ Page({
   },
   getList() {
     var _this = this;
-    App._get('coupon/lists', {
-      money: 0,
+    var prams = {
+      begin_time: _this.data.begin_time,
+      end_time: _this.data.end_time,
+      salesman_id: _this.data.salesman_id,
       page: _this.data.page
-    }, function (result) {
-      var couponList = result.data.data
-      for (var i = 0; i < couponList.length; i++) {
-        var time = couponList[i].add_time.text;
-        // console.log(time.split(' ')[0],"time.split(' ')[0]")
-        couponList[i].add_time.date = time.split(' ')[0]
-        couponListArr.push(couponList[i])
+    }
+    App._get('user.index/sales_list', prams, function (result) {
+      if(result.code == 1) {
+        var list = result.data.list.data
+        for (var i = 0; i < list.length; i++) {
+          listArr.push(list[i])
+        }
+        _this.setData({
+          list: listArr,
+          last_page: result.data.list.last_page
+        })
+        console.log(_this.data.page, _this.data.last_page)
+        if (_this.data.page == _this.data.last_page) {
+          _this.setData({
+            isLastPage: true
+          })
+        }
       }
-      _this.setData({
-        couponList: couponListArr,
-        last_page: result.data.last_page
-      })
     });
   },
   toUseBtn() {

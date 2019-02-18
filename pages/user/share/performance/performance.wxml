@@ -1,33 +1,65 @@
 <view class='wrapper' style="height:{{windowHeight}}px">
+  <view class='sectionBox'>
+    <view class="section">
+      <view class="section__title">时间筛选: </view>
+      <view class='tt'>从</view>
+      <picker
+        class='_date'
+        mode="date"
+        value="{{begin_time}}"
+        start="2019-01-01"
+        end="2020-12-31"
+        bindchange="bindBeginDateChange"
+      >
+        <view class="picker">
+          {{begin_time?begin_time:'选择时间'}} 
+          <!-- <text class="iconfont icon-xiangyoujiantou arrow_right"></text> -->
+        </view>
+      </picker>
+      <view class='tt'>到</view>
+      <picker
+        class='_date'
+        mode="date"
+        value="{{end_time}}"
+        start="2019-01-01"
+        end="2020-12-31"
+        bindchange="bindEndDateChange"
+      >
+        <view class="picker">
+          {{end_time?end_time:'选择时间'}} 
+          <!-- <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text> -->
+        </view>
+      </picker>
+    </view>
+  </view>
   <scroll-view class="container" lower-threshold="100" scroll-y="true" bindscrolltolower="scrollToBottom" bindscroll="scroll">
-    <view class="coupon-list" wx:if="{{couponList.length}}">
-      <view class="item" wx:for="{{couponList}}" wx:for-item="item" wx:key="index">
+    <view class="coupon-list" wx:if="{{list.length}}">
+      <view class="item" wx:for="{{list}}" wx:for-item="item" wx:key="index">
         <view class='itemLeft'>
           <view class='line1'>
-            <text style="font-size:24rpx;">￥</text>{{item.money}}<text style="font-size:28rpx;"> 满{{item.invest_money}}减{{item.money}}</text>
+            <text class='f-28'>商户名称: {{item.name}}</text>
           </view>
-          <view class='line2'>
-            <text class='text'>{{item.c_type.name}}({{item.c_type.pay_status.value==0?'全部可用':item.c_type.pay_status.value==10?'在线支付用':item.c_type.pay_status.value==20?'货到付款用':''}})</text>
-          </view>
-          <view class='line3'>
-            {{item.add_time.date}}~{{item.end_time.text}}
+          <view class='line2'><text class='text' style='font-size:26rpx'>总金额: {{item.reality_price?item.reality_price:0.00}}</text></view>
+          <view class='line3' style='font-size:22rpx'>
+            订购时间: {{item.create_time}}
           </view>
         </view>
-        <view class='itemRight'>
-          <label class="toUseBtn {{item.use_time.text=='未使用'?'orange':'gray'}}" bindtap="toUseBtn">{{item.use_time.text=='未使用'?'去使用':'已使用'}}</label>
-        </view>
+        <!-- <view class='itemRight'>
+          <label class="toUseBtn {{item.store_cert=='已认证'?'orange':'gray'}}">{{item.store_cert}}</label>
+        </view> -->
       </view>
-      <!-- 底线 -->
-      <view class="title-footer p-r">
-        <text class="f-24 col-9 cont">我是有底线的</text>
-        <view class="hr"></view>
-      </view>
+      
     </view>
     <view wx:else>
       <view class="yoshop-notcont">
         <text class="iconfont icon-meiyougengduo"></text>
         <text class="cont">亲，您还没有业绩</text>
       </view>
+    </view>
+    <!-- 底线 -->
+    <view class="title-footer p-r" wx:if="{{isLastPage}}">
+      <text class="f-24 col-9 cont">我是有底线的</text>
+      <view class="hr"></view>
     </view>
   </scroll-view>
 </view>

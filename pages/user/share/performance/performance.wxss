@@ -1,31 +1,66 @@
 .wrapper{
   background-color: #228B22;
   width: 100%;
+  padding-top: 100rpx;
+}
+.sectionBox{
+  background-color: #228B22;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.section{
+  width: 96%;
+  margin-left: 2%;
+  display: flex;
+  background-color: white;
+  align-items: center;
+}
+.section .section__title{
+  flex: 0 0 140rpx;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+}
+.section .tt{
+  flex: 0 0 30rpx;
+  font-size: 28rpx;
+}
+.section ._date{
+  flex: 1;
+}
+.section .picker{
+  font-size: 28rpx;
+  color: #c7c7c7;
+}
+.arrow_right{
+  float:right;
+  color:#646464;
+  font-size:28rpx;
+  margin-bottom: 18rpx;
 }
 .container{
-  padding: 8rpx;
+  width: 100%;
   height: 100%;
 }
 .coupon-list{
-  height: 100%;
+  width: 96%;
+  margin-left: 2%;
 }
 .item{
   display: flex;
-  padding: 8rpx;
   align-items: center;
   height: 160rpx;
+  background-color: white;
+  border-bottom: 1rpx solid #efefef;
 }
 .item .itemLeft{
   flex: auto;
   height: 100%;
-  border-radius: 16rpx;
-  background-color: rgba(255, 222, 205,0.7);
 }
 .item .itemRight{
   flex: 0 0 200rpx;
-  border-left: 2rpx dashed rgb(233, 86, 2);
-  border-radius: 16rpx;
-  background-color: rgba(255, 222, 205,0.7);
   height: 160rpx;
   line-height: 160rpx;
   text-align: center;

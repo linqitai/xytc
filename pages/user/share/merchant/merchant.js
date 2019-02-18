@@ -1,15 +1,16 @@
 let App = getApp();
-var couponListArr = []
+var listArr = []
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    couponList: [],
+    list: [],
     page: 1,
     windowHeight: '',
-    isLastPage: false
+    isLastPage: false,
+    last_page:1
   },
 
   /**
@@ -27,10 +28,9 @@ Page({
       }
     });
     // 获取当前订单信息
-    couponListArr = []
+    listArr = []
     this.getList();
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -38,6 +38,13 @@ Page({
   },
   scroll(e) {
     // console.log(e.detail)
+  },
+  toPerformance(e) {
+    var salesman_id = e.currentTarget.dataset.salesman_id
+    console.log(salesman_id,"salesman_id")
+    wx.navigateTo({
+      url: '../performance/performance?salesman_id=' + salesman_id
+    })
   },
   scrollToBottom() {
     console.log('scrollToBottom')
@@ -57,21 +64,24 @@ Page({
   },
   getList() {
     var _this = this;
-    App._get('coupon/lists', {
-      money: 0,
+    var prams = {
       page: _this.data.page
-    }, function (result) {
-      var couponList = result.data.data
-      for (var i = 0; i < couponList.length; i++) {
-        var time = couponList[i].add_time.text;
-        // console.log(time.split(' ')[0],"time.split(' ')[0]")
-        couponList[i].add_time.date = time.split(' ')[0]
-        couponListArr.push(couponList[i])
+    }
+    App._get('user.index/store_list', prams, function (result) {
+      var list = result.data.lists.data
+      for (var i = 0; i < list.length; i++) {
+        listArr.push(list[i])
       }
       _this.setData({
-        couponList: couponListArr,
-        last_page: result.data.last_page
+        list: listArr,
+        last_page: result.data.lists.last_page
       })
+      console.log(_this.data.page, _this.data.last_page)
+      if (_this.data.page == _this.data.last_page){
+        _this.setData({
+          isLastPage:true
+        })
+      }
     });
   },
   toUseBtn() {

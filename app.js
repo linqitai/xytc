@@ -16,8 +16,23 @@ App({
   onLaunch: function() {
     // 设置api地址
     this.setApiRoot();
+    // this.getPhotosAuth();
   },
-
+  //获取相册授权
+  getPhotosAuth: function() {
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              console.log('writePhotosAlbum授权成功')
+            }
+          })
+        }
+      }
+    })
+  },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
    */
