@@ -97,7 +97,7 @@
         </view>
       </view>
     </navigator>
-    <navigator url="../user/share/share"  open-type='navigate'>
+    <navigator url="../user/share/share"  open-type='navigate' wx:if="{{userInfo.is_expend}}">
       <view class="user-order-title dis-flex b-f">
         <view class="flex-box">
           <text class="iconfont icon-fenxiao common-icon"></text>
