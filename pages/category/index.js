@@ -23,13 +23,13 @@ Page({
     this.refreshView = this.selectComponent("#refreshView")
 
     // 获取分类列表
-    // this.getCategoryList();
+    this.getCategoryList();
 
   },
   onShow: function (e) {
     console.log(wx.getStorageSync('category_id'),"wx.getStorageSync('category_id')")
     // 获取分类列表
-    this.getCategoryList();
+    // this.getCategoryList();
   },
   subToCart: function(e) {
     console.log(e, 'e')
@@ -129,31 +129,30 @@ Page({
   //触摸开始
   handletouchstart: function (event) {
     this.refreshView.handletouchstart(event)
-    console.log('触摸开始')
+    // console.log('触摸开始')
   },
   //触摸移动
   handletouchmove: function (event) {
     this.refreshView.handletouchmove(event)
-    console.log('触摸移动')
+    // console.log('触摸移动')
   },
   //触摸结束
   handletouchend: function (event) {
     this.refreshView.handletouchend(event)
-    console.log('触摸结束')
+    // console.log('触摸结束')
     setTimeout(() => { this.refreshView.stopPullRefresh() }, 2000)
   },
   //触摸取消
   handletouchcancel: function (event) {
     this.refreshView.handletouchcancel(event)
-    console.log('触摸取消')
+    // console.log('触摸取消')
   },
   //页面滚动
   onPageScroll: function (event) {
     this.refreshView.onPageScroll(event)
-    console.log('')
   },
   _pullState: function(e) {
-    console.log(e,'e')
+    // console.log(e,'e')
   },
   // onPullDownRefresh: function () {
   //   var _this = this;

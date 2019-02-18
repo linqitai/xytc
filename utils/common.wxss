@@ -17,7 +17,9 @@
 page {
   background: #f7f7f7;
 }
-
+.margR{
+  margin-right: 20rpx;
+}
 .b-f {
   background: #fff;
 }

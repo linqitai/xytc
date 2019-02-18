@@ -1,0 +1,33 @@
+<view class='wrapper' style="height:{{windowHeight}}px">
+  <scroll-view class="container" lower-threshold="100" scroll-y="true" bindscrolltolower="scrollToBottom" bindscroll="scroll">
+    <view class="coupon-list" wx:if="{{couponList.length}}">
+      <view class="item" wx:for="{{couponList}}" wx:for-item="item" wx:key="index">
+        <view class='itemLeft'>
+          <view class='line1'>
+            <text style="font-size:24rpx;">￥</text>{{item.money}}<text style="font-size:28rpx;"> 满{{item.invest_money}}减{{item.money}}</text>
+          </view>
+          <view class='line2'>
+            <text class='text'>{{item.c_type.name}}({{item.c_type.pay_status.value==0?'全部可用':item.c_type.pay_status.value==10?'在线支付用':item.c_type.pay_status.value==20?'货到付款用':''}})</text>
+          </view>
+          <view class='line3'>
+            {{item.add_time.date}}~{{item.end_time.text}}
+          </view>
+        </view>
+        <view class='itemRight'>
+          <label class="toUseBtn {{item.use_time.text=='未使用'?'orange':'gray'}}" bindtap="toUseBtn">{{item.use_time.text=='未使用'?'去使用':'已使用'}}</label>
+        </view>
+      </view>
+      <!-- 底线 -->
+      <view class="title-footer p-r">
+        <text class="f-24 col-9 cont">我是有底线的</text>
+        <view class="hr"></view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="yoshop-notcont">
+        <text class="iconfont icon-meiyougengduo"></text>
+        <text class="cont">亲，您还没有业绩</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

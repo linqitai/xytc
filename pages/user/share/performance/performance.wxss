@@ -1,0 +1,72 @@
+.wrapper{
+  background-color: #228B22;
+  width: 100%;
+}
+.container{
+  padding: 8rpx;
+  height: 100%;
+}
+.coupon-list{
+  height: 100%;
+}
+.item{
+  display: flex;
+  padding: 8rpx;
+  align-items: center;
+  height: 160rpx;
+}
+.item .itemLeft{
+  flex: auto;
+  height: 100%;
+  border-radius: 16rpx;
+  background-color: rgba(255, 222, 205,0.7);
+}
+.item .itemRight{
+  flex: 0 0 200rpx;
+  border-left: 2rpx dashed rgb(233, 86, 2);
+  border-radius: 16rpx;
+  background-color: rgba(255, 222, 205,0.7);
+  height: 160rpx;
+  line-height: 160rpx;
+  text-align: center;
+}
+.toUseBtn{
+  font-size: 28rpx;
+  color: white;
+  padding: 4rpx 12rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  border-radius: 19rpx;
+  text-align: center;
+}
+.orange{
+  background-color: rgb(233, 86, 2);
+}
+.gray{
+  background-color: rgb(110, 110, 110);
+}
+.line1,.line2,.line3{
+  padding-left: 20rpx;
+}
+.item .itemLeft .line1{
+  color: rgb(233, 86, 2);
+  height: 66rpx;
+  line-height: 88rpx;
+}
+.item .itemLeft .line2{
+  color: #646464;
+  font-size: 28rpx;
+  height: 30rpx;
+  margin-top: 4rpx;
+}
+.item .itemLeft .line3{
+  margin-top: 10rpx;
+  color: #818181;
+  font-size: 26rpx;
+}
+.yoshop-notcont .iconfont{
+  color: white;
+}
+.yoshop-notcont .cont{
+  color: white;
+}

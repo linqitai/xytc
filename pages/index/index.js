@@ -33,27 +33,27 @@ Page({
   },
   //触摸开始
   handletouchstart: function (event) {
-    console.log("触摸开始", event)
+    // console.log("触摸开始", event)
     this.refreshView.handletouchstart(event)
   },
   //触摸移动
   handletouchmove: function (event) {
-    console.log("触摸开始", event)
+    // console.log("触摸开始", event)
     this.refreshView.handletouchmove(event)
   },
   //触摸结束
   handletouchend: function (event) {
-    console.log("触摸结束")
+    // console.log("触摸结束")
     this.refreshView.handletouchend(event)
   },
   //触摸取消
   handletouchcancel: function (event) {
-    console.log("触摸取消")
+    // console.log("触摸取消")
     this.refreshView.handletouchcancel(event)
   },
   //页面滚动
   onPageScroll: function (event) {
-    console.log("页面滚动", event)
+    // console.log("页面滚动", event)
     this.refreshView.onPageScroll(event)
   },
   onPullDownRefresh: function () {
