@@ -151,7 +151,7 @@ Page({
     var params = {
       name: that.data.name,
       sales_name: that.data.sales_name,
-      sales_sex: that.data.sexArr[that.data.sex_index],
+      sales_sex: that.data.sexArr[that.data.sex_index].id,
       phone: that.data.phone,
       address: that.data.address,
       licence_image: that.data.pic,
