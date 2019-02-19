@@ -9,7 +9,7 @@ Page({
     duration: 800, // 滑动动画时长
     imgHeights: {}, // 图片的高度
     imgCurrent: {}, // 当前banne所在滑块指针
-
+    test:'/pages/category/index?category_id=29',
     // 页面元素
     items: {},
     newest: {},
@@ -30,6 +30,24 @@ Page({
     this.getCateData();
     this.getGoodsData();
     this.getBestGoodsData();
+  },
+  /**
+   * 跳转到分类页面
+   */
+  toCategoryView: function (e) {
+    var category_id = e.currentTarget.dataset.categoryid;
+    console.log(category_id, "category_id")
+    wx.setStorageSync('category_id', category_id)
+    wx.reLaunch({
+      url: '/pages/category/index?category_id=' + category_id
+    })
+  },
+  toCategoryView2(e) {
+    var linkurl = e.currentTarget.dataset.linkurl;
+    console.log(linkurl, "linkurl")
+    wx.reLaunch({
+      url: linkurl
+    })
   },
   //触摸开始
   handletouchstart: function (event) {
@@ -67,17 +85,6 @@ Page({
   },
   _pullState: function(e) {
     console.log(e,"_pullState")
-  },
-  /**
-   * 跳转到分类页面
-   */
-  toCategoryView: function(e) {
-    var category_id = e.currentTarget.dataset.categoryid;
-    console.log(category_id,"category_id")
-    wx.setStorageSync('category_id', category_id)
-    wx.reLaunch({
-      url: '/pages/category/index'
-    })
   },
   /**
    * 获取Banner数据

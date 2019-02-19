@@ -11,25 +11,24 @@ Page({
 
     sortType: 'all',    // 排序类型
     sortPrice: false,   // 价格从低到高
-    category_id:'',
+    category_id: '',
     goodsList:[],
     list: [],
     currentOrder:''
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
     let _this = this;
-
+    console.log(options.category_id,"options.category_id")
     this.refreshView = this.selectComponent("#refreshView")
-
+    this.setData({
+      category_id: options.category_id || wx.getStorageSync('category_id')
+    })
     // 获取分类列表
     this.getCategoryList();
 
   },
   onShow: function (e) {
-    console.log(wx.getStorageSync('category_id'),"wx.getStorageSync('category_id')")
-    // 获取分类列表
-    // this.getCategoryList();
   },
   subToCart: function(e) {
     console.log(e, 'e')
@@ -203,7 +202,7 @@ Page({
       if(result.code == 1) {
         var list = result.data.list;
         var index = '';
-        var category_id = wx.getStorageSync('category_id')
+        var category_id = _this.data.category_id
         if (category_id) {
           for (var i = 0; i < list.length; i++) {
             if (list[i].category_id == category_id) {
