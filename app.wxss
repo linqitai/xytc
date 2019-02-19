@@ -478,7 +478,7 @@
 }
 
 .title-footer .cont {
-  background: #f7f7f7;
+  /* background: #f7f7f7; */
   padding: 0 12rpx;
   font-size: 28rpx;
   z-index: 10;
@@ -1063,4 +1063,181 @@
 
 .xEmojiView {
   margin: 15rpx 0;
+}
+
+/* 商品列表item */
+
+.goodsList{
+  width: 100%;
+  height: 100%;
+}
+.goodsList .itemsTitle{
+  font-size: 28rpx;
+  padding-left: 24rpx;
+  margin-top: 20rpx;
+}
+.goodsList .items{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #fcfcfc;
+  height: 120rpx;
+  padding: 22rpx 20rpx;
+}
+.goodsList .items .img{
+  flex: 0 0 120rpx; 
+  height: 100%;
+}
+.goodsList .items .img .image{
+  width: 110rpx;
+  height: 110rpx;
+  background-color: #11877C;
+  /* border-radius: 100%; */
+  background-size: 100%;
+}
+.goodsList .items .content{
+  flex: auto; 
+  display: flex;
+  flex-direction: column;
+  align-content:center;
+}
+.goodsList .items .content .title{
+  flex: auto; 
+  font-size: 32rpx;
+  color: #646464;
+  position: relative;
+}
+.goodsList .items .content .title .text{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+}
+.goodsList .items .content .price{
+  flex: auto;
+  position: relative;
+}
+.goodsList .items .content .price .text{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  font-size: 26rpx;
+  color: #E36A1E;
+}
+.goodsList .items .content .single_price{
+  flex: auto;
+  position: relative;
+}
+.goodsList .items .content .single_price .text{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  color: #E36A1E;
+  font-size: 24rpx;
+}
+.goodsList .items .content .price .line1{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+}
+.goodsList .items .content .price .line1 .goods_price0{
+  font-size: 18rpx;
+}
+.price .line1 .line_price{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  text-decoration: line-through;
+  color: #999;
+  font-size: 16rpx;
+}
+.goodsList .items .content .line_price{
+  flex: auto;
+  position: relative;
+}
+.goodsList .items .content .line_price .text{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+.goodsList .btn{
+  flex: 0 0 130rpx; 
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:flex-end;
+}
+.goodsList .btn .sub{
+  flex: 0 0 50rpx;
+  float: left;
+  /* width: 50rpx; */
+  font-size: 50rpx;
+  color: #0FB053;
+}
+.goodsList .btn .text{
+  flex: 0 0 30rpx;
+  /* float: left; */
+  /* width: 50rpx; */
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+.goodsList .btn .add{
+  flex: 0 0 50rpx;
+  float: left;
+  /* width: 50rpx; */
+  font-size: 50rpx;
+  color: #0FB053;
+}
+.goodsList .btn .iconStyle{
+  /* 让文字垂直居中 */
+  position: absolute;
+  top:50%;
+  right: 0;
+  transform:translateY(-50%);
+  /* 让文字垂直居中 */
+  font-size: 50rpx;
+  color: #0FB053;
+}
+.specification .specificationItem{
+  display: flex;
+  border-bottom: 1rpx solid #fcfcfc;
+  height: 90rpx;
+  padding: 22rpx 20rpx;
+}
+.specification .specificationItem .content{
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+}
+.specification .specificationItem .content .line1{
+  flex: auto;
+  font-size: 24rpx;
+  color: #646464;
+}
+.specification .specificationItem .content .goods_price{
+  color: #646464;
+}
+.specification .specificationItem .content .line2{
+  flex: auto;
+  color: #E36A1E;
+}
+.specification .specificationItem .content .line_sprice{
+  color: #999;
+  text-decoration: line-through;
+  font-size: 18rpx;
 }

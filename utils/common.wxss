@@ -15,10 +15,14 @@
 }
 
 page {
-  background: #f7f7f7;
+  background: white;
 }
-.margR{
-  margin-right: 20rpx;
+
+.left{
+  float: left;
+}
+.right{
+  float: right;
 }
 .b-f {
   background: #fff;
@@ -37,7 +41,9 @@ page {
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-
+.flex-center{
+  align-items: center;
+}
 .dis-flex {
   display: flex !important;
   flex-wrap: wrap;

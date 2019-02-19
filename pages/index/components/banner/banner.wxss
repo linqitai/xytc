@@ -2,8 +2,8 @@
 
 .diy-banner {
   position: relative;
+  padding: 0 24rpx;
 }
-
 /* 顶部置灰 */
 
 .diy-banner .linear {

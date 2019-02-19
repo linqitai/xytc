@@ -1,11 +1,18 @@
 <!-- 搜索框 -->
 <view class="diy-search-box col-f ts-3">
-  <view class="dis-flex">
+  <view class="dis-flex flex-center">
+    <view class='ewmBox'>
+      <text class="flex-box icon icon-ewm ewm"></text>
+    </view>
     <view class="diy-search flex-box">
       <navigator class="cont" hover-class="none" openType="navigate" url="../search/index">
-        <text class="iconfont icon-sousuo f-30"></text>
-        <text class="f-28">点击输入菜品名称搜索</text>
+        <text class="iconfont icon-sousuo f-30 right"></text>
+        <text class="f-28 left">点击输入菜品名称搜索</text>
       </navigator>
+    </view>
+    <view class='msgBox'>
+      <text class="flex-box icon icon-msg msg"></text>
+      <label class='red_dot'></label>
     </view>
   </view>
 </view>

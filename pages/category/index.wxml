@@ -32,54 +32,9 @@
           </view>
         </view>
         <scroll-view class='goodsList' lower-threshold="50" scroll-top="{{scrollTop}}" scroll-y="true" bindscrolltoupper="scrollToUpper">
-        
-          <view class="itemsBox" data-id="{{item.goods_id}}" data-index="{{index}}" wx:for="{{goodsList}}" wx:key="{{index}}">
-            <view class='items'>
-              <navigator class="img" url="../goods/index?goods_id={{item.goods_id}}" hover-class="none">
-                <image class='image' src="{{item.image[0].file_path}}" lazy-load="true"></image>
-              </navigator>
-              <view class="content">
-                <view class='title'>
-                  <text class='text f-28'>{{item.goods_name}}</text>
-                </view>
-                <view class='price' wx:if="{{!item.isOpen}}">
-                  <view class='line1' wx:if="{{item.is_mul_spec==0}}">
-                    <text class='goods_price0' wx:if="{{item.spec[0].goods_price}}">{{item.spec[0].goods_price}}</text> 
-                    <text class="line_price">{{item.spec[0].line_price}}</text>
-                  </view>
-                  <text class='text' wx:if="{{item.is_mul_spec==1}}">￥{{item.goods_min_single_price}}~{{item.goods_max_single_price}}{{item.goods_unit}}</text>
-                </view>
-                <view class='single_price' wx:if="{{item.is_mul_spec==0}}">
-                  <text class="text" wx:if="{{item.spec[0].single_money}}">￥{{item.spec[0].single_money}}</text>
-                </view>
-              </view>
-              <!-- 多规格 -->
-              <view class="btn" data-index="{{index}}" wx:if="{{item.is_mul_spec==1}}" catchtap='toggleBtn'>
-                <text class="icon icon-{{item.isOpen?'up':'down'}} iconStyle"></text>
-              </view>
-              <!-- 单规格 -->
-              <view class="btn" wx:if="{{item.is_mul_spec==0}}">
-                <text class='icon icon-sub sub' data-goodsid="{{item.goods_id}}" catchtap='subToCart' wx:if="{{item.spec[0].cart_num>0}}"></text>
-                <text class='text f-32' wx:if="{{item.spec[0].cart_num>0}}">{{item.spec[0].cart_num}}</text>
-                <text class='icon icon-add2 add' data-goodsid="{{item.goods_id}}" catchtap='addToCart'></text>
-              </view>
-            </view>
-            <!-- 多规格展示 -->
-            <view class='specification' wx:if="{{item.isOpen}}">
-              <view class='specificationItem' wx:for="{{item.spec}}" wx:for-item="spec" wx:key="{{index}}">
-                <view class='content'>
-                  <view class='line1'><text class='goods_price'>￥{{spec.goods_price}}{{spec.unit?spec.unit:''}}</text> <text class="line_sprice">￥{{spec.line_price}}</text></view>
-                  <view class='line2'>￥{{spec.single_money}}{{spec.single_unit}}</view>
-                  
-                </view>
-                <view class='btn'>
-                  <text class='icon icon-sub sub' data-goodsid="{{item.goods_id}}" data-specid='{{spec.spec_sku_id}}' catchtap='subToCart' wx:if="{{spec.cart_num>0}}"></text>
-                  <text class='text f-32' wx:if="{{spec.cart_num>0}}">{{spec.cart_num}}</text>
-                  <text class='icon icon-add2 add' data-goodsid="{{spec.goods_id}}" data-specid='{{spec.spec_sku_id}}' catchtap='addToCart'></text>
-                </view>
-              </view>
-            </view>
-          </view>
+
+          <!-- 商品列表item for 循环-->
+          <include src="../../components/goodsList/goodsList.wxml" />
           <view style='height:60rpx;'></view>
         </scroll-view>
       <!-- </view> -->

@@ -1,5 +1,5 @@
 let App = getApp();
-
+var goodsList = [];
 Page({
   data: {
     // banner轮播组件属性
@@ -13,9 +13,13 @@ Page({
     // 页面元素
     items: {},
     newest: {},
-    best: {},
+    goodsList: [],
     cate: {},
     scrollTop: 0,
+    tabIndex: 0,
+    cateList:[],
+    curClassifyId:0,
+    curClassifyIndex:0
   },
 
   onLoad: function() {
@@ -29,7 +33,95 @@ Page({
     this.getIndexData();
     this.getCateData();
     this.getGoodsData();
-    this.getBestGoodsData();
+    // this.getBestGoodsData();
+    this.getCategoryList();
+  },
+  /**
+   * 切换list tab
+   */
+  switchTab(e) {
+    var tabIndex = e.currentTarget.dataset.index;
+    console.log(tabIndex,"index")
+    this.setData({
+      tabIndex
+    })
+  },
+  toggleBtn: function (e) {
+    let _this = this;
+    var index = parseInt(e.currentTarget.dataset.index);
+    goodsList[index].isOpen = !goodsList[index].isOpen;
+    _this.setData({
+      goodsList: goodsList
+    })
+  },
+  subToCart: function (e) {
+    console.log(e, 'e')
+    let _this = this;
+    let goodsId = e.currentTarget.dataset.goodsid
+    let specId = e.currentTarget.dataset.specid
+    var pramas = {
+      goods_id: goodsId,
+      goods_num: 1,
+      goods_sku_id: specId ? specId : ''
+    }
+    console.log(pramas, "pramas")
+    App._get('cart/sub', pramas, function (result) {
+      if (result.code == 1) {
+        // App.toast('-1')
+        for (var i = 0; i < goodsList.length; i++) {
+          if (specId) {
+            for (var j = 0; j < goodsList[i].spec.length; j++) {
+              if (goodsList[i].spec[j].spec_sku_id == specId) {
+                goodsList[i].spec[j].cart_num = parseInt(goodsList[i].spec[j].cart_num) - 1;
+                break;
+              }
+            }
+          } else {
+            if (goodsList[i].goods_id == goodsId) {
+              goodsList[i].spec[0].cart_num = parseInt(goodsList[i].spec[0].cart_num) - 1;
+              break;
+            }
+          }
+        }
+        _this.setData({
+          goodsList
+        })
+      }
+    });
+  },
+  addToCart: function (e) {
+    let _this = this;
+    let goodsId = e.currentTarget.dataset.goodsid
+    let specId = e.currentTarget.dataset.specid
+    var pramas = {
+      goods_id: goodsId,
+      goods_num: 1,
+      goods_sku_id: specId ? specId : ''
+    }
+    console.log(pramas, "pramas")
+    App._get('cart/add', pramas, function (result) {
+      if (result.code == 1) {
+        // App.toast('+1')
+        for (var i = 0; i < goodsList.length; i++) {
+          if (specId) {
+            for (var j = 0; j < goodsList[i].spec.length; j++) {
+              if (goodsList[i].spec[j].spec_sku_id == specId) {
+                goodsList[i].spec[j].cart_num = parseInt(goodsList[i].spec[j].cart_num) + 1;
+                break;
+              }
+            }
+          } else {
+            if (goodsList[i].goods_id == goodsId) {
+              goodsList[i].spec[0].cart_num = parseInt(goodsList[i].spec[0].cart_num) + 1;
+              break;
+            }
+          }
+        }
+        _this.setData({
+          goodsList
+        })
+      }
+    });
   },
   //触摸开始
   handletouchstart: function (event) {
@@ -80,6 +172,32 @@ Page({
     })
   },
   /**
+   * 获取分类列表
+   */
+  getCategoryList: function () {
+    let _this = this;
+    App._get('category/lists', {}, function (result) {
+      // console.log(result,"result")
+      if (result.code == 1) {
+        var cateList = result.data.list;
+        console.log(cateList,"cateList")
+        _this.setData({cateList})
+      }
+    });
+  },
+  /**
+   * 选中分类
+   */
+  selectClassify: function (t) {
+    let _this = this;
+    let curClassifyId = t.target.dataset.id, curClassifyIndex = parseInt(t.target.dataset.index);
+    this.setData({
+      curClassifyId,
+      curClassifyIndex
+    });
+    // this.getGoodsList(_this.data.curNav);
+  },
+  /**
    * 获取Banner数据
    */
   getIndexData: function() {
@@ -106,10 +224,15 @@ Page({
    */
   getGoodsData: function () {
     let _this = this;
-    App._get('index/good_list', {}, function (result) {
+    App._get('index/best_list', {}, function (result) {
+      console.log(result,"result")
+      goodsList = result.data.best
+      for (var i = 0; i < goodsList.length; i++) {
+        goodsList[i].isOpen = false;
+      }
       _this.setData({
-        newest: result.data.newest
-      });
+        goodsList
+      })
     });
   },
   /**
@@ -124,9 +247,6 @@ Page({
       _this.refreshView.stopPullRefresh()
     });
   },
-  /**
-   * 计算图片高度
-   */
   imagesHeight: function(e) {
     let imgId = e.target.dataset.id,
       itemKey = e.target.dataset.itemKey,
