@@ -1,24 +1,22 @@
 <refresh-view id='refreshView' bind:onRefresh="onPullDownRefresh"/>
 <view class="container" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'>
   <include src="components/search/search.wxml" />
-    <block wx:for="{{items}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
-      <!-- banner轮播  wx:if="{{item.type === 'banner'}}" -->
-      <block wx:if="{{item.type === 'banner'}}">
-        <!-- <include src="components/banner/banner.wxml" /> -->
-        <!-- banner轮播 -->
+  <block wx:for="{{items}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
+    <!-- banner轮播  wx:if="{{item.type === 'banner'}}" -->
+    <block wx:if="{{item.type === 'banner'}}">
+      <!-- <include src="components/banner/banner.wxml" /> -->
+      <!-- banner轮播 -->
       <view class="diy-banner">
         <swiper autoplay="{{autoplay}}" class="banner-box swiper-box" duration="{{duration}}" circular="{{true}}" indicator-dots="{{indicatorDots}}" interval="{{interval}}" indicator-color="{{item.style.btnColor}}" indicator-active-color="#000" bindchange="bindChange" data-item-key="{{item_key}}" style="height:{{imgHeights[item_key][imgCurrent[item_key]]}}rpx">
-          <navigator hover-class="none" wx:for-item="banner" url="/{{banner.linkUrl}}" wx:for="{{item.data}}" wx:key="this">
-            <swiper-item item-id="{{index}}">
-              <image class="slide-image" bindload="imagesHeight" src="{{banner.imgUrl}}" data-id="{{index}}" data-item-key="{{item_key}}"></image>
-            </swiper-item>
-          </navigator>
+          <swiper-item item-id="{{index}}" wx:for-item="banner" wx:for="{{item.data}}" wx:key="this">
+            <image class="slide-image" bindload="imagesHeight" src="{{banner.imgUrl}}" data-id="{{index}}" data-item-key="{{item_key}}" data-linkurl="{{banner.linkUrl}}" bindtap="toCategoryView2"></image>
+          </swiper-item>
         </swiper>
         <!-- 顶部置灰 -->
         <!-- <view class="linear"></view>  -->
       </view>
-      </block>
     </block>
+  </block>
     <!-- 一级分类 -->
     <view class='cate m-top20'>
       <view class='cateItem' wx:for="{{cate}}" wx:key="index" data-categoryid='{{item.category_id}}' bindtap='toCategoryView'>
