@@ -45,7 +45,7 @@ Page({
   toCategoryView2(e) {
     var linkurl = e.currentTarget.dataset.linkurl;
     console.log(linkurl, "linkurl")
-    wx.reLaunch({
+    wx.navigateTo({
       url: linkurl
     })
   },
