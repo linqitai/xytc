@@ -45,9 +45,17 @@ Page({
   toCategoryView2(e) {
     var linkurl = e.currentTarget.dataset.linkurl;
     console.log(linkurl, "linkurl")
-    wx.navigateTo({
-      url: linkurl
-    })
+    var to = linkurl.split('/')[2];
+    console.log(to,"split[2]")
+    if (to =='category'){
+      wx.reLaunch({
+        url: linkurl
+      })
+    }else{
+      wx.navigateTo({
+        url: linkurl
+      })
+    }
   },
   //触摸开始
   handletouchstart: function (event) {
