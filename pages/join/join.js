@@ -153,14 +153,14 @@ Page({
       sales_name: that.data.sales_name,
       sales_sex: that.data.sexArr[that.data.sex_index].id,
       phone: that.data.phone,
-      address: that.data.address,
-      licence_image: that.data.pic,
+      address: that.data.address
     }
     console.log(params);
     if (App.hasNull(params)){
       App.showError("请填写或完善信息");
       return;
     }
+    params.licence_image = that.data.pic ? that.data.pic : ''
     var method = "POST";
     console.log(params,"----------params---------------")
     App._post_form('user.index/store_edit', params,
