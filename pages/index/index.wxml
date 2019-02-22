@@ -63,8 +63,8 @@
         </view>
         <view class="right">
           <view class="cont">
-            <text class="f-28 title twolist-hidden m-top10">{{item.goods_name}}</text>
-            <text class="goods_price f-26 f-w">￥{{item.spec[0].single_money}}{{item.spec[0].single_unit}}</text>
+            <view class="f-28 title twolist-hidden m-top10">{{item.goods_name}}</view>
+            <view class="goods_price f-w">￥{{item.spec[0].single_money}}{{item.spec[0].single_unit}}</view>
           </view>
           <!-->
           <view class="cont">
