@@ -11,6 +11,7 @@
 }
 .category-list .right .cont .goods_price{
   color: #ff495e;
+  font-size: 26rpx;
 }
 .category-list .right .cont .single_price{
   color: orange;
