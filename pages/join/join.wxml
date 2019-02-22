@@ -29,7 +29,7 @@
       <input class='input' placeholder="请填写能准确收到货物的地址" type="text" data-name="address" bindinput='getAddress' value='{{address}}'></input>
     </view>
     <view class='indentityBox'>
-      <label class='indentityLabel'>商户信息(营业执照):</label>
+      <label class='indentityLabel'>商户信息/营业执照(非必填):</label>
       <view class='uploadIndentityBox'>
         <view class='frontbackBox' bindtap="upload">
           <!-- <image class='' mode='aspectFit' src="{{licence_image}}'"></image> -->
