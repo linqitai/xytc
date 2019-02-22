@@ -38,7 +38,7 @@
               <navigator class="img" url="../goods/index?goods_id={{item.goods_id}}" hover-class="none">
                 <image class='image' src="{{item.image[0].file_path}}" lazy-load="true"></image>
               </navigator>
-              <view class="content">
+              <navigator class="content" url="../goods/index?goods_id={{item.goods_id}}" hover-class="none">
                 <view class='title'>
                   <text class='text f-28'>{{item.goods_name}}</text>
                 </view>
@@ -52,7 +52,7 @@
                 <view class='single_price' wx:if="{{item.is_mul_spec==0}}">
                   <text class="text" wx:if="{{item.spec[0].single_money}}">￥{{item.spec[0].single_money}}</text>
                 </view>
-              </view>
+              </navigator>
               <!-- 多规格 -->
               <view class="btn" data-index="{{index}}" wx:if="{{item.is_mul_spec==1}}" catchtap='toggleBtn'>
                 <text class="icon icon-{{item.isOpen?'up':'down'}} iconStyle"></text>
