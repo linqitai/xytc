@@ -28,6 +28,7 @@ Page({
     // 执行微信登录
     wx.login({
       success: function (res) {
+        console.log(res.code,"res.code")
         // 发送用户信息
         App._post_form('user/login'
           , {
