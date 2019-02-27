@@ -19,3 +19,6 @@
 .picker{
   padding:0px;
 }
+.radio{
+  margin-left: 10px;
+}

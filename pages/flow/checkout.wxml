@@ -59,6 +59,17 @@
 
   <!-- 商品金额 -->
   <view class="flow-all-money b-f padding-box m-top20">
+    <view class="flow-all-list" style='overflow:hidden'>
+      <text class="" style='width:43%;float:left'>配送:</text>
+      <view class="" style='float:right'>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{pay_type}}" wx:key="index">
+            <radio value="{{item.value}}" checked="{{item.checked}}" name="pay_type"/>
+            <label>{{item.name}}</label>
+          </label>
+        </radio-group>
+      </view>
+    </view>
     <view class="dis-flex flow-all-list">
       <text class="flex-five">配送时间:</text>
       <view class="flex-five t-r">

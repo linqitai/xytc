@@ -14,7 +14,7 @@ Page({
     distribution_time : null, //配送时间
     pay_type:{},
     disabled: false,
-    post_pay_type :20,
+    post_pay_type :10,
     post_dis_type :0,
     hasError: false,
     couponOptions: [],
@@ -28,16 +28,16 @@ Page({
   onLoad: function(options) {
     // 当前页面参数
     this.data.options = options;
-    console.log(options,"options");
+    console.log(options, "options");
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
+    console.log("onShow");
     // 获取当前订单信息
     this.getOrderData();
-
   },
   
   getCouponOptions(post_pay_typeCouponList){
@@ -306,6 +306,7 @@ Page({
 
     // 订单创建成功后回调--微信支付
     let callback = function(result) {
+      console.log(result, "result")
       console.log(result.code,"result.code")
       if (result.code === -10) {
         App.showError(result.msg, function() {
@@ -333,12 +334,20 @@ Page({
               url: '../order/detail?order_id=' + result.data.order_id,
             });
           },
-          fail: function () {
+          fail: function (res) {
+            console.log(res,"res")
             App.showError('订单未支付', function () {
               // 跳转到未付款订单
-              wx.redirectTo({
-                url: '../order/index?type=payment',
+              let prams = {
+                order_id: result.data.order_id
+              }
+              console.log(prams,"prams")
+              App._post_form('user.order/order_del', prams, function (result) {
+                _this.onShow()
               });
+              // wx.redirectTo({
+              //   url: '../order/index?type=payment',
+              // });
             });
           },
         });
