@@ -13,6 +13,11 @@ Page({
     goods: {}, // 商品信息
     distribution_time : null, //配送时间
     pay_type:{},
+    time_type: 0,//默认今天送
+    time_value:'',
+    time_value_index:0,
+    time_type_arr:[{ name: "今天送",value:0,checked:true }, { name: "明天送",value:1,checked:false }],
+    time_list:[],
     disabled: false,
     post_pay_type :10,
     post_dis_type :0,
@@ -21,6 +26,7 @@ Page({
     couponIndex: 0,
     couponId: '',
     error: '',
+    time_number:new Date().getTime()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -29,6 +35,7 @@ Page({
     // 当前页面参数
     this.data.options = options;
     console.log(options, "options");
+    console.log(this.data.time_number,"time_number");
   },
 
   /**
@@ -67,6 +74,15 @@ Page({
     }
     return couponOptions
   },
+  time_typeRadioChange(e){
+    var _this = this
+    this.setData({
+      time_type: e.detail.value,
+      time_value_index:0,
+      time_value: _this.data.time_list[e.detail.value][0]
+    })
+    console.log(this.data.time_type, "time_type")
+  },
   /**
    * 获取优惠券列表
    */
@@ -98,6 +114,33 @@ Page({
     }
     return couponOptions;
   },
+  init_post_pay_type(pay_type_arr){
+    let _this = this;
+    // if (!pay_type_arr) {
+    //   return;
+    // }
+    var keys = Object.keys(pay_type_arr)
+    for (let index = 0; index < keys.length; index++) {
+      if (pay_type_arr[keys[index]].checked) {
+        console.log(pay_type_arr[keys[index]], "pay_type_arr[keys[index]]")
+        _this.setData({
+          post_pay_type: pay_type_arr[keys[index]].value
+        })
+        console.log(_this.data.post_pay_type, "post_pay_type")
+      }
+    }
+  },
+  init_get_time_list(time_list){
+    let _this = this;
+    // if (!time_list) {
+    //   return;
+    // }
+    _this.setData({
+      time_list,
+      time_value: time_list[_this.data.time_type][0]
+    })
+    console.log(_this.data.time_list,"time_list")
+  },
   /**
    * 获取当前订单信息
    */
@@ -107,9 +150,15 @@ Page({
 
     // 获取订单信息回调方法
     let callback = function(result) {
-      console.log(result.data,"result.data获取订单信息回调方法")
+      let pay_type_arr = result.data.pay_type;
+      let time_list = result.data.time_list;
+      // console.log(pay_type_arr, "pay_type_arr")
+      // console.log(time_list, "time_list")
+      _this.init_get_time_list(time_list)
+      _this.init_post_pay_type(pay_type_arr)
+      // console.log(result.data,"result.data获取订单信息回调方法")
       if (result.code !== 1) {
-        console.log(result.msg,"result.msg")
+        // console.log(result.msg,"result.msg")
         App.showError(result.msg);
         return false;
       }
@@ -131,7 +180,10 @@ Page({
         goods_sku_id: options.goods_sku_id,
         pay_type: options.pay_type,
         dis_type: options.dis_type,
-        coupon_id:_this.data.couponId
+        coupon_id:_this.data.couponId,
+        time_type: _this.data.time_type,
+        time_value: _this.data.time_value,
+        time_number: _this.data.time_number
       }, function(result) {
         callback(result);
       });
@@ -139,9 +191,8 @@ Page({
 
     // 购物车结算
     else if (wx.getStorageSync('order_type') === 'cart') {
-      App._get('order/cart', {
-
-        }, function(result) {
+      App._get('order/cart', {}, function(result) {
+        // console.log("===============cart======================2")
         callback(result);
       });
     }
@@ -153,7 +204,7 @@ Page({
     var type = '';
     var money = '';
     for (var i = 0; i < post_pay_typeCouponList.length;i++) {
-      console.log(`id:${post_pay_typeCouponList[i].id},coupon_id:${_this.data.couponId}`)
+      // console.log(`id:${post_pay_typeCouponList[i].id},coupon_id:${_this.data.couponId}`)
       if (post_pay_typeCouponList[i].id == _this.data.couponId) {
         type = post_pay_typeCouponList[i].c_type.type
         if (type == 1) {// c_type 里面 type 1是优惠券 2是折扣券
@@ -173,8 +224,8 @@ Page({
           type = 0
           money = 0
         }
-        console.log(type,"type")
-        console.log(money,"money")
+        // console.log(type,"type")
+        // console.log(money,"money")
         subMoney.push(type)
         subMoney.push(money)
         return subMoney;
@@ -188,16 +239,16 @@ Page({
     if (!post_pay_typeCouponList){
       return;
     }
-    console.log(_this.data.post_pay_type, "_this.data.post_pay_type")
-    console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
+    // console.log(_this.data.post_pay_type, "_this.data.post_pay_type")
+    // console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
     var showCouponOptions = _this.getCouponOptions(post_pay_typeCouponList) //把数据改造成所要显示的数据
     _this.setData({
       couponOptions: showCouponOptions,
       couponId: post_pay_typeCouponList.length>0?post_pay_typeCouponList[0].id:0
     })
-    console.log(this.data.couponId, "couponId")
+    // console.log(this.data.couponId, "couponId")
     var subMoney = _this.getSubMoney(post_pay_typeCouponList)
-    console.log(subMoney, 'subMoney')
+    // console.log(subMoney, 'subMoney')
     // =======================================
     _this.getReal_pay_price(subMoney)
   },
@@ -205,19 +256,19 @@ Page({
     var _this = this
     var real_pay_price = ''
     var order_total_price = _this.data.order_total_price
-    console.log(subMoney,"subMoneysubMoneysubMoneysubMoney")
+    // console.log(subMoney,"subMoneysubMoneysubMoneysubMoney")
     if (subMoney){
       if (subMoney[0] == 1) {
-        console.log(_this.data.order_total_price, "order_total_price")
+        // console.log(_this.data.order_total_price, "order_total_price")
         real_pay_price = order_total_price - subMoney[1]
       } else if (subMoney[0] == 2) {
-        console.log(_this.data.order_total_price, "order_total_price")
+        // console.log(_this.data.order_total_price, "order_total_price")
         real_pay_price = (order_total_price * subMoney[1] * (subMoney[1].length == 1 ? 0.1 : subMoney[1].length == 2 ? 0.01 : 1)).toFixed(2)
       }else{
-        console.log(_this.data.order_total_price, "order_total_price")
+        // console.log(_this.data.order_total_price, "order_total_price")
         real_pay_price = order_total_price
       }
-      console.log(real_pay_price, "real_pay_price")
+      // console.log(real_pay_price, "real_pay_price")
       _this.setData({
         order_pay_price: real_pay_price
       })
@@ -247,9 +298,9 @@ Page({
       couponIndex: e.detail.value,
       couponId: post_pay_typeCouponList[e.detail.value].id // 这里有问题 =》couponList
     })
-    console.log(this.data.couponId, "couponId")
+    // console.log(this.data.couponId, "couponId")
     var subMoney = _this.getSubMoney(post_pay_typeCouponList)
-    console.log(subMoney, 'subMoney')
+    // console.log(subMoney, 'subMoney')
     // =======================================
     _this.getReal_pay_price(subMoney)
   },
@@ -268,11 +319,13 @@ Page({
   },
   // 配送时间的选择
   bindTimePickerChange(e) {
+    let _this = this;
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      post_dis_type: e.detail.value
+      time_value_index: e.detail.value,
+      time_value: _this.data.time_list[_this.data.time_type][e.detail.value]
     })
-    console.log(this.data.couponId, "couponId")
+    // console.log(this.data.time_value, "time_value")
   },
   /**
    * 选择收货地址
@@ -306,8 +359,10 @@ Page({
 
     // 订单创建成功后回调--微信支付
     let callback = function(result) {
-      console.log(result, "result")
-      console.log(result.code,"result.code")
+      let pay_type_arr = result.data.pay_type;
+      let time_list = result.data.time_list;
+      _this.init_get_time_list(time_list)
+      _this.init_post_pay_type(pay_type_arr)
       if (result.code === -10) {
         App.showError(result.msg, function() {
           // 跳转到未付款订单
@@ -319,7 +374,7 @@ Page({
       }
 
       //条件为线上支付 
-      console.log(post_pay_type,"post_pay_typepost_pay_typepost_pay_typepost_pay_type")
+      // console.log(post_pay_type,"post_pay_typepost_pay_typepost_pay_typepost_pay_type")
       if(post_pay_type==10){
         // 发起微信支付
         wx.requestPayment({
@@ -377,7 +432,10 @@ Page({
         goods_sku_id: options.goods_sku_id,
         pay_type: post_pay_type,
         dis_type: post_dis_type,
-        coupon_id: _this.data.couponId
+        coupon_id: _this.data.couponId,
+        time_type: _this.data.time_type,
+        time_value: _this.data.time_value,
+        time_number: _this.data.time_number
       }, function(result) {
         // success
         console.log('===================success============================');
@@ -405,11 +463,14 @@ Page({
 
     // 创建订单-购物车结算
     else if (wx.getStorageSync('order_type') === 'cart') {
-      console.log("===============cart======================")
+      console.log("===============cart======================1")
       App._post_form('order/cart', {
         pay_type: post_pay_type,
         dis_type: post_dis_type,
-        coupon_id: _this.data.couponId
+        coupon_id: _this.data.couponId,
+        time_type: _this.data.time_type,
+        time_value: _this.data.time_value,
+        time_number: _this.data.time_number
       }, function(result) {
         // success
         console.log('success');
