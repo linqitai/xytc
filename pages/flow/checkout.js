@@ -472,7 +472,7 @@ Page({
               url: "../join/join",
             })
           } else {
-            wx.navigateBack()
+            _this.onShow();
           }
 
         }
