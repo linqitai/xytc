@@ -26,7 +26,7 @@ Page({
     couponIndex: 0,
     couponId: '',
     error: '',
-    time_number:new Date().getTime()
+    time_number: ""
   },
   /**
    * 生命周期函数--监听页面加载
@@ -36,6 +36,11 @@ Page({
     this.data.options = options;
     console.log(options, "options");
     console.log(this.data.time_number,"time_number");
+    let timeString = new Date().getTime().toString();
+    let newTimeString = timeString.substr(0, timeString.length-3);
+    this.setData({
+      time_number:newTimeString
+    })
   },
 
   /**
@@ -135,10 +140,21 @@ Page({
     // if (!time_list) {
     //   return;
     // }
-    _this.setData({
-      time_list,
-      time_value: time_list[_this.data.time_type][0]
-    })
+    console.log(time_list[_this.data.time_type][0],"time_list[_this.data.time_type][0]")
+    if (time_list[_this.data.time_type][0]){
+      _this.setData({
+        time_list,
+        time_value: time_list[_this.data.time_type][0]
+      })
+    }else{
+      console.log("null")
+      let timeList = time_list;
+      timeList[0][0] = "今天已过配送时间";
+      _this.setData({
+        time_list,
+        time_value: time_list[_this.data.time_type][0]
+      })
+    }
     console.log(_this.data.time_list,"time_list")
   },
   /**
@@ -158,7 +174,7 @@ Page({
       _this.init_post_pay_type(pay_type_arr)
       // console.log(result.data,"result.data获取订单信息回调方法")
       if (result.code !== 1) {
-        // console.log(result.msg,"result.msg")
+        console.log(result.msg,"result.msg")
         App.showError(result.msg);
         return false;
       }
@@ -419,10 +435,17 @@ Page({
     _this.data.disabled = true;
 
     // 显示loading
-    wx.showLoading({
-      title: '正在处理...'
-    });
-
+    // wx.showLoading({
+    //   title: '正在处理...'
+    // });
+    if (_this.data.time_value=="今天已过配送时间"){
+      App.showModel('今天已过配送时间，请选择明天送',function(){
+        _this.setData({
+          disabled:false
+        })
+      });
+      return;
+    }
     // 创建订单-立即购买
     if (wx.getStorageSync('order_type') === 'buyNow') {
       console.log("=============buyNow==============")
@@ -484,7 +507,7 @@ Page({
               url: "../join/join",
             })
           }else{
-            wx.navigateBack()
+            _this.onShow();
           }
           
         }
