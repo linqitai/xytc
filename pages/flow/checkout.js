@@ -439,7 +439,7 @@ Page({
     //   title: '正在处理...'
     // });
     if (_this.data.time_value=="今天已过配送时间"){
-      App.showModel('今天已过配送时间，请选择明天送',function(){
+      App.showError('今天已过配送时间，请选择明天送',function(){
         _this.setData({
           disabled:false
         })
