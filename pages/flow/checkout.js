@@ -26,7 +26,12 @@ Page({
     couponIndex: 0,
     couponId: '',
     error: '',
-    time_number: ""
+    time_number: "",
+    couponShow: false,
+    windowHeight:'',
+    windowWidth:'',
+    page: 1,
+    isLastPage: false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -41,6 +46,7 @@ Page({
     this.setData({
       time_number:newTimeString
     })
+    this.getWindowsInfo();
   },
 
   /**
@@ -51,7 +57,60 @@ Page({
     // 获取当前订单信息
     this.getOrderData();
   },
-  
+  toGetAddress(){
+    wx.setStorageSync('_from', 'flow')
+    wx.navigateTo({
+      url: '../address/index',
+    })
+  },
+  scrollToBottom() {
+    console.log('scrollToBottom')
+    var _this = this;
+    console.log(_this.data.isLastPage, "_this.data.isLastPage")
+    if (_this.data.isLastPage == false) {
+      _this.setData({
+        page: _this.data.page + 1
+      })
+      _this.getList();
+    }
+    if (_this.data.page == _this.data.last_page && _this.data.isLastPage == false) {
+      _this.data.isLastPage = true;
+      // App.toast("数据已经加载完毕")
+      return;
+    }
+  },
+  toUseBtn() {
+    console.log("you click me")
+    wx.switchTab({
+      url: '/pages/category/index',
+    })
+  },
+  getWindowsInfo(){
+    let _this = this;
+    wx.getSystemInfo({
+      success(res) {
+        console.log(res.windowWidth)
+        console.log(res.windowHeight)
+        _this.setData({
+          windowHeight: res.windowHeight,
+          windowWidth: res.windowWidth
+        })
+        // console.log(res.model)
+        // console.log(res.pixelRatio)
+        // console.log(res.windowWidth)
+        // console.log(res.windowHeight)
+        // console.log(res.language)
+        // console.log(res.version)
+        // console.log(res.platform)
+      }
+    })
+  },
+  openPopup(){
+    this.setData({ couponShow: true });
+  },
+  onClose(){
+    this.setData({ couponShow: false });
+  },
   getCouponOptions(post_pay_typeCouponList){
     var couponOptions = [];
     if (post_pay_typeCouponList.length>0){
@@ -72,7 +131,12 @@ Page({
           couponOptions.push(`满${post_pay_typeCouponList[i].invest_money}打${zhekou}折`)
         }else{
           if (post_pay_typeCouponList[i].money == 0 || post_pay_typeCouponList[i].money == '0.00') {
-            couponOptions.push(`不使用优惠券`)
+            // couponOptions.push(`不使用优惠券`)
+            if (post_pay_typeCouponList.length == 1){
+              couponOptions.push('您还没有优惠券')
+            }else{
+              couponOptions.push(`不使用优惠券`)
+            }
           }
         }
       }
@@ -98,7 +162,8 @@ Page({
     }, function (result) {
       // console.log(result,"conponResult")
       couponList = result.data.data;// 接口中拿到的初始数据
-      
+      console.log(couponList, "couponList")
+      console.log(_this.data.post_pay_type,"post_pay_type")
       _this.masterMethod4getSubMoney()
     });
   },
@@ -312,7 +377,7 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       couponIndex: e.detail.value,
-      couponId: post_pay_typeCouponList[e.detail.value].id // 这里有问题 =》couponList
+      couponId: post_pay_typeCouponList[e.detail.value].id
     })
     // console.log(this.data.couponId, "couponId")
     var subMoney = _this.getSubMoney(post_pay_typeCouponList)

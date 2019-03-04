@@ -9,6 +9,10 @@
           </view>
           <view class="flow-checkout-address">
             {{item.detail}}
+<<<<<<< HEAD
+=======
+            <!-- {{item.region.province}} {{item.region.city}} {{item.region.region}} {{item.detail}} -->
+>>>>>>> 846e29ceefbc8ab09e7f1d489c60d738a16b0ebd
           </view>
         </view>
       </view>

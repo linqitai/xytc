@@ -425,11 +425,11 @@ Page({
       this.setData({ error: '手机号不符合要求' })
       return false;
     }
-    if (!this.data.region) {
-      // this.data.error = '省市区不能空';
-      this.setData({ error: '省市区不能空' })
-      return false;
-    }
+    // if (!this.data.region) {
+    //   // this.data.error = '省市区不能空';
+    //   this.setData({ error: '省市区不能空' })
+    //   return false;
+    // }
     if (values.detail === '') {
       // this.data.error = '详细地址不能为空';
       this.setData({ error: '详细地址不能为空' })
