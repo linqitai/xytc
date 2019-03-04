@@ -8,7 +8,7 @@
         待确认<text class='tag' wx:if="{{orderCount.delivery}}">{{orderCount.delivery}}</text>
       </view>
       <view bindtap="bindHeaderTap" class="header_item {{dataType==='received'?'active':''}}" data-type="received">
-        待收货<text class='tag' wx:if="{{ordercoun.received}}">{{ordercoun.received}}</text>
+        待收货<text class='tag' wx:if="{{orderCount.received}}">{{orderCount.received}}</text>
       </view>
       <view bindtap="bindHeaderTap" class="header_item {{dataType==='complete'?'active':''}}" data-type="complete">
         已完成
