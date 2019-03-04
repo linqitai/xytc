@@ -16,7 +16,7 @@ Page({
     time_type: 0,//默认今天送
     time_value:'',
     time_value_index:0,
-    time_type_arr:[{ name: "今天送",value:0,checked:true }, { name: "明天送",value:1,checked:false }],
+    time_type_arr: [{ name: "即时送", value: 0, checked: true }, { name: "明日达",value:1,checked:false }],
     time_list:[],
     disabled: false,
     post_pay_type :10,

@@ -89,7 +89,6 @@ Page({
   editAddress: function(e) {
     wx.setStorageSync('operate', 'edit')
     wx.setStorageSync('address_id', e.currentTarget.dataset.id)
-    console.log(e.currentTarget.dataset.id,"e.currentTarget.dataset.id编辑地址")
     wx.showNavigationBarLoading();
     // wx.navigateTo({
     //   url: "./create?address_id=" + e.currentTarget.dataset.id
