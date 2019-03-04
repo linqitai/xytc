@@ -42,7 +42,7 @@ Page({
         console.log(`${longitude},${latitude}`,'setStorageSync')
         //选择地点之后返回到原来页面
         wx.redirectTo({
-          url: "/pages/address/position/sureAddress?address=" + res.name // "pages/address/position/sureAddress"
+          url: `/pages/address/position/sureAddress?address=${res.address}(${res.name})` // "pages/address/position/sureAddress"
         });
       },
       fail: function (err) {

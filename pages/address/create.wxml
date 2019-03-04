@@ -22,7 +22,7 @@
       </view>
     </view>
     <view class="address-cont-title b-f b-b">
-      <view class="dis-flex list address-box m-top20 b-b">
+      <!-- <view class="dis-flex list address-box m-top20 b-b">
         <view class="left-name">
           <text class="f-30">所在地区</text>
         </view>
@@ -32,7 +32,7 @@
             <text wx:else class="f-30 col-7">选择省、市、区</text>
           </picker>
         </view>
-      </view>
+      </view> -->
       <view class="dis-flex list address-box" bindtap='onChangeAddress'>
         <view class="left-name">
           <text class="f-30">详细地址</text>

@@ -1,5 +1,11 @@
 /* common.wxss */
 @import "/utils/common.wxss";
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}
 .flag{
   font-size: 28rpx;
   padding-left: 24rpx;

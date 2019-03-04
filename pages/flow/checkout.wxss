@@ -1,3 +1,11 @@
+.flow-checkout-header .address_arrow{
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  font-size:24rpx;
+  color:#777;
+  margin-top:-20rpx;
+}
 .checkout_list {
   padding: 10px 15px 2px 15px;
   background: #fff;
@@ -21,4 +29,76 @@
 }
 .radio{
   margin-left: 10px;
+}
+.coupon_popup{
+  width: 100%;
+  height: 100%;
+}
+.popup_content{
+  width: 100%;
+  height: 100%;
+}
+
+/* ===============优惠券样式==================== */
+.coupon_popup .container{
+  padding: 8rpx;
+  height: 100%;
+}
+.coupon_popup .coupon-list{
+  height: 100%;
+}
+.coupon_popup .item{
+  display: flex;
+  padding: 8rpx;
+  align-items: center;
+  height: 160rpx;
+}
+.coupon_popup .item .itemLeft{
+  flex: auto;
+  height: 100%;
+  border-radius: 16rpx;
+  background-color: rgba(255, 222, 205,0.7);
+}
+.coupon_popup .item .itemRight{
+  flex: 0 0 200rpx;
+  border-left: 2rpx dashed rgb(233, 86, 2);
+  border-radius: 16rpx;
+  background-color: rgba(255, 222, 205,0.7);
+  height: 160rpx;
+  line-height: 160rpx;
+  text-align: center;
+}
+.coupon_popup .toUseBtn{
+  font-size: 28rpx;
+  color: white;
+  padding: 4rpx 12rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  border-radius: 19rpx;
+  text-align: center;
+}
+.coupon_popup .orange{
+  background-color: rgb(233, 86, 2);
+}
+.coupon_popup .gray{
+  background-color: rgb(110, 110, 110);
+}
+.coupon_popup .line1,.line2,.line3{
+  padding-left: 20rpx;
+}
+.coupon_popup .item .itemLeft .line1{
+  color: rgb(233, 86, 2);
+  height: 66rpx;
+  line-height: 88rpx;
+}
+.coupon_popup .item .itemLeft .line2{
+  color: #646464;
+  font-size: 28rpx;
+  height: 30rpx;
+  margin-top: 4rpx;
+}
+.coupon_popup .item .itemLeft .line3{
+  margin-top: 10rpx;
+  color: #818181;
+  font-size: 26rpx;
 }

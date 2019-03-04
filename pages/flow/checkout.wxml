@@ -3,7 +3,7 @@
   <view>
     <view wx:if="{{address.address_id}}">
       <view class="b-f">
-        <view class="flow-checkout-header">
+        <view class="flow-checkout-header" bindtap='toGetAddress'>
           <text class="iconfont icon-dingwei1"></text>
           <view class="flow-header-left">
             <view class="flow-checkout-admin f-30 col-3">
@@ -15,6 +15,7 @@
               {{address.detail}}
             </view>
           </view>
+          <text class="iconfont icon-xiangyoujiantou address_arrow"></text>
         </view>
       </view>
     </view>
@@ -98,9 +99,12 @@
         </radio-group>
       </view>
     </view>
-    <view class="dis-flex flow-all-list" wx:if="{{couponOptions.length}}">
+    <view class="dis-flex flow-all-list">
       <text class="flex-five">优惠券:</text>
       <view class="flex-five t-r">
+        <!-- <view class="picker"> bindtap='openPopup'
+          {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
+        </view> -->
         <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}">
           <view class="picker">
             {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
@@ -120,7 +124,40 @@
       </view>
     </view>
   </view>
-
+  <!-- <van-popup style="width:{{windowWidth}}px;height:{{windowHeight-100}}px" show="{{ couponShow }}" position="right" bind:close="onClose">
+    <view style="width:{{windowWidth}}px;height:{{windowHeight-100}}px">
+      <scroll-view class="container">
+        <view class="coupon-list" wx:if="{{couponList[0].length}}">
+          <view class="item" wx:for="{{couponList[0]}}" wx:for-item="item" wx:key="index">
+            <view class='itemLeft'>
+              <view class='line1'>
+                <text style="font-size:24rpx;">￥</text>{{item.money}}<text style="font-size:28rpx;"> 满{{item.invest_money}}减{{item.money}}</text>
+              </view>
+              <view class='line2'>
+                <text class='text'>{{item.c_type.name}}({{item.c_type.pay_status.value==0?'全部可用':item.c_type.pay_status.value==10?'在线支付用':item.c_type.pay_status.value==20?'货到付款用':''}})</text>
+              </view>
+              <view class='line3'>
+                {{item.add_time.date}}~{{item.end_time.text}}
+              </view>
+            </view>
+            <view class='itemRight'>
+              <label class="toUseBtn {{item.use_time.text=='未使用'?'orange':'gray'}}" bindtap="toUseBtn">{{item.use_time.text=='未使用'?'去使用':'已使用'}}</label>
+            </view>
+          </view>
+          <view class="title-footer p-r">
+            <text class="f-24 col-9 cont">我是有底线的</text>
+            <view class="hr"></view>
+          </view>
+        </view>
+        <view wx:else>
+          <view class="yoshop-notcont">
+            <text class="iconfont icon-meiyougengduo"></text>
+            <text class="cont">亲，您还没有优惠券</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </van-popup> -->
   <!-- 快捷导航 -->
   <view class="filter-menu {{nav_select?'active':''}}">
     <view class="filter-menu-list ts-5">
