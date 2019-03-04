@@ -30,7 +30,6 @@ Page({
     cart_total_num: 0, // 购物车商品总数量
     specData: {}, // 多规格信息
     specValue:1,
-    
   },
 
   // 记录规格的数组
@@ -61,6 +60,14 @@ Page({
       _this.setData({
         specValue: _this.data.detail.is_mul_spec ? _this.data.detail.spec_rel[0].spec_value:1
       });
+      // let stock_num = "";
+      // console.log(data.detail.spec, "spec")
+      // if (data.detail.spec.length > 1){
+
+      // }else{
+      //   stock_num = data.detail.spec[0].stock_num
+      //   _this.setData({stock_num})
+      // }
     });
   },
 

@@ -34,7 +34,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [{
+          "id": -1,
+          "name": "我的",
+          "pathName": "pages/user/index"
+        },{
+          "id": -1,
+          "name": "我的订单",
+          "pathName": "pages/order/index"
+        }]
 		}
 	}
 }

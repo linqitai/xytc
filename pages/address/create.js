@@ -15,7 +15,7 @@ Page({
     phone:'',
     region: '',
     address_id:'',
-    address: '',//请选择地址
+    address: wx.getStorageSync('address') || '',//请选择地址
     longitude: wx.getStorageSync('longitude')||'',
     latitude: wx.getStorageSync('latitude') || '',
     markers: [{
@@ -29,97 +29,64 @@ Page({
     polygons: [],
     error: '',
   },
-  bindtap(e) {
-    console.log(e,"bindtap")
-  },
-  bindpoitap(e) {
-    console.log(e, "bindpoitap")
-  },
-  regionchange(e) {
-    console.log(e.type)
-  },
-  markertap(e) {
-    console.log(e.markerId)
-  },
-  controltap(e) {
-    console.log(e.controlId)
-  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) { // options: address_id\lat\lan
+    console.log('================onLoad=====================')
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('operate')=='add'?"新增收获地址":"编辑收获地址",
     })
-    console.log('================onLoad=====================')
-    wx.setStorageSync('fromAddress', 0)
+    wx.setStorageSync('fromSureAddress', 0)
     var that = this;
     var operate = wx.getStorageSync('operate')
-    console.log(operate, "operate")
     if (operate == 'add') {
       wx.setStorageSync('address_id', '')
       // that.clearStorage();
       // console.log(that.data, 'init data')
       /*判断是第一次加载还是从position页面返回
       如果从position页面返回，会传递用户选择的地点*/
-      console.log(options.address, "options.address")
+      // console.log(options.address, "options.address")
       if (options.address != null && options.address != '') {
         //设置变量 address 的值
         that.setData({
           address: options.address
         });
       }
-    } else {
+      // var region = wx.getStorageSync('region');
+      if (that.data.region) { //地区存在
+        that.relGetLocation(options.longitude, options.latitude);
+      } else {//地区不存在，就去获取
+        that.getLocation();
+      }
+      that.getPolygon();
+    } else { //编辑
       if (options.address_id) {
-        console.log(options.address_id,"options.address_id")
         // 获取当前地址信息
-        that.setData({
-          address_id: options.address_id
-        })
         that.getAddressDetail(options.address_id);
       }
     }
-    var name = wx.getStorageSync('name')
-    var phone = wx.getStorageSync('phone')
-    that.setData({
-      isOnLoad: 1,
-      name: name || '',
-      phone: phone || '',
-      longitude: options.longitude || wx.getStorageSync('longitude'),
-      latitude: options.latitude || wx.getStorageSync('latitude'),
-      address: options.address || '',
-      markers: [{
-        iconPath: '/images/location.png',
-        id: 0,
-        longitude: options.longitude || wx.getStorageSync('longitude'),
-        latitude: options.latitude || wx.getStorageSync('latitude'),
-        width: 50,
-        height: 50
-      }]
-    })
-    console.log(`${that.data.longitude},${that.data.latitude}`)
-    var region = wx.getStorageSync('region');
-    // console.log(region,"getStorageSync.region")
-    if (region) {
-      var longitude = wx.getStorageSync('longitude')
-      var latitude = wx.getStorageSync('latitude')
-      if (longitude && latitude){
-        that.setData({
-          longitude,
-          latitude
-        })
-        that.relGetLocation(longitude,latitude);
-      }else{
-        that.setData({
-          region: region
-        })
-      }
-    } else {
-      that.getLocation();
-    }
-    that.getPolygon();
   },
-  
+  onShow() {
+    let _this = this;
+    if (wx.getStorageSync("fromSureAddress")){
+      _this.setData({
+        region: wx.getStorageSync("region"),
+        address: wx.getStorageSync("address"),
+        longitude: wx.getStorageSync("longitude"),
+        latitude: wx.getStorageSync("latitude"),
+        markers: [{
+          iconPath: '/images/location.png',
+          id: 0,
+          longitude: wx.getStorageSync("longitude"),
+          latitude: wx.getStorageSync("latitude"),
+          width: 50,
+          height: 50
+        }],
+      });
+      _this.getPolygon();
+    }
+  },
   /**
    * @description 射线法判断点是否在多边形内部
    * @param {Object} p 待判断的点，格式：{ x: X坐标, y: Y坐标 }
@@ -164,19 +131,21 @@ Page({
     App._get('address/detail', {
       address_id
     }, function (result) {
+      console.log(result,"detail result")
       wx.setStorageSync('address_id', result.data.detail.address_id)
       wx.setStorageSync('name', result.data.detail.name)
       wx.setStorageSync('phone', result.data.detail.phone)
       wx.setStorageSync('region', `${result.data.detail.region.province},${result.data.detail.region.city},${result.data.detail.region.region}`)
-      wx.setStorageSync('address', result.data.detail.detail)
+      // wx.setStorageSync('address', result.data.detail.detail)
       wx.setStorageSync('longitude', result.data.detail.lon)
       wx.setStorageSync('latitude', result.data.detail.lat)
+      console.log(wx.getStorageSync("address"), "wx.getStorageSync(address)")
       _this.setData({
         address_id: result.data.detail.address_id,
         name: result.data.detail.name,
         phone: result.data.detail.phone,
         region: `${result.data.detail.region.province},${result.data.detail.region.city},${result.data.detail.region.region}`,
-        address: result.data.detail.detail,
+        address: wx.getStorageSync("address") ? wx.getStorageSync("address") : result.data.detail.detail,
         longitude: result.data.detail.lon,
         latitude: result.data.detail.lat,
         markers: [{
@@ -188,6 +157,13 @@ Page({
           height: 50
         }],
       });
+      // var region = wx.getStorageSync('region');
+      if (_this.data.region) { //地区存在
+        _this.relGetLocation(result.data.detail.lon, result.data.detail.lat);
+      } else {//地区不存在，就去获取
+        _this.getLocation();
+      }
+      _this.getPolygon();
     });
   },
   /**
@@ -262,10 +238,11 @@ Page({
         // var location = dingwei.gcj02towgs84(res.longitude, res.latitude);//如果定位不准确的解决方法
         const longitude = res.longitude;
         const latitude = res.latitude;
-        // that.setData({
-        //   longitude: longitude,
-        //   latitude: latitude
-        // })
+        console.log(longitude, latitude, 'getLocation')
+        that.setData({
+          longitude: longitude,
+          latitude: latitude
+        })
         // 实例化API核心类
         qqmapsdk = new QQMapWX({
           //此key需要用户自己申请
@@ -428,32 +405,39 @@ Page({
    */
   validation: function(values) {
     if (values.name === '') {
-      this.data.error = '收件人不能为空';
+      // this.data.error = '收件人不能为空';
+      this.setData({ error: '收件人不能为空'})
       return false;
     }
     if (values.phone.length < 1) {
-      this.data.error = '手机号不能为空';
+      // this.data.error = '手机号不能为空';
+      this.setData({ error: '手机号不能为空' })
       return false;
     }
     if (values.phone.length !== 11) {
-      this.data.error = '手机号长度有误';
+      // this.data.error = '手机号长度有误';
+      this.setData({ error: '手机号长度有误' })
       return false;
     }
     let reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (!reg.test(values.phone)) {
-      this.data.error = '手机号不符合要求';
+      // this.data.error = '手机号不符合要求';
+      this.setData({ error: '手机号不符合要求' })
       return false;
     }
     if (!this.data.region) {
-      this.data.error = '省市区不能空';
+      // this.data.error = '省市区不能空';
+      this.setData({ error: '省市区不能空' })
       return false;
     }
     if (values.detail === '') {
-      this.data.error = '详细地址不能为空';
+      // this.data.error = '详细地址不能为空';
+      this.setData({ error: '详细地址不能为空' })
       return false;
     }
     if (values.flag === false) {
-      this.data.error = '抱歉，所选位置暂时不在配送范围内';
+      // this.data.error = '抱歉，所选位置暂时不在配送范围内';
+      this.setData({ error: '抱歉，所选位置暂时不在配送范围内' })
       return false;
     }
     return true;

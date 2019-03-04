@@ -17,8 +17,9 @@ Page({
     })
   },
   sure: function() {
+    console.log(this.data.address,"this.data.address")
     wx.setStorageSync('address', this.data.address)
-    wx.setStorageSync('fromAddress', 1)
+    wx.setStorageSync('fromSureAddress', 1)
     wx.navigateBack({
       delta: 1
     });
