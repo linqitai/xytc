@@ -17,7 +17,11 @@ Page({
     this.data.order_id = options.order_id;
     this.getOrderDetail(options.order_id);
   },
-
+  onUnload: function () {
+    wx.redirectTo({
+      url: '../order/index?type=delivery'
+    })
+  },
   /**
    * 获取订单详情
    */
