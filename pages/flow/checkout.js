@@ -404,7 +404,7 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     console.log(post_pay_typeCouponList[e.detail.value],"post_pay_typeCouponList[e.detail.value]")
     if (post_pay_typeCouponList[e.detail.value].not_reason) {
-      App.showError(`此优惠券${post_pay_typeCouponList[e.detail.value].not_reason}`)
+      App.showError(`${post_pay_typeCouponList[e.detail.value].not_reason}`)
       return;
     }
     this.setData({
