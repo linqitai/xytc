@@ -99,8 +99,8 @@
         </radio-group>
       </view>
     </view>
-    <view class="dis-flex flow-all-list" wx:if="{{post_pay_type==10}}">
-      <text class="flex-five">优惠券:</text>
+    <view class="dis-flex flow-all-list" wx:if="{{!isHiddenCounpon}}">
+      <text class="flex-five">优惠券: {{isHiddenCounpon}}</text>
       <view class="flex-five t-r">
         <!-- <view class="picker"> bindtap='openPopup'
           {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
