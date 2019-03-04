@@ -16,7 +16,7 @@
           </navigator>
         </view>
         <view class="flex-box p-r">
-          <navigator hover-class="navigator-hover" url="../order/index?type=payment" open-type='navigate'>
+          <navigator hover-class="navigator-hover" url="../order/index?type=delivery" open-type='navigate'>
             <text class="iconfont icon-daifukuan orderListIcon">
               <!-- <text class='tag' wx:if='{{orderCount.delivery>0}}'>{{orderCount.delivery}}</text> -->
             </text>
@@ -42,9 +42,11 @@
           </navigator>
         </view>
         <view class="flex-box p-r">
-          <text class="iconfont icon-daipingjia orderListIcon "></text>
-          <text class="listCont">已完成</text>
-          <text class="user-tag p-a" wx:if="{{false}}"></text>
+          <navigator hover-class="navigator-hover" url="../order/index?type=complete"  open-type='navigate'>
+            <text class="iconfont icon-daipingjia orderListIcon "></text>
+            <text class="listCont">已完成</text>
+            <text class="user-tag p-a" wx:if="{{false}}"></text>
+          </navigator>
         </view>
       </view>
     </view>

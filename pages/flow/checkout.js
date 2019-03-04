@@ -13,6 +13,7 @@ Page({
     goods: {}, // 商品信息
     distribution_time : null, //配送时间
     pay_type:{},
+    pay_type_arr:'',
     time_type: 0,//默认今天送
     time_value:'',
     time_value_index:0,
@@ -123,7 +124,9 @@ Page({
       for (var i = 0; i < post_pay_typeCouponList.length; i++) {
         if (post_pay_typeCouponList[i].c_type.type == 1) {// c_type 里面 type 1是优惠券 2是折扣券
           // console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
-          couponOptions.push(`满${post_pay_typeCouponList[i].invest_money}减${post_pay_typeCouponList[i].money}(${post_pay_typeCouponList[i].not_reason})`)
+          let counpon = `满${post_pay_typeCouponList[i].invest_money}减${post_pay_typeCouponList[i].money}`
+          let reason = post_pay_typeCouponList[i].not_reason ? '(' + post_pay_typeCouponList[i].not_reason+')':''
+          couponOptions.push(counpon + reason)
           
         } else if (post_pay_typeCouponList[i].c_type.type == 2) {
           var zhekou = '';
@@ -193,35 +196,38 @@ Page({
   },
   init_post_pay_type(pay_type_arr){
     let _this = this;
-    // if (!pay_type_arr) {
-    //   return;
-    // }
-    var keys = Object.keys(pay_type_arr)
-    for (let index = 0; index < keys.length; index++) {
-      if (pay_type_arr[keys[index]].checked) {
-        console.log(pay_type_arr[keys[index]], "pay_type_arr[keys[index]]")
-        _this.setData({
-          post_pay_type: pay_type_arr[keys[index]].value
-        })
-        console.log(_this.data.post_pay_type, "post_pay_type")
+    console.log(pay_type_arr,"pay_type_arr")
+    if (pay_type_arr) {
+      var keys = Object.keys(pay_type_arr)
+      for (let index = 0; index < keys.length; index++) {
+        if (pay_type_arr[keys[index]].checked) {
+          console.log(pay_type_arr[keys[index]], "pay_type_arr[keys[index]]")
+          _this.setData({
+            post_pay_type: pay_type_arr[keys[index]].value
+          })
+          // console.log(_this.data.post_pay_type, "post_pay_type")
+        }
       }
+    }else{
+      console.log("出错了")
     }
+    
   },
   init_get_time_list(time_list){
     let _this = this;
     // if (!time_list) {
     //   return;
     // }
-    console.log(_this.data.time_type,"_this.data.time_type")
-    console.log(time_list[_this.data.time_type], "time_list[_this.data.time_type]")
-    console.log(time_list[_this.data.time_type][0],"time_list[_this.data.time_type][0]")
+    // console.log(_this.data.time_type,"_this.data.time_type")
+    // console.log(time_list[_this.data.time_type], "time_list[_this.data.time_type]")
+    // console.log(time_list[_this.data.time_type][0],"time_list[_this.data.time_type][0]")
     if (time_list[_this.data.time_type][0]){
       _this.setData({
         time_list,
         time_value: time_list[_this.data.time_type][0]
       })
     }else{
-      console.log("null")
+      // console.log("null")
       let timeList = time_list;
       timeList[0][0] = "今天已过配送时间";
       _this.setData({
@@ -241,7 +247,14 @@ Page({
     // 获取订单信息回调方法
     let callback = function(result) {
       let pay_type_arr = result.data.pay_type;
+      _this.setData({
+        pay_type_arr
+      })
+      console.log(pay_type_arr,"get------pay_type_arr")
       let time_list = result.data.time_list;
+      _this.setData({
+        time_list
+      })
       // console.log(pay_type_arr, "pay_type_arr")
       console.log(time_list, "time_list")
       _this.init_get_time_list(time_list)
@@ -389,6 +402,11 @@ Page({
   bindCouponPickerChange: function (e) {
     var _this = this
     console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log(post_pay_typeCouponList[e.detail.value],"post_pay_typeCouponList[e.detail.value]")
+    if (post_pay_typeCouponList[e.detail.value].not_reason) {
+      App.showError(`此优惠券${post_pay_typeCouponList[e.detail.value].not_reason}`)
+      return;
+    }
     this.setData({
       couponIndex: e.detail.value,
       couponId: post_pay_typeCouponList[e.detail.value].id
@@ -455,11 +473,13 @@ Page({
     // 订单创建成功后回调--微信支付
     let callback = function (result) {
       console.log(result, "result")
-      let pay_type_arr = result.data.pay_type;
-      let time_list = result.data.time_list;
+      let pay_type_arr = _this.data.pay_type_arr;
+      let time_list =_this.data.time_list;
       console.log(time_list,"time_list")
       _this.init_get_time_list(time_list)
+      console.log('---------------------')
       _this.init_post_pay_type(pay_type_arr)
+      console.log('---------------------')
       if (result.code === -10) {
         App.showError(result.msg, function() {
           // 跳转到未付款订单
@@ -488,19 +508,23 @@ Page({
           },
           fail: function (res) {
             console.log(res,"res")
-            App.showError('订单未支付', function () {
-              // 跳转到未付款订单
-              let prams = {
-                order_id: result.data.order_id
-              }
-              console.log(prams,"prams")
-              App._post_form('user.order/order_del', prams, function (result) {
-                _this.onShow()
-              });
-              // wx.redirectTo({
-              //   url: '../order/index?type=payment',
-              // });
+            let prams = {
+              order_id: result.data.order_id
+            }
+            console.log(prams, "prams")
+            App._post_form('user.order/order_del', prams, function (result) {
+              _this.onShow()
             });
+            // App.showError('订单未支付', function () {
+            //   // 跳转到未付款订单
+            //   let prams = {
+            //     order_id: result.data.order_id
+            //   }
+            //   console.log(prams,"prams")
+            //   App._post_form('user.order/order_del', prams, function (result) {
+            //     _this.onShow()
+            //   });
+            // });
           },
         });
       }else{

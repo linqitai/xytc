@@ -15,16 +15,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.dataType = options.type || 'all';
-    this.setData({ dataType: this.data.dataType });
+    console.log(options.type,"options")
+    this.setData({ dataType: options.type || 'all' });
+    // 获取订单列表
+    this.getOrderList(this.data.dataType);
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 获取订单列表
-    this.getOrderList(this.data.dataType);
   },
 
   /**
@@ -33,6 +33,7 @@ Page({
   getOrderList: function (dataType) {
     let _this = this;
     App._get('user.order/lists', { dataType }, function (result) {
+      console.log(result.data.orderCount,"result.data.orderCount")
       _this.setData({
         list: result.data.list.data,
         orderCount: result.data.orderCount
@@ -47,6 +48,7 @@ Page({
    * 切换标签
    */
   bindHeaderTap: function (e) {
+    console.log(e.target.dataset.type,"e.target.dataset.type")
     this.setData({ dataType: e.target.dataset.type });
     // 获取订单列表
     this.getOrderList(e.target.dataset.type);
