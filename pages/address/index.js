@@ -129,6 +129,7 @@ Page({
     App._post_form('address/setDefault', {
       address_id
     }, function(result) {
+      console.log("setDefault success")
       console.log(wx.getStorageSync('_from'),"wx.getStorageSync('_from')")
       if (wx.getStorageSync('_from') == 'flow'){
         wx.navigateBack();

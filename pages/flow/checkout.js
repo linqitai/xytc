@@ -53,15 +53,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("onShow");
+    console.log("==========================onShow===========================");
     // 获取当前订单信息
     this.getOrderData();
   },
   toGetAddress(){
-    wx.setStorageSync('_from', 'flow')
+    // wx.setStorageSync('_from', 'flow')
+    // wx.navigateTo({
+    //   url: '../address/index',
+    // })
+    let _this = this;
+    wx.setStorageSync('_from', 'flow');// 记得在我的页面要清空
+    console.log(wx.getStorageSync('_from'), "wx.getStorageSync('_from')")
     wx.navigateTo({
-      url: '../address/index',
-    })
+      url: '../address/' + (_this.data.exist_address ? 'index?from=flow' : 'create')
+    });
   },
   scrollToBottom() {
     console.log('scrollToBottom')
@@ -116,7 +122,8 @@ Page({
     if (post_pay_typeCouponList.length>0){
       for (var i = 0; i < post_pay_typeCouponList.length; i++) {
         if (post_pay_typeCouponList[i].c_type.type == 1) {// c_type 里面 type 1是优惠券 2是折扣券
-          couponOptions.push(`满${post_pay_typeCouponList[i].invest_money}减${post_pay_typeCouponList[i].money}`)
+          // console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
+          couponOptions.push(`满${post_pay_typeCouponList[i].invest_money}减${post_pay_typeCouponList[i].money}(${post_pay_typeCouponList[i].not_reason})`)
           
         } else if (post_pay_typeCouponList[i].c_type.type == 2) {
           var zhekou = '';
@@ -205,6 +212,8 @@ Page({
     // if (!time_list) {
     //   return;
     // }
+    console.log(_this.data.time_type,"_this.data.time_type")
+    console.log(time_list[_this.data.time_type], "time_list[_this.data.time_type]")
     console.log(time_list[_this.data.time_type][0],"time_list[_this.data.time_type][0]")
     if (time_list[_this.data.time_type][0]){
       _this.setData({
@@ -234,7 +243,7 @@ Page({
       let pay_type_arr = result.data.pay_type;
       let time_list = result.data.time_list;
       // console.log(pay_type_arr, "pay_type_arr")
-      // console.log(time_list, "time_list")
+      console.log(time_list, "time_list")
       _this.init_get_time_list(time_list)
       _this.init_post_pay_type(pay_type_arr)
       // console.log(result.data,"result.data获取订单信息回调方法")
@@ -250,6 +259,11 @@ Page({
         App.showError(_this.data.error);
       }
       _this.setData(result.data);
+      if(result.data.address.detail){
+        _this.setData({
+          exist_address:true
+        })
+      }
       _this.getCouponList();// 获取优惠券列表
     };
 
@@ -439,9 +453,11 @@ Page({
     }
 
     // 订单创建成功后回调--微信支付
-    let callback = function(result) {
+    let callback = function (result) {
+      console.log(result, "result")
       let pay_type_arr = result.data.pay_type;
       let time_list = result.data.time_list;
+      console.log(time_list,"time_list")
       _this.init_get_time_list(time_list)
       _this.init_post_pay_type(pay_type_arr)
       if (result.code === -10) {

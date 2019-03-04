@@ -98,8 +98,11 @@
 }
 
 .goods-sales-box .stock {
-  text-align: right;
+  text-align: center;
   display: block;
+}
+.goods-sales-box .scan_number{
+  text-align: right;
 }
 
 .goods-property-box {

@@ -15,7 +15,7 @@
     <view class="cont-box b-f">
       <view class="goods-title ">
         <text class="title f-32 twolist-hidden">{{detail.goods_name}}</text>
-        <text class='f-24' style='color:#888;float:right'>浏览：{{detail.scan_number}}</text>
+        
       </view>
       <view class="money-box">
         <text class="num" wx:if="{{detail.is_mul_spec==0}}">￥{{goods_price}}{{unit}}</text>
@@ -25,6 +25,7 @@
       <view class="goods-sales-box f-24 dis-flex">
         <text class="flex-box num" style='margin-left:2px;'>库存：{{stock_num}}</text>
         <text class="flex-box stock">销量：{{detail.goods_sales}}</text>
+        <text class='flex-box scan_number' style='color:#888;'>浏览：{{detail.scan_number}}</text>
       </view>
     </view>
     <view class="cart bright789_view_hide {{showView?'bright789_view_show':''}}">

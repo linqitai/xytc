@@ -11,7 +11,6 @@
         <view class="flex-box p-r">
           <navigator hover-class="navigator-hover" url="../order/index?type=all" open-type='navigate'>
             <text class="iconfont icon-form orderListIcon ">
-              <text class='tag'>1</text>
             </text>
             <text class="listCont">全部订单</text>
           </navigator>
@@ -19,10 +18,10 @@
         <view class="flex-box p-r">
           <navigator hover-class="navigator-hover" url="../order/index?type=payment" open-type='navigate'>
             <text class="iconfont icon-daifukuan orderListIcon">
-              <text class='tag'>22</text>
+              <!-- <text class='tag' wx:if='{{orderCount.delivery>0}}'>{{orderCount.delivery}}</text> -->
             </text>
             <text class="listCont">待确认</text>
-            <text class="user-tag p-a" wx:if="{{orderCount.payment > 0}}">{{orderCount.payment}}</text>
+            <text class="user-tag p-a" wx:if="{{orderCount.delivery > 0}}">{{orderCount.delivery}}</text>
           </navigator>
         </view>
         <view class="p-r" style=" flex:1.4;">
@@ -36,7 +35,7 @@
         <view class="flex-box p-r">
           <navigator hover-class="navigator-hover" url="../order/index?type=received"  open-type='navigate'>
             <text class="iconfont icon-daishouhuo orderListIcon">
-              <text class='tag'>22</text>
+              <!-- <text class='tag' wx:if='{{orderCount.received>0}}'>{{orderCount.received}}</text> -->
             </text>
             <text class="listCont">待收货</text>
             <text class="user-tag p-a" wx:if="{{orderCount.received > 0}}">{{orderCount.received}}</text>
@@ -90,7 +89,7 @@
         </view>
       </view>
     </navigator>
-    <!-- <navigator url="../join/join"  open-type='navigate'>
+    <navigator url="../join/join"  open-type='navigate'>
       <view class="user-order-title dis-flex b-f">
         <view class="flex-box">
           <text class="iconfont icon-merchantJoin common-icon"></text>
@@ -102,7 +101,7 @@
           </view>
         </view>
       </view>
-    </navigator> -->
+    </navigator>
     <navigator url="../user/share/share"  open-type='navigate' wx:if="{{userInfo.is_expend}}">
       <view class="user-order-title dis-flex b-f">
         <view class="flex-box">

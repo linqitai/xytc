@@ -5,10 +5,10 @@
         全部订单
       </view>
       <view bindtap="bindHeaderTap" class="header_item {{dataType==='payment'?'active':''}}" data-type="payment">
-        待确认<text class='tag'>38</text>
+        待确认<text class='tag' wx:if="{{ordercoun.delivery>0}}">{{orderCount.delivery}}</text>
       </view>
       <view bindtap="bindHeaderTap" class="header_item {{dataType==='delivery'?'active':''}}" data-type="delivery">
-        待收货<text class='tag'>38</text>
+        待收货<text class='tag' wx:if="{{ordercoun.received>0}}">{{ordercoun.received}}</text>
       </view>
       <view bindtap="bindHeaderTap" class="header_item {{dataType==='received'?'active':''}}" data-type="received">
         已完成
