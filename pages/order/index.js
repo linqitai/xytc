@@ -26,7 +26,12 @@ Page({
    */
   onShow: function () {
   },
-
+  onUnload: function () {
+    console.log("----------------onUnLoad----------------")
+    wx.switchTab({
+      url: '../user/index'
+    })
+  },
   /**
    * 获取订单列表
    */

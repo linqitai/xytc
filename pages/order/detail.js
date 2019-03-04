@@ -18,7 +18,7 @@ Page({
     this.getOrderDetail(options.order_id);
   },
   onUnload: function () {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../order/index?type=delivery'
     })
   },
