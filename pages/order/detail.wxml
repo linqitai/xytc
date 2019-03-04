@@ -34,11 +34,10 @@
             <text class="title">商品列表</text>
           </view>
           <view class="flex-box t-r">
-            <text class="col-m" wx:if="{{order.pay_status.value===10 && order.offline_status==10}}">{{order.pay_status.text}}</text>
+            <text class="col-m" wx:if="{{order.offline_status==10}}">{{order.pay_status.text}}-</text>
             <text class="col-m" wx:if="{{(order.pay_status.value===20 || order.offline_status==20) && order.delivery_status.value===10}}">{{order.delivery_status.text}}</text>
             <text class="col-m" wx:if="{{(order.pay_status.value===20 || order.offline_status==20)&& order.delivery_status.value===20 && order.receipt_status.value===10}}">{{order.receipt_status.text}}</text>
             <text class="col-m" wx:if="{{order.order_status.value===30}}">{{order.order_status.text}}</text>
-            <text class="col-m">---{{order.pay_type}}</text>
           </view>
         </view>
       </view>

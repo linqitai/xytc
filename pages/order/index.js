@@ -32,8 +32,12 @@ Page({
   getOrderList: function (dataType) {
     let _this = this;
     App._get('user.order/lists', { dataType }, function (result) {
-      _this.setData(result.data);
-      result.data.list.length && wx.pageScrollTo({
+      _this.setData(
+        {
+          list: result.data.list.data
+        }
+      );
+      result.data.list.data.length && wx.pageScrollTo({
         scrollTop: 0
       });
     });
