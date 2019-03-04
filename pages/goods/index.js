@@ -273,7 +273,7 @@ Page({
       wx.setStorageSync('addToUrl', addToUrl)
       console.log(wx.getStorageSync('addToUrl'), "addToUrl")
       wx.setStorageSync('order_type', 'buyNow')
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../flow/checkout?' + addToUrl
       });
     } else if (submitType === 'addCart') {

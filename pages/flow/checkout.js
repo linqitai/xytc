@@ -57,6 +57,9 @@ Page({
     console.log("==========================onShow===========================");
     // 获取当前订单信息
     this.getOrderData();
+    this.setData({
+      couponIndex:0
+    })
   },
   toGetAddress(){
     // wx.setStorageSync('_from', 'flow')
@@ -623,7 +626,6 @@ Page({
         _this.data.disabled = false;
       });
     }
-
   },
   toJoin() {
     wx.navigateTo({
