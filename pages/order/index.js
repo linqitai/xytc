@@ -79,7 +79,7 @@ Page({
     let order_id = e.currentTarget.dataset.id;
     wx.showModal({
       title: "提示",
-      content: "是否确认付款？",
+      content: "是否确认收货？",
       success: function (o) {
         if (o.confirm) {
           App._post_form('user.order/receipt', { order_id }, function (result) {
