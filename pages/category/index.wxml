@@ -1,5 +1,4 @@
 <view class="container">
-  <view class="common-header-xian"></view>
   <!-- 搜索框 -->
   <view class="index-search-box">
     <navigator class="index-search " hover-class="none" openType="navigate" url="../search/index">
@@ -21,8 +20,6 @@
 
     <!-- 右侧 商品列表 -->
     <view class="cate-right b-f">
-      <!-- <view class="container goodsList" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'> -->
-      <!-- <refresh-view id='refreshView' backgroundColor="#000" bind:onRefresh="onPullDownRefresh" bind:onPullState="_pullState"/> -->
         <view class='goodsOrder'>
           <view class="orderType {{currentOrder==0?'select':''}}" data-index='0' bindtap='orderTap'>默认排序</view>
           <view class="orderType {{currentOrder==1?'select':''}}" data-index='1' bindtap='orderTap'>销量排序</view>

@@ -94,8 +94,9 @@ Page({
     })
   },
   savePhotoEvent() {
+    let _this = this;
     wx.downloadFile({
-      url: 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQEJ8TwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyYlI5czA0THNjdmsxMDAwME0wM3UAAgSr2GRcAwQAAAAA',
+      url: _this.data.imgurl,
       success: function (res) {
 
         wx.saveImageToPhotosAlbum({

@@ -5,6 +5,7 @@
 }
 .dis-flex .detail .inputDetail{
   flex: auto;
+  height: 100rpx;
 }
 .dis-flex .detail .iconMap{
   flex: 0 0 50rpx;

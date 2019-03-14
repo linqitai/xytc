@@ -1,6 +1,5 @@
-.container{
+.coupon_container{
   padding: 8rpx;
-  height: 100%;
 }
 .coupon-list{
   height: 100%;

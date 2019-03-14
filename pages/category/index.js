@@ -20,7 +20,6 @@ Page({
   onLoad: function (options) {
     let _this = this;
     console.log(options.category_id,"options.category_id")
-    this.refreshView = this.selectComponent("#refreshView")
     this.setData({
       category_id: options.category_id || wx.getStorageSync('category_id')
     })
@@ -124,45 +123,6 @@ Page({
       })
     }
     this.getGoodsList(this.data.category_id)
-  },
-  //触摸开始
-  handletouchstart: function (event) {
-    this.refreshView.handletouchstart(event)
-    // console.log('触摸开始')
-  },
-  //触摸移动
-  handletouchmove: function (event) {
-    this.refreshView.handletouchmove(event)
-    // console.log('触摸移动')
-  },
-  //触摸结束
-  handletouchend: function (event) {
-    this.refreshView.handletouchend(event)
-    // console.log('触摸结束')
-    setTimeout(() => { this.refreshView.stopPullRefresh() }, 2000)
-  },
-  //触摸取消
-  handletouchcancel: function (event) {
-    this.refreshView.handletouchcancel(event)
-    // console.log('触摸取消')
-  },
-  //页面滚动
-  onPageScroll: function (event) {
-    this.refreshView.onPageScroll(event)
-  },
-  _pullState: function(e) {
-    // console.log(e,'e')
-  },
-  // onPullDownRefresh: function () {
-  //   var _this = this;
-  //   console.log('_this.refreshView.stopPullRefresh()')
-  // },
-  onPullDownRefresh: function () {
-    setTimeout(() => { this.refreshView.stopPullRefresh() }, 2000)
-  },
-  scrollToUpper: function() {
-    console.log('scrollToUp')
-    wx.startPullDownRefresh()
   },
   toggleBtn: function(e) {
     let _this = this;
