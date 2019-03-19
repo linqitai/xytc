@@ -5,6 +5,35 @@ App({
    */
   globalData: {
     user_id: null,
+    userInfo:'',
+    is_pifa_selected:false,
+    tab_bar:[
+      {
+        name:'首页',
+        icon:'home',
+        is_show:true
+      }, 
+      {
+        name: '分类',
+        icon: 'category',
+        is_show: true
+      },
+      {
+        name: '批发市场',
+        icon: 'pifa',
+        is_show: true
+      },
+      {
+        name: '购物车',
+        icon: 'shopcart',
+        is_show: true
+      }, 
+      {
+        name: '我的',
+        icon: 'person',
+        is_show: true
+      }
+    ]
   },
   mapKey:'4AFBZ-OADKJ-SAZFN-KYM6M-F6IV3-7ABJ7',
   api_root: '', // api地址
@@ -16,7 +45,26 @@ App({
   onLaunch: function() {
     // 设置api地址
     this.setApiRoot();
-    // this.getPhotosAuth();
+    
+  },
+  /**
+   * 获取当前用户信息
+   */
+  getUserDetail: function () {
+    let _this = this;
+    _this._get('user.index/detail', {}, function (result) {
+      _this.globalData.userInfo = result.data.userInfo
+      _this.globalData.orderCount = result.data.orderCount
+      console.log(_this.globalData.userInfo,"_this.globalData.userInfo")
+    });
+  },
+  setActive(active){
+    let _this = this;
+    if (_this.globalData.userInfo.store_cert==1){
+      return active+1
+    }else{
+      return active
+    }
   },
   //获取相册授权
   getPhotosAuth: function() {
@@ -36,7 +84,17 @@ App({
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
    */
-  onShow: function(options) {
+  onShow: function (options) {
+    console.log("onShow","getUserDetail")
+    let _this = this;
+    // 获取当前用户信息
+    if (!_this.globalData.userInfo) {
+      _this.getUserDetail();
+    }else{
+      if (_this.globalData.userInfo.store_cert==1){
+        _this.globalData.tab_bar[2].is_show = true
+      }
+    }
     // 获取小程序基础信息
     // this.getWxappBase(function(wxapp) {
     //   // 设置navbar标题、颜色
@@ -313,5 +371,10 @@ App({
       //   App.setTitle();
       // });
     }
+  },
+  setHeaderTitle(text){
+    wx.setNavigationBarTitle({
+      title: text
+    });
   }
 });

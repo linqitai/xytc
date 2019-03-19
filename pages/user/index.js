@@ -7,7 +7,7 @@ Page({
    */
   data: {
     userInfo: {},
-    orderCount: {},
+    orderCount: {}
   },
 
   /**
@@ -15,14 +15,19 @@ Page({
    */
   onLoad: function (options) {
     wx.setStorageSync('_from', '');
+    console.log(App.globalData.tab_bar,"App.globalData.tab_bar")
+    this.setData({
+      active: App.setActive(3),
+      tab_bar: App.globalData.tab_bar
+    })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 获取当前用户信息
-    this.getUserDetail();
+    let _this = this;
+    _this.getUserDetail();
   },
 
   /**
@@ -32,6 +37,11 @@ Page({
     let _this = this;
     App._get('user.index/detail', {}, function (result) {
       _this.setData(result.data);
+      App.globalData.userInfo = result.data.userInfo
+      App.globalData.orderCount = result.data.orderCount
+      if (App.globalData.userInfo.store_cert == 1) {
+        App.globalData.tab_bar[2].is_show = true
+      }
     });
   },
 

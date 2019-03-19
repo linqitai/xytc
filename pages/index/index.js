@@ -15,10 +15,20 @@ Page({
     newest: {},
     best: {},
     cate: {},
-    scrollTop: 0,
+    scrollTop: 0
   },
 
   onLoad: function() {
+    if (App.globalData.userInfo.store_cert == 1) {
+      App.globalData.tab_bar[2].is_show = true
+      console.log(App.globalData.tab_bar[2],"App.globalData.tab_bar[2]")
+    }
+    let tab_bar = App.globalData.tab_bar
+    // tab_bar[3].info = 2
+    this.setData({
+      active: 0,
+      tab_bar: tab_bar
+    })
     // 刷新组件
     this.refreshView = this.selectComponent("#refreshView")
     // 设置页面标题
@@ -26,10 +36,34 @@ Page({
     // wx.clearStorageSync();
     wx.setStorageSync('category_id', '')
     // 获取首页数据
-    this.getIndexData();
-    this.getCateData();
-    this.getGoodsData();
-    this.getBestGoodsData();
+    if (App.globalData.banner) {
+      this.setData({
+        items: App.globalData.banner
+      })
+    }else{
+      this.getIndexData();
+    }
+    if (App.globalData.cate) {
+      this.setData({
+        cate: App.globalData.cate
+      })
+    } else {
+      this.getCateData();
+    }
+    if (App.globalData.newest) {
+      this.setData({
+        newest: App.globalData.newest
+      })
+    } else {
+      this.getGoodsData();
+    }
+    if (App.globalData.best) {
+      this.setData({
+        best: App.globalData.best
+      })
+    } else {
+      this.getBestGoodsData();
+    };
   },
   /**
    * 跳转到分类页面
@@ -100,6 +134,7 @@ Page({
   getIndexData: function() {
     let _this = this;
     App._get('index/page', {}, function(result) {
+      App.globalData.banner = result.data.items
       _this.setData({
         items: result.data.items
       });
@@ -111,6 +146,7 @@ Page({
   getCateData: function () {
     let _this = this;
     App._get('index/cate_list', {}, function (result) {
+      App.globalData.cate = result.data.cate
       _this.setData({
         cate: result.data.cate
       });
@@ -122,6 +158,7 @@ Page({
   getGoodsData: function () {
     let _this = this;
     App._get('index/good_list', {}, function (result) {
+      App.globalData.newest = result.data.newest
       _this.setData({
         newest: result.data.newest
       });
@@ -133,10 +170,11 @@ Page({
   getBestGoodsData: function () {
     let _this = this;
     App._get('index/best_list', {}, function (result) {
+      App.globalData.best = result.data.best;
       _this.setData({
         best: result.data.best
       });
-      _this.refreshView.stopPullRefresh()
+      _this.refreshView.stopPullRefresh();
     });
   },
   /**

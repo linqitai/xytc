@@ -19,13 +19,15 @@ Page({
 
   onLoad: function (options) {
     let _this = this;
-    console.log(options.category_id,"options.category_id")
+    this.setData({
+      active: 1,
+      tab_bar: App.globalData.tab_bar
+    })
     this.setData({
       category_id: options.category_id || wx.getStorageSync('category_id')
     })
     // 获取分类列表
     this.getCategoryList();
-
   },
   onShow: function (e) {
   },
@@ -157,37 +159,45 @@ Page({
    */
   getCategoryList: function () {
     let _this = this;
-    App._get('category/lists', {}, function (result) {
-      // console.log(result,"result")
-      if(result.code == 1) {
-        var list = result.data.list;
-        var index = '';
-        var category_id = _this.data.category_id
-        if (category_id) {
-          for (var i = 0; i < list.length; i++) {
-            if (list[i].category_id == category_id) {
-              index = i;
-            }
-          }
+    if (App.globalData.categortListResult) {
+      _this.callback(App.globalData.categortListResult)
+    }else{
+      App._get('category/lists', {}, function (result) {
+        App.globalData.categortListResult = result
+        console.log(App.globalData.categortListResult,'App.globalData.categortListResult')
+        if (result.code == 1) {
+          _this.callback(result)
         }
-        console.log(index,"index")
-        _this.setData({
-          list: list,
-          curClassify: index != '' ? category_id:list[0].category_id,
-          curNav: index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id),
-          curClassifyIndex: index != '' ? index:0
-        });
-        console.log(_this.data.curClassify,'curClassify')
-        console.log(_this.data.curNav, 'curNav')
-        var navid = index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id)
-        _this.setData({
-          category_id: navid
-        })
-        _this.getGoodsList(navid)
-      }
-    });
+      });
+    }
   },
-
+  callback(result) {
+    let _this = this;
+    var list = result.data.list;
+    var index = '';
+    var category_id = _this.data.category_id
+    if (category_id) {
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].category_id == category_id) {
+          index = i;
+        }
+      }
+    }
+    console.log(index, "index")
+    _this.setData({
+      list: list,
+      curClassify: index != '' ? category_id : list[0].category_id,
+      curNav: index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id),
+      curClassifyIndex: index != '' ? index : 0
+    });
+    console.log(_this.data.curClassify, 'curClassify')
+    console.log(_this.data.curNav, 'curNav')
+    var navid = index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id)
+    _this.setData({
+      category_id: navid
+    })
+    _this.getGoodsList(navid)
+  },
   /**
    * 选中分类
    */

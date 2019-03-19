@@ -1,5 +1,8 @@
 /* common.wxss */
 @import "/utils/common.wxss";
+.theme_color{
+  color: #228B22;
+}
 .right{
   float: right;
 }
@@ -15,6 +18,9 @@
 }
 .flagFalse{
   color:#FF495E
+}
+.pd_b100{
+  padding-bottom: 100rpx;
 }
 .common-header-xian {
   border-top: 1rpx solid #eee;
@@ -32,7 +38,6 @@
   overflow: hidden;
   color: #888;
   text-align: center;
-  margin-top: 30rpx;
 }
 
 .title-hrbg .cont {
@@ -103,6 +108,7 @@
   box-sizing: border-box;
   width: 50%;
   float: left;
+  padding-bottom: 12rpx;
 }
 
 .category-list .list:nth-child(2n) {
@@ -475,17 +481,15 @@
 .title-footer {
   position: relative;
   z-index: 1;
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   overflow: hidden;
   color: #888;
   text-align: center;
-  margin: 0 18rpx 0;
+  /* background: #f7f7f7; */
 }
 
 .title-footer .cont {
-  background: #f7f7f7;
-  padding: 0 12rpx;
   font-size: 28rpx;
   z-index: 10;
 }

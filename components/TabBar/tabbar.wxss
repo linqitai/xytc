@@ -1,0 +1,38 @@
+/* components/RefreshLayout/refresh-layout.wxss */
+
+.refresh-container {
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #999;
+  background-color:#0FB053;
+  display: flex;
+  width: 100%;
+}
+.refresh-layout {
+  vertical-align: center;
+  width: 100%;
+  text-align: center;
+  align-self: flex-end;
+  background-color: white;
+  color: #646464;
+}
+
+.refresh-loading {
+  margin: 0 5px;
+  width: 30rpx;
+  height: 30rpx;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-animation: weuiLoading 1s steps(12, end) infinite;
+  animation: weuiLoading 1s steps(12, end) infinite;
+  background-size: 100%;
+  color: #646464;
+}
+
+.refresh-tips {
+  line-height: 30rpx;
+  font-size: 26rpx;
+  vertical-align: middle;
+  margin: auto;
+  color: #228B22;
+}

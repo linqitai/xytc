@@ -118,5 +118,5 @@
       </view>
     </navigator>
   </view>
-
 </view>
+<tab-bar active="{{active}}" tab_bar="{{tab_bar}}"/>

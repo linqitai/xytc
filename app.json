@@ -5,6 +5,8 @@
     "pages/index/test",
     "pages/category/index",
     "pages/category/list",
+    "pages/pifa/index",
+    "pages/pifa/list",
     "pages/goods/index",
     "pages/goods/comment",
     "pages/search/index",
@@ -36,38 +38,6 @@
     "navigationBarTextStyle": "black",
     "backgroundTextStyle": "dark"
   },
-  "tabBar": {
-    "color": "#6e6d6b",
-    "selectedColor": "#fd4a5f",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home-active.png"
-      },
-      {
-        "pagePath": "pages/category/index",
-        "text": "分类",
-        "iconPath": "images/cate.png",
-        "selectedIconPath": "images/cate-active.png"
-      },
-      {
-        "pagePath": "pages/flow/index",
-        "text": "购物车",
-        "iconPath": "images/flow.png",
-        "selectedIconPath": "images/flow-active.png"
-      },
-      {
-        "pagePath": "pages/user/index",
-        "text": "我的",
-        "iconPath": "images/user.png",
-        "selectedIconPath": "images/user-active.png"
-      }
-    ],
-    "position": "bottom"
-  },
+  
   "debug": false
 }

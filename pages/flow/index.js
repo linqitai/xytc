@@ -8,14 +8,19 @@ Page({
   data: {
     goods_list: [], // 商品列表
     order_total_num: 0,
-    order_total_price: 0,
+    order_total_price: 0
   },
-
+  is_pifa_selected: false,
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.is_pifa_selected = App.globalData.is_pifa_selected
+    console.log(this.is_pifa_selected,"is_pifa_selected")
+    this.setData({
+      active: App.setActive(2),// 根据用户信息来判断active
+      tab_bar: App.globalData.tab_bar
+    })
   },
 
   /**
@@ -29,7 +34,16 @@ Page({
    */
   getCartList: function() {
     let _this = this;
-    App._get('cart/lists', {}, function(result) {
+    let url = '';
+    console.log(_this.is_pifa_selected,"_this.is_pifa_selected")
+    if (_this.is_pifa_selected){
+      url = 'cart2/lists'
+      App.setHeaderTitle("批发市场购物车")
+    }else{
+      url = 'cart/lists'
+      App.setHeaderTitle("新零售购物车")
+    }
+    App._get(url, {}, function(result) {
       _this.setData(result.data);
     });
   },
@@ -48,7 +62,13 @@ Page({
       title: '加载中',
       mask: true
     })
-    App._post_form('cart/add', {
+    let url = '';
+    if (_this.store_cert==1) {
+      url = 'cart2/add'
+    } else {
+      url = 'cart/add'
+    }
+    App._post_form(url, {
       goods_id: goods.goods_id,
       goods_num: 1,
       goods_sku_id: goodsSkuId
@@ -77,7 +97,13 @@ Page({
         title: '加载中',
         mask: true
       })
-      App._post_form('cart/sub', {
+      let url = '';
+      if (_this.store_cert==1) {
+        url = 'cart2/sub'
+      } else {
+        url = 'cart/sub'
+      }
+      App._post_form(url, {
         goods_id: goods.goods_id,
         goods_sku_id: goodsSkuId
       }, function() {
@@ -103,7 +129,13 @@ Page({
       title: "提示",
       content: "您确定要移除当前商品吗?",
       success: function(e) {
-        e.confirm && App._post_form('cart/delete', {
+        let url = '';
+        if (_this.store_cert==1) {
+          url = 'cart2/delete'
+        } else {
+          url = 'cart/delete'
+        }
+        e.confirm && App._post_form(url, {
           goods_id,
           goods_sku_id: goodsSkuId
         }, function(result) {
@@ -144,6 +176,5 @@ Page({
     wx.switchTab({
       url: '../index/index',
     });
-  },
-
+  }
 })

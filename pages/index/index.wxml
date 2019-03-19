@@ -1,5 +1,5 @@
 <refresh-view id='refreshView' bind:onRefresh="onPullDownRefresh"/>
-<view class="container" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'>
+<view class="container pd_b100" bindtouchstart='handletouchstart' bindtouchmove='handletouchmove' bindtouchend='handletouchend' bindtouchcancel='handletouchcancel'>
   <include src="components/search/search.wxml" />
   <block wx:for="{{items}}" wx:for-item="item" wx:for-index="item_key" wx:key="this">
     <!-- banner轮播  wx:if="{{item.type === 'banner'}}" -->
@@ -74,14 +74,20 @@
         </view>
       </navigator>
     </view>
-
-    <!-- 底线 -->
-    <view class="title-footer p-r">
-      <text class="f-24 col-9 cont">我是有底线的</text>
+    <!-- <view class="title-hrbg">
+      <text class="cont">
+        <text class="iconfont icon-huo col-m"></text>我是有底线的
+      </text>
       <view class="hr"></view>
+    </view> -->
+    <!-- 底线 -->
+    <view class="title-footer">
+      <text class="f-24 col-9 cont">数据加载完毕</text>
     </view>
   <!-- 返回顶部 -->
   <view bindtap="goTop" class="widget-goTop" wx:if="{{floorstatus}}">
     <text class="iconfont icon-fanhuidingbu"></text>
   </view>
 </view>
+
+<tab-bar active="{{active}}" tab_bar="{{tab_bar}}"/>

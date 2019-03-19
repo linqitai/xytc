@@ -47,7 +47,23 @@
           "id": -1,
           "name": "购物车",
           "pathName": "pages/flow/index"
-        }]
+        },
+        {
+          "id": -1,
+          "name": "首页",
+          "pathName": "pages/index/index"
+        },
+        {
+          "id": -1,
+          "name": "分类",
+          "pathName": "pages/category/index"
+        },
+        {
+          "id": -1,
+          "name": "批发市场",
+          "pathName": "pages/pifa/index"
+        }
+      ]
 		}
 	}
 }
