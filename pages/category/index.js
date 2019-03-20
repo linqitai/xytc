@@ -1,5 +1,6 @@
 let App = getApp();
 var goodsList = [];
+var navid = ''
 Page({
   data: {
     searchColor: "rgba(0,0,0,0.4)",
@@ -14,9 +15,10 @@ Page({
     category_id: '',
     goodsList:[],
     list: [],
-    currentOrder:''
+    currentOrder:'',
+    cart1:0
   },
-
+  is_pifa_selected: false,
   onLoad: function (options) {
     let _this = this;
     this.setData({
@@ -30,6 +32,25 @@ Page({
     this.getCategoryList();
   },
   onShow: function (e) {
+    let _this = this;
+    if (navid) {
+      _this.getGoodsList(navid);
+    }
+    this.setData({
+      cart1:App.globalData.cart1
+    })
+    this.is_pifa_selected = App.globalData.is_pifa_selected
+    console.log(this.is_pifa_selected, "is_pifa_selected")
+  },
+  refreshCart(){
+    this.setData({
+      cart1: App.globalData.cart1
+    })
+  },
+  to_shopcart_view() {
+    wx.navigateTo({
+      url: "../flow/index"
+    });
   },
   subToCart: function(e) {
     console.log(e, 'e')
@@ -42,7 +63,14 @@ Page({
       goods_sku_id: specId ? specId : ''
     }
     console.log(pramas, "pramas")
-    App._get('cart/sub', pramas, function (result) {
+    let url = '';
+    console.log(_this.is_pifa_selected, "_this.is_pifa_selected")
+    if (_this.is_pifa_selected) {
+      url = 'cart2/add'
+    } else {
+      url = 'cart/add'
+    }
+    App._get(url, pramas, function (result) {
       if (result.code == 1) {
         // App.toast('-1')
         for (var i = 0; i < goodsList.length; i++) {
@@ -63,6 +91,13 @@ Page({
         _this.setData({
           goodsList
         })
+        if (App.globalData.is_pifa_selected) {
+          App.globalData.cart2--;
+        } else {
+          App.globalData.cart1--;
+          console.log(App.globalData.cart1, "App.globalData.cart1")
+        }
+        _this.refreshCart()
       }
     });
   },
@@ -76,7 +111,14 @@ Page({
       goods_sku_id: specId ? specId:''
     }
     console.log(pramas,"pramas")
-    App._get('cart/add', pramas, function (result) {
+    let url = '';
+    console.log(_this.is_pifa_selected, "_this.is_pifa_selected")
+    if (App.globalData.is_pifa_selected) {
+      url = 'cart2/add'
+    } else {
+      url = 'cart/add'
+    }
+    App._get(url, pramas, function (result) {
       if (result.code == 1) {
         // App.toast('+1')
         for (var i = 0; i < goodsList.length; i++) {
@@ -97,6 +139,13 @@ Page({
         _this.setData({
           goodsList
         })
+        if (App.globalData.is_pifa_selected) {
+          App.globalData.cart2++;
+        } else {
+          App.globalData.cart1++;
+          console.log(App.globalData.cart1, "App.globalData.cart1")
+        }
+        _this.refreshCart()
       }
     });
   },
@@ -192,7 +241,7 @@ Page({
     });
     console.log(_this.data.curClassify, 'curClassify')
     console.log(_this.data.curNav, 'curNav')
-    var navid = index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id)
+    navid = index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id)
     _this.setData({
       category_id: navid
     })

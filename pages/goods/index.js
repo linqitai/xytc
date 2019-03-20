@@ -31,7 +31,7 @@ Page({
     specData: {}, // 多规格信息
     specValue:1,
   },
-
+  is_pifa_selected: false,
   // 记录规格的数组
   goods_spec_arr: [],
 
@@ -42,6 +42,7 @@ Page({
     let _this = this;
     // 商品id
     _this.data.goods_id = options.goods_id;
+    _this.is_pifa_selected = App.globalData.is_pifa_selected
     // 获取商品信息
     _this.getGoodsDetail();
   },
@@ -227,7 +228,7 @@ Page({
    * 跳转购物车页面
    */
   flowCart: function() {
-    wx.switchTab({
+    wx.navigateTo({
       url: "../flow/index"
     });
   },
@@ -278,11 +279,25 @@ Page({
       });
     } else if (submitType === 'addCart') {
       // 加入购物车
-      App._post_form('cart/add', {
+      let url = '';
+      console.log(_this.is_pifa_selected, "_this.is_pifa_selected")
+      if (_this.is_pifa_selected) {
+        url = 'cart2/add'
+      } else {
+        url = 'cart/add'
+      }
+      App._post_form(url, {
         goods_id: _this.data.goods_id,
         goods_num: _this.data.goods_num,
         goods_sku_id: _this.data.goods_sku_id,
       }, function(result) {
+        if (App.globalData.is_pifa_selected) {
+          App.globalData.cart2 = App.globalData.cart2 + _this.data.goods_num;
+          console.log(App.globalData.cart2, "App.globalData.cart2")
+        } else {
+          App.globalData.cart1 = App.globalData.cart1 + _this.data.goods_num;
+          console.log(App.globalData.cart1, "App.globalData.cart1")
+        }
         App.showSuccess(result.msg);
         _this.setData(result.data);
       });

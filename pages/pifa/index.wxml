@@ -87,4 +87,12 @@
     </view>
   </view>
 </view>
+
+<view class="shopcart_top" bindtap="to_shopcart_view">
+  <view class='p-r icon_wrapper'>
+    <text class="iconfont icon-cart"></text>
+    <view class='info' wx:if="{{cart2}}">{{cart2}}</view>
+  </view>
+</view>
+
 <tab-bar active="{{active}}" tab_bar="{{tab_bar}}"/>

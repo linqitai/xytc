@@ -6,28 +6,25 @@ App({
   globalData: {
     user_id: null,
     userInfo:'',
+    cart1:0,
+    cart2:0,
     is_pifa_selected:false,
     tab_bar:[
       {
         name:'首页',
         icon:'home',
         is_show:true
-      }, 
+      },
       {
         name: '分类',
         icon: 'category',
         is_show: true
       },
       {
-        name: '批发市场',
+        name: '批发',
         icon: 'pifa',
-        is_show: true
+        is_show: false
       },
-      {
-        name: '购物车',
-        icon: 'shopcart',
-        is_show: true
-      }, 
       {
         name: '我的',
         icon: 'person',
@@ -45,7 +42,29 @@ App({
   onLaunch: function() {
     // 设置api地址
     this.setApiRoot();
-    
+    this.getCart_num();
+  },
+  deal_number(order_total_price){
+    if (order_total_price.indexOf(',') > -1) {
+      let index = order_total_price.indexOf(',')
+      let arr = order_total_price.split('')
+      arr.splice(index, 1)
+      return arr.join('')
+    }else{
+      return order_total_price
+    }
+  },
+  /**
+   * 获取购物车数量
+   */
+  getCart_num: function () {
+    let _this = this;
+    _this._get('index/get_num', {}, function (result) {
+      console.log(result,"result:get_num")
+      _this.globalData.cart1 = result.data.data.cart1
+      _this.globalData.cart2 = result.data.data.cart2
+      console.log(_this.globalData.cart1, _this.globalData.cart2,'cart12')
+    });
   },
   /**
    * 获取当前用户信息

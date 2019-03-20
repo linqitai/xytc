@@ -85,9 +85,13 @@
       <text class="f-24 col-9 cont">数据加载完毕</text>
     </view>
   <!-- 返回顶部 -->
-  <view bindtap="goTop" class="widget-goTop" wx:if="{{floorstatus}}">
-    <text class="iconfont icon-fanhuidingbu"></text>
-  </view>
+  <!-- <view bindtap="goTop" class="shopcart_top" wx:if="{{floorstatus}}">
+    <text class="iconfont icon-pifa"></text>
+  </view> -->
 </view>
+
+<!-- <view class="shopcart_top" bindtap="to_shopcart_view">
+  <text class="iconfont icon-cart"></text>
+</view> -->
 
 <tab-bar active="{{active}}" tab_bar="{{tab_bar}}"/>

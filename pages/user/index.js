@@ -17,7 +17,7 @@ Page({
     wx.setStorageSync('_from', '');
     console.log(App.globalData.tab_bar,"App.globalData.tab_bar")
     this.setData({
-      active: App.setActive(3),
+      active: App.setActive(2),
       tab_bar: App.globalData.tab_bar
     })
   },

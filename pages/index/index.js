@@ -15,9 +15,34 @@ Page({
     newest: {},
     best: {},
     cate: {},
-    scrollTop: 0
+    scrollTop: 0,
+    top: '',
+    left: '',
+    windowWidth: '',
+    windowHeight: ''
   },
-
+  to_shopcart_view(){
+    wx.navigateTo({
+      url: "../flow/index"
+    });
+  },
+  // 拖动不超过规定范围
+  setTouchMove: function (e) {
+    e.preventDefault();
+    console.log("---------------- e.touches[0].clientX----------------8==" + e.touches[0].clientX)
+    console.log("---------------- e.touches[0].clientX----------------8=======" + e.touches[0].clientY)
+    if (e.touches[0].clientX < 650 && e.touches[0].clientY < 1110 && e.touches[0].clientX > 0 && e.touches[0].clientY > 0) {
+      this.setData({
+        left: e.touches[0].clientX,
+        top: e.touches[0].clientY
+      })
+    }else{
+      this.setData({
+        left: 650,
+        top: 1110
+      })
+    }
+  },
   onLoad: function() {
     if (App.globalData.userInfo.store_cert == 1) {
       App.globalData.tab_bar[2].is_show = true

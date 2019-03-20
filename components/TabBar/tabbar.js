@@ -57,9 +57,6 @@ Component({
           url = "/pages/pifa/index"
           break;
         case 3:
-          url = "/pages/flow/index"
-          break;
-        case 4:
           App.globalData.is_pifa_selected = false
           url = "/pages/user/index"
           break;

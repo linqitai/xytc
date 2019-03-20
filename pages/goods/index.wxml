@@ -127,7 +127,6 @@
 <view bindtap="goTop" class="widget-goTop" wx:if="{{floorstatus}}">
   <text class="iconfont icon-fanhuidingbu"></text>
 </view>
-
 <!-- 快捷导航工具 -->
 <view class="filter-menu {{nav_select?'active':''}}">
   <view class="filter-menu-list ts-5">

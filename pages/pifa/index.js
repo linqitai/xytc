@@ -1,5 +1,6 @@
 let App = getApp();
 var goodsList = [];
+var navid = "";
 Page({
   data: {
     searchColor: "rgba(0,0,0,0.4)",
@@ -14,7 +15,8 @@ Page({
     category_id: '',
     goodsList:[],
     list: [],
-    currentOrder:''
+    currentOrder:'',
+    cart2:0
   },
 
   onLoad: function (options) {
@@ -30,6 +32,18 @@ Page({
     this.getCategoryList();
   },
   onShow: function (e) {
+    let _this = this;
+    if (navid){
+      _this.getGoodsList(navid);
+    }
+    this.setData({
+      cart2: App.globalData.cart2
+    })
+  },
+  to_shopcart_view() {
+    wx.navigateTo({
+      url: "../flow/index"
+    });
   },
   subToCart: function(e) {
     console.log(e, 'e')
@@ -63,6 +77,13 @@ Page({
         _this.setData({
           goodsList
         })
+        if (App.globalData.is_pifa_selected) {
+          App.globalData.cart2--;
+        } else {
+          App.globalData.cart1--;
+          console.log(App.globalData.cart1, "App.globalData.cart1")
+        }
+        _this.refreshCart()
       }
     });
   },
@@ -97,8 +118,20 @@ Page({
         _this.setData({
           goodsList
         })
+        if (App.globalData.is_pifa_selected) {
+          App.globalData.cart2++;
+        } else {
+          App.globalData.cart1++;
+          console.log(App.globalData.cart1, "App.globalData.cart1")
+        }
+        _this.refreshCart()
       }
     });
+  },
+  refreshCart() {
+    this.setData({
+      cart2: App.globalData.cart2
+    })
   },
   orderTap(e) {
     var index = e.currentTarget.dataset.index;
@@ -142,7 +175,7 @@ Page({
       category_id: category_id,
       search: ''
     }
-    App._get('goods/lists', pramas, function (result) {
+    App._get('goods/lists2', pramas, function (result) {
       if(result.code == 1){
         goodsList = result.data.list;
         for(var i=0;i<goodsList.length;i++) {
@@ -192,7 +225,7 @@ Page({
     });
     console.log(_this.data.curClassify, 'curClassify')
     console.log(_this.data.curNav, 'curNav')
-    var navid = index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id)
+    navid = index != '' ? (list[index].child ? list[index].child[0].category_id : list[index].category_id) : (list[0].child ? list[0].child[0].category_id : list[index].category_id)
     _this.setData({
       category_id: navid
     })

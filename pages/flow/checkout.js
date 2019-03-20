@@ -374,20 +374,15 @@ Page({
   getReal_pay_price(subMoney) {
     var _this = this
     var real_pay_price = ''
-    var order_total_price = _this.data.order_total_price
-    // console.log(subMoney,"subMoneysubMoneysubMoneysubMoney")
+    var order_total_price = App.deal_number(_this.data.order_total_price)
     if (subMoney){
       if (subMoney[0] == 1) {
-        // console.log(_this.data.order_total_price, "order_total_price")
         real_pay_price = order_total_price - subMoney[1]
       } else if (subMoney[0] == 2) {
-        // console.log(_this.data.order_total_price, "order_total_price")
         real_pay_price = (order_total_price * subMoney[1] * (subMoney[1].length == 1 ? 0.1 : subMoney[1].length == 2 ? 0.01 : 1)).toFixed(2)
       }else{
-        // console.log(_this.data.order_total_price, "order_total_price")
         real_pay_price = order_total_price
       }
-      // console.log(real_pay_price, "real_pay_price")
       _this.setData({
         order_pay_price: real_pay_price
       })
@@ -426,7 +421,7 @@ Page({
     var subMoney = _this.getSubMoney(post_pay_typeCouponList)
     // console.log(subMoney, 'subMoney')
     // =======================================
-    _this.getReal_pay_price(subMoney)
+    _this.getReal_pay_price(App.deal_number(subMoney))
   },
   
   radioChange: function (e) {
@@ -436,7 +431,11 @@ Page({
     })
     if (e.detail.value == 20){
       _this.setData({
-        isHiddenCounpon:true
+        isHiddenCounpon: true
+      })
+    }else{
+      _this.setData({
+        isHiddenCounpon: false
       })
     }
     console.log(this.data.post_pay_type,"post_pay_type")

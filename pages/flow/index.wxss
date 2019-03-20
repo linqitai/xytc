@@ -24,7 +24,7 @@
 .cart-tab-wrp {
   height: 100rpx;
   position: fixed;
-  bottom: 106rpx;
+  bottom: 0rpx;
   background: #fff;
   border-top: 1rpx solid #ddd;
   display: flex;
