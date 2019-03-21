@@ -43,6 +43,7 @@ App({
     // 设置api地址
     this.setApiRoot();
     this.getCart_num();
+    this.getUserDetail()
   },
   deal_number(order_total_price){
     if (order_total_price.indexOf(',') > -1) {
@@ -72,14 +73,23 @@ App({
   /**
    * 获取当前用户信息
    */
-  getUserDetail: function () {
+  getUserDetail: function (callback) {
     let _this = this;
     _this._get('user.index/detail', {}, function (result) {
       _this.globalData.userInfo = result.data.userInfo
       _this.globalData.orderCount = result.data.orderCount
       console.log(_this.globalData.userInfo,"_this.globalData.userInfo")
+      if (_this.globalData.userInfo.store_cert == 1) {
+        _this.globalData.tab_bar[2].is_show = true
+      }
+      if (callback){
+        callback()
+      }
     });
   },
+  /**
+   * 如果是商户，tab-bar会多一个批发，那么active动态+1
+   */
   setActive(active){
     let _this = this;
     if (_this.globalData.userInfo.store_cert==1){
@@ -109,14 +119,7 @@ App({
   onShow: function (options) {
     console.log("onShow","getUserDetail")
     let _this = this;
-    // 获取当前用户信息
-    if (!_this.globalData.userInfo) {
-      _this.getUserDetail();
-    }else{
-      if (_this.globalData.userInfo.store_cert==1){
-        _this.globalData.tab_bar[2].is_show = true
-      }
-    }
+    _this.getUserDetail();
     // 获取小程序基础信息
     // this.getWxappBase(function(wxapp) {
     //   // 设置navbar标题、颜色

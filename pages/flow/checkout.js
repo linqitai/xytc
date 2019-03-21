@@ -34,7 +34,9 @@ Page({
     page: 1,
     isLastPage: false,
     isHiddenCounpon:false,
-    counponEmpty:false
+    counponEmpty:false,
+    msg: '',
+    is_pifa:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -50,6 +52,16 @@ Page({
       time_number:newTimeString
     })
     this.getWindowsInfo();
+    if (App.globalData.is_pifa_selected) {
+      this.setData({
+        time_type_arr: [{ name: "即时送", value: 0, checked: true }, { name: "明日达", value: 1, checked: false }]
+      })
+    } else {
+      this.setData({
+        time_type_arr: [{ name: "明日达", value: 1, checked: true }],
+        time_type:1
+      })
+    }
   },
 
   /**
@@ -60,7 +72,8 @@ Page({
     // 获取当前订单信息
     this.getOrderData();
     this.setData({
-      couponIndex:0
+      couponIndex:0,
+      is_pifa: App.globalData.is_pifa_selected
     })
   },
   toGetAddress(){
@@ -124,6 +137,7 @@ Page({
     this.setData({ couponShow: false });
   },
   getCouponOptions(post_pay_typeCouponList){
+    console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
     var couponOptions = [];
     if (post_pay_typeCouponList.length>0){
       for (var i = 0; i < post_pay_typeCouponList.length; i++) {
@@ -172,11 +186,20 @@ Page({
    */
   getCouponList() {
     var _this = this;
-    App._get('coupon/lists', {
+    let prams = {
       money: this.data.order_total_price
-    }, function (result) {
+    }
+    if (App.globalData.is_pifa_selected) {
+      prams.market_type = 1
+    } else {
+      prams.market_type = 0
+    }
+    App._get('coupon/lists', prams, function (result) {
       // console.log(result,"conponResult")
       couponList = result.data.data;// 接口中拿到的初始数据
+      _this.setData({
+        msg:result.data.msg
+      })
       console.log(couponList[0],"couponList[0]")
       console.log(couponList[0].length,"couponList[0].length")
       if (couponList[0]){
@@ -185,6 +208,7 @@ Page({
             isHiddenCounpon: true,
             counponEmpty:true
           })
+          console.log(_this.data.counponEmpty,"counponEmpty")
         }
       }
       console.log(couponList, "couponList")
@@ -193,7 +217,7 @@ Page({
     });
   },
   selectCoupons(list,post_pay_type){
-    // console.log(list,'list')
+    console.log(list,'-----------list-----------')
     console.log(post_pay_type, 'post_pay_type')
     if (!list){
       return;
@@ -201,8 +225,6 @@ Page({
     var _this = this;
     var couponOptions = [];
     for (var i = 0; i < list.length;i++) {
-      // console.log(list[i].c_type.pay_status?'yes':'no')
-      // console.log(list[i].c_type.pay_status,"list[i].c_type.pay_status")
       if (list[i].c_type.pay_status.value == post_pay_type || list[i].c_type.pay_status.value == 0){
         couponOptions.push(list[i])
       }
@@ -287,7 +309,7 @@ Page({
         App.showError(_this.data.error);
       }
       _this.setData(result.data);
-      if(result.data.address.detail){
+      if(result.data.address){
         _this.setData({
           exist_address:true
         })
@@ -311,6 +333,8 @@ Page({
       console.log(App.globalData.is_pifa_selected,"App.globalData.is_pifa_selected")
       if (App.globalData.is_pifa_selected) {
         prams.market_type = 1
+      } else {
+        prams.market_type = 0
       }
       App._get('order/buyNow', prams, function(result) {
         callback(result);
@@ -319,11 +343,11 @@ Page({
 
     // 购物车结算
     else if (wx.getStorageSync('order_type') === 'cart') {
-      console.log(App.globalData.is_pifa_selected,"App.globalData.is_pifa_selected")
       let prams = {}
-      console.log(App.globalData.is_pifa_selected, "App.globalData.is_pifa_selected")
       if (App.globalData.is_pifa_selected) {
         prams.market_type = 1
+      }else{
+        prams.market_type = 0
       }
       App._get('order/cart', prams, function(result) {
         // console.log("===============cart======================2")
@@ -376,6 +400,7 @@ Page({
     // console.log(_this.data.post_pay_type, "_this.data.post_pay_type")
     // console.log(post_pay_typeCouponList,"post_pay_typeCouponList")
     var showCouponOptions = _this.getCouponOptions(post_pay_typeCouponList) //把数据改造成所要显示的数据
+    console.log(showCouponOptions,"showCouponOptions")
     _this.setData({
       couponOptions: showCouponOptions,
       couponId: post_pay_typeCouponList.length>0?post_pay_typeCouponList[0].id:0
@@ -544,6 +569,11 @@ Page({
             let prams = {
               order_id: result.data.order_id
             }
+            if (App.globalData.is_pifa_selected) {
+              prams.market_type = 1
+            } else {
+              prams.market_type = 0
+            }
             console.log(prams, "prams")
             App._post_form('user.order/order_del', prams, function (result) {
               _this.onShow()
@@ -601,6 +631,8 @@ Page({
       console.log(App.globalData.is_pifa_selected,"App.globalData.is_pifa_selected")
       if (App.globalData.is_pifa_selected) {
         prams.market_type = 1
+      } else {
+        prams.market_type = 0
       }
       App._post_form('order/buyNow', prams, function(result) {
         // success
@@ -641,6 +673,8 @@ Page({
       console.log(App.globalData.is_pifa_selected, "App.globalData.is_pifa_selected")
       if (App.globalData.is_pifa_selected) {
         prams.market_type = 1
+      } else {
+        prams.market_type = 0
       }
       App._post_form('order/cart', prams, function(result) {
         // success

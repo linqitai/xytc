@@ -41,7 +41,7 @@ Page({
             // 记录token user_id
             wx.setStorageSync('token', result.data.token);
             wx.setStorageSync('user_id', result.data.user_id);
-            _this.getUserDetail()
+            App.getUserDetail()
             // 跳转回原页面
             console.log(wx.getStorageSync('currentPage').route,"currentPage");
             let route = wx.getStorageSync('currentPage').route;
@@ -63,17 +63,17 @@ Page({
   /**
      * 获取当前用户信息
      */
-  getUserDetail: function () {
-    let _this = this;
-    App._get('user.index/detail', {}, function (result) {
-      App.globalData.userInfo = result.data.userInfo
-      App.globalData.orderCount = result.data.orderCount
-      console.log(App.globalData.userInfo, "App.globalData.userInfo")
-      if (App.globalData.userInfo.store_cert == 1) {
-        App.globalData.tab_bar[2].is_show = true
-      }
-    });
-  },
+  // getUserDetail: function () {
+  //   let _this = this;
+  //   App._get('user.index/detail', {}, function (result) {
+  //     App.globalData.userInfo = result.data.userInfo
+  //     App.globalData.orderCount = result.data.orderCount
+  //     console.log(App.globalData.userInfo, "App.globalData.userInfo")
+  //     if (App.globalData.userInfo.store_cert == 1) {
+  //       App.globalData.tab_bar[2].is_show = true
+  //     }
+  //   });
+  // },
   /**
    * 授权成功 跳转回原页面
    */

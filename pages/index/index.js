@@ -43,16 +43,19 @@ Page({
       })
     }
   },
-  onLoad: function() {
-    if (App.globalData.userInfo.store_cert == 1) {
-      App.globalData.tab_bar[2].is_show = true
-      console.log(App.globalData.tab_bar[2],"App.globalData.tab_bar[2]")
-    }
-    let tab_bar = App.globalData.tab_bar
+  onShow: function() {
+    let _this = this;
+    console.log("----------------onShow-------------------")
+    console.log(App.globalData.userInfo.store_cert, 'App.globalData.userInfo.store_cert')
+    App.getUserDetail(function () {
+      let tab_bar = App.globalData.tab_bar
+      _this.setData({
+        tab_bar: tab_bar
+      })
+    })
     // tab_bar[3].info = 2
     this.setData({
-      active: 0,
-      tab_bar: tab_bar
+      active: 0
     })
     // 刷新组件
     this.refreshView = this.selectComponent("#refreshView")

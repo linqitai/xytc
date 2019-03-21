@@ -15,7 +15,7 @@
               {{address.detail}}
             </view>
           </view>
-          <text class="iconfont icon-xiangyoujiantou address_arrow"></text>
+          <text class="iconfont icon-xiangyoujiantou address_arrow" wx:if="{{is_pifa}}"></text>
         </view>
       </view>
     </view>
@@ -99,13 +99,15 @@
         </radio-group>
       </view>
     </view>
-    <view class="dis-flex flow-all-list" wx:if="{{!isHiddenCounpon}}">
+    <view class="dis-flex flow-all-list">
       <text class="flex-five">优惠券:</text>
       <view class="flex-five t-r">
         <!-- <view class="picker"> bindtap='openPopup'
           {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
         </view> -->
-        <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}">
+        <!-- {{couponOptions.length==0?msg[0]}} -->
+        <view class="picker" wx:if="{{couponOptions.length==0}}">{{msg[0]}}</view>
+        <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}" wx:if="{{couponOptions.length}}">
           <view class="picker">
             {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
           </view>

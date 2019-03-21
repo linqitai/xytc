@@ -1,5 +1,5 @@
 <van-tabbar active="{{ active }}" tab_bar="{{tab_bar}}" active-color="#48C23D" bind:change="onChange">
-  <van-tabbar-item wx:for="{{tab_bar}}" wx:key="{{index}}" info="{{item.info}}">
+  <van-tabbar-item wx:for="{{tab_bar}}" wx:key="{{index}}" info="{{item.info}}" wx:if="{{item.is_show}}">
     <image slot="icon" src="/images/tab-bar/{{item.icon}}.png" mode="aspectFit"/>
     <image slot="icon-active" src="/images/tab-bar/{{item.icon}}-active.png" mode="aspectFit" />
     {{item.name}}

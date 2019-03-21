@@ -39,7 +39,7 @@ Component({
    */
   methods: {
     onChange(event) {
-      console.log(event.detail);
+      console.log(event.detail,"active");
       let active = event.detail;
       let url = ''
       console.log(App.globalData.userInfo.store_cert,"App.globalData.userInfo.store_cert")
@@ -55,6 +55,9 @@ Component({
         case 2:
           App.globalData.is_pifa_selected = false
           url = "/pages/category/index"
+          if (App.globalData.userInfo.store_cert == 2 && active == 2) {
+            url = "/pages/user/index"
+          }
           break;
         case 3:
           App.globalData.is_pifa_selected = false

@@ -17,7 +17,7 @@ Page({
     wx.setStorageSync('_from', '');
     console.log(App.globalData.tab_bar,"App.globalData.tab_bar")
     this.setData({
-      active: App.setActive(2),
+      active: App.setActive(2), // 如果是商户，tab-bar会多一个批发，那么active动态+1
       tab_bar: App.globalData.tab_bar
     })
   },
