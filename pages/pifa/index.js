@@ -21,6 +21,7 @@ Page({
 
   onLoad: function (options) {
     let _this = this;
+    App.getCart_num()
     this.setData({
       active: 2,
       tab_bar: App.globalData.tab_bar
@@ -33,12 +34,14 @@ Page({
   },
   onShow: function (e) {
     let _this = this;
+    App.getCart_num(function () {
+      _this.setData({
+        cart2: App.globalData.cart2
+      })
+    })
     if (navid){
       _this.getGoodsList(navid);
     }
-    this.setData({
-      cart2: App.globalData.cart2
-    })
   },
   to_shopcart_view() {
     wx.navigateTo({

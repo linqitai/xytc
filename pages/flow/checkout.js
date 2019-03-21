@@ -293,24 +293,35 @@ Page({
 
     // 立即购买
     if (wx.getStorageSync('order_type') === 'buyNow') {
-      App._get('order/buyNow', {
+      let prams = {
         goods_id: options.goods_id,
         goods_num: options.goods_num,
         goods_sku_id: options.goods_sku_id,
         pay_type: options.pay_type,
         dis_type: options.dis_type,
-        coupon_id:_this.data.couponId,
+        coupon_id: _this.data.couponId,
         time_type: _this.data.time_type,
         time_value: _this.data.time_value,
         time_number: _this.data.time_number
-      }, function(result) {
+      }
+      console.log(App.globalData.is_pifa_selected,"App.globalData.is_pifa_selected")
+      if (App.globalData.is_pifa_selected) {
+        prams.market_type = 1
+      }
+      App._get('order/buyNow', prams, function(result) {
         callback(result);
       });
     }
 
     // 购物车结算
     else if (wx.getStorageSync('order_type') === 'cart') {
-      App._get('order/cart', {}, function(result) {
+      console.log(App.globalData.is_pifa_selected,"App.globalData.is_pifa_selected")
+      let prams = {}
+      console.log(App.globalData.is_pifa_selected, "App.globalData.is_pifa_selected")
+      if (App.globalData.is_pifa_selected) {
+        prams.market_type = 1
+      }
+      App._get('order/cart', prams, function(result) {
         // console.log("===============cart======================2")
         callback(result);
       });
@@ -442,7 +453,7 @@ Page({
     this.masterMethod4getSubMoney()
     this.setData({
       couponIndex: 0,
-      order_pay_price:_this.data.order_total_price
+      order_pay_price: App.deal_number(_this.data.order_total_price)
     })
   },
   // 配送时间的选择
@@ -569,7 +580,7 @@ Page({
     // 创建订单-立即购买
     if (wx.getStorageSync('order_type') === 'buyNow') {
       console.log("=============buyNow==============")
-      App._post_form('order/buyNow', {
+      let prams = {
         goods_id: options.goods_id,
         goods_num: options.goods_num,
         goods_sku_id: options.goods_sku_id,
@@ -579,7 +590,12 @@ Page({
         time_type: _this.data.time_type,
         time_value: _this.data.time_value,
         time_number: _this.data.time_number
-      }, function(result) {
+      }
+      console.log(App.globalData.is_pifa_selected,"App.globalData.is_pifa_selected")
+      if (App.globalData.is_pifa_selected) {
+        prams.market_type = 1
+      }
+      App._post_form('order/buyNow', prams, function(result) {
         // success
         console.log('===================success============================');
         callback(result);
@@ -607,14 +623,19 @@ Page({
     // 创建订单-购物车结算
     else if (wx.getStorageSync('order_type') === 'cart') {
       console.log("===============cart======================1")
-      App._post_form('order/cart', {
+      let prams = {
         pay_type: post_pay_type,
         dis_type: post_dis_type,
         coupon_id: _this.data.couponId,
         time_type: _this.data.time_type,
         time_value: _this.data.time_value,
         time_number: _this.data.time_number
-      }, function(result) {
+      }
+      console.log(App.globalData.is_pifa_selected, "App.globalData.is_pifa_selected")
+      if (App.globalData.is_pifa_selected) {
+        prams.market_type = 1
+      }
+      App._post_form('order/cart', prams, function(result) {
         // success
         console.log('success');
         callback(result);

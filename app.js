@@ -57,13 +57,16 @@ App({
   /**
    * 获取购物车数量
    */
-  getCart_num: function () {
+  getCart_num: function (callback) {
     let _this = this;
     _this._get('index/get_num', {}, function (result) {
       console.log(result,"result:get_num")
       _this.globalData.cart1 = result.data.data.cart1
       _this.globalData.cart2 = result.data.data.cart2
       console.log(_this.globalData.cart1, _this.globalData.cart2,'cart12')
+      if(callback){
+        callback();
+      }
     });
   },
   /**

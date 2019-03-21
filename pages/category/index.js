@@ -33,12 +33,14 @@ Page({
   },
   onShow: function (e) {
     let _this = this;
+    App.getCart_num(function(){
+      _this.setData({
+        cart1: App.globalData.cart1
+      })
+    })
     if (navid) {
       _this.getGoodsList(navid);
     }
-    this.setData({
-      cart1:App.globalData.cart1
-    })
     this.is_pifa_selected = App.globalData.is_pifa_selected
     console.log(this.is_pifa_selected, "is_pifa_selected")
   },
