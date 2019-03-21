@@ -23,7 +23,7 @@ Page({
     let _this = this;
     App.getCart_num()
     this.setData({
-      active: 2,
+      active: 1,
       tab_bar: App.globalData.tab_bar
     })
     this.setData({
@@ -256,6 +256,7 @@ Page({
       scrollTop: 0,
       category_id: curNav
     });
+    navid = curNav
     this.getGoodsList(curNav);
   },
 

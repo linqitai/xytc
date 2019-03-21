@@ -58,6 +58,7 @@
               <view class="btn" wx:if="{{item.is_mul_spec==0}}">
                 <text class='icon icon-sub sub' data-goodsid="{{item.goods_id}}" catchtap='subToCart' wx:if="{{item.spec[0].cart_num>0}}"></text>
                 <text class='text f-32' wx:if="{{item.spec[0].cart_num>0}}">{{item.spec[0].cart_num}}</text>
+                <!-- <input class='text f-32' wx:if="{{item.spec[0].cart_num>0}}" value='{{item.spec[0].cart_num}}'></input> -->
                 <text class='icon icon-add2 add' data-goodsid="{{item.goods_id}}" catchtap='addToCart'></text>
               </view>
             </view>

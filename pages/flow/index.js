@@ -34,10 +34,10 @@ Page({
     console.log(App.globalData.is_pifa_selected,"App.globalData.is_pifa_selected")
     if (App.globalData.is_pifa_selected){
       url = 'cart2/lists'
-      App.setHeaderTitle("批发市场购物车")
+      App.setHeaderTitle("新零售购物车")
     }else{
       url = 'cart/lists'
-      App.setHeaderTitle("新零售购物车")
+      App.setHeaderTitle("批发市场购物车")
     }
     App._get(url, {}, function(result) {
       console.log(result,"result:cart/list")

@@ -22,7 +22,7 @@ Page({
   onLoad: function (options) {
     let _this = this;
     this.setData({
-      active: 1,
+      active: 2,
       tab_bar: App.globalData.tab_bar
     })
     this.setData({
@@ -38,6 +38,7 @@ Page({
         cart1: App.globalData.cart1
       })
     })
+    console.log(navid,"navid")
     if (navid) {
       _this.getGoodsList(navid);
     }
@@ -186,6 +187,7 @@ Page({
     })
   },
   getGoodsList: function (category_id) {
+    console.log(category_id,"category_id")
     let _this = this;
     var pramas = {
       sortType: this.data.sortType,
@@ -271,6 +273,7 @@ Page({
       scrollTop: 0,
       category_id: curNav
     });
+    navid = curNav
     this.getGoodsList(curNav);
   },
 

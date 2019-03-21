@@ -33,7 +33,8 @@ Page({
     windowWidth:'',
     page: 1,
     isLastPage: false,
-    isHiddenCounpon:false
+    isHiddenCounpon:false,
+    counponEmpty:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -176,10 +177,13 @@ Page({
     }, function (result) {
       // console.log(result,"conponResult")
       couponList = result.data.data;// 接口中拿到的初始数据
+      console.log(couponList[0],"couponList[0]")
+      console.log(couponList[0].length,"couponList[0].length")
       if (couponList[0]){
         if (couponList[0].length == 0) {
           _this.setData({
-            isHiddenCounpon: true
+            isHiddenCounpon: true,
+            counponEmpty:true
           })
         }
       }
@@ -440,14 +444,17 @@ Page({
     this.setData({
       post_pay_type: e.detail.value
     })
-    if (e.detail.value == 20){
-      _this.setData({
-        isHiddenCounpon: true
-      })
-    }else{
-      _this.setData({
-        isHiddenCounpon: false
-      })
+    console.log(_this.data.counponEmpty,"_this.data.counponEmpty")
+    if (_this.data.counponEmpty == false){
+      if (e.detail.value == 20) {
+        _this.setData({
+          isHiddenCounpon: true
+        })
+      } else {
+        _this.setData({
+          isHiddenCounpon: false
+        })
+      }
     }
     console.log(this.data.post_pay_type,"post_pay_type")
     this.masterMethod4getSubMoney()

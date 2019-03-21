@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "全部分类",
+    "navigationBarTitleText": "批发",
     "usingComponents": {
       "tab-bar": "/components/TabBar/tabbar"
     }

@@ -49,12 +49,12 @@ Component({
           url = "/pages/index/index"
           break;
         case 1:
-          App.globalData.is_pifa_selected = false
-          url = "/pages/category/index"
-          break;
-        case 2:
           App.globalData.is_pifa_selected = true
           url = "/pages/pifa/index"
+          break;
+        case 2:
+          App.globalData.is_pifa_selected = false
+          url = "/pages/category/index"
           break;
         case 3:
           App.globalData.is_pifa_selected = false
