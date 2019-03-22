@@ -76,11 +76,14 @@ Page({
       is_pifa: App.globalData.is_pifa_selected
     })
   },
-  toGetAddress(){
+  toGetAddress(e){
     // wx.setStorageSync('_from', 'flow')
     // wx.navigateTo({
     //   url: '../address/index',
     // })
+    if (!App.globalData.is_pifa_selected){
+      return
+    }
     let _this = this;
     wx.setStorageSync('_from', 'flow');// 记得在我的页面要清空
     console.log(wx.getStorageSync('_from'), "wx.getStorageSync('_from')")
