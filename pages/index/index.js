@@ -46,7 +46,8 @@ Page({
   onShow: function() {
     let _this = this;
     console.log("----------------onShow-------------------")
-    console.log(App.globalData.userInfo.store_cert, 'App.globalData.userInfo.store_cert')
+    App.globalData.is_pifa_selected = true;
+    console.log(App.globalData.is_pifa_selected, "App.globalData.is_pifa_selected")
     App.getUserDetail(function () {
       let tab_bar = App.globalData.tab_bar
       _this.setData({

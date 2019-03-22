@@ -78,7 +78,7 @@ App({
     _this._get('user.index/detail', {}, function (result) {
       _this.globalData.userInfo = result.data.userInfo
       _this.globalData.orderCount = result.data.orderCount
-      console.log(_this.globalData.userInfo,"_this.globalData.userInfo")
+      // console.log(_this.globalData.userInfo,"_this.globalData.userInfo")
       if (_this.globalData.userInfo.store_cert == 1) {
         _this.globalData.tab_bar[2].is_show = true
       }

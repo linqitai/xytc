@@ -42,6 +42,8 @@ Page({
     if (navid){
       _this.getGoodsList(navid);
     }
+    App.globalData.is_pifa_selected = true
+    console.log(App.globalData.is_pifa_selected, "App.globalData.is_pifa_selected")
   },
   to_shopcart_view() {
     wx.navigateTo({

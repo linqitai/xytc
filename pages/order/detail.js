@@ -19,7 +19,7 @@ Page({
   },
   onUnload: function () {
     wx.navigateTo({
-      url: '../order/index?type=delivery'
+      url: '../order/index'
     })
   },
   /**

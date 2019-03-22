@@ -16,9 +16,10 @@ Page({
    */
   onLoad: function (options) {
     console.log(options.type,"options")
-    this.setData({ dataType: options.type || 'all' });
+    console.log(wx.getStorageSync('type'),"wx.getStorageSync('type')")
+    this.setData({ dataType: options.type || wx.getStorageSync('type') || 'all' });
     // 获取订单列表
-    this.getOrderList(this.data.dataType);
+    this.getOrderList(this.data.dataType || wx.getStorageSync('type'));
   },
 
   /**
@@ -28,7 +29,7 @@ Page({
   },
   onUnload: function () {
     console.log("----------------onUnLoad----------------")
-    wx.switchTab({
+    wx.redirectTo({
       url: '../user/index'
     })
   },
@@ -53,10 +54,12 @@ Page({
    * 切换标签
    */
   bindHeaderTap: function (e) {
-    console.log(e.target.dataset.type,"e.target.dataset.type")
-    this.setData({ dataType: e.target.dataset.type });
+    let type = e.target.dataset.type
+    wx.setStorageSync('type', type)
+    console.log(type,"type")
+    this.setData({ dataType: type });
     // 获取订单列表
-    this.getOrderList(e.target.dataset.type);
+    this.getOrderList(type);
   },
 
   /**
