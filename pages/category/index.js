@@ -187,7 +187,9 @@ Page({
     })
   },
   getGoodsList: function (category_id) {
-    console.log(category_id,"category_id")
+    console.log("getGoodsList")
+    this.setData({ category_id: category_id})
+    navid = category_id
     let _this = this;
     var pramas = {
       sortType: this.data.sortType,

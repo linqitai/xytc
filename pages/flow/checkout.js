@@ -289,6 +289,12 @@ Page({
       })
       console.log(pay_type_arr,"get------pay_type_arr")
       let time_list = result.data.time_list;
+      if (App.globalData.is_pifa_selected){
+
+      }else{
+        time_list[1] = result.data.distribution_time
+      }
+      
       _this.setData({
         time_list
       })

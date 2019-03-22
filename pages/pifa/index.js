@@ -44,6 +44,8 @@ Page({
     }
     App.globalData.is_pifa_selected = true
     console.log(App.globalData.is_pifa_selected, "App.globalData.is_pifa_selected")
+    console.log(navid, "navid")
+    console.log(this.data.category_id,"category_id")
   },
   to_shopcart_view() {
     wx.navigateTo({
@@ -173,6 +175,9 @@ Page({
     })
   },
   getGoodsList: function (category_id) {
+    console.log("getGoodsList")
+    this.setData({ category_id: category_id })
+    navid = category_id
     let _this = this;
     var pramas = {
       sortType: this.data.sortType,
@@ -234,6 +239,7 @@ Page({
     _this.setData({
       category_id: navid
     })
+    console.log(navid, "navid")
     _this.getGoodsList(navid)
   },
   /**
@@ -248,6 +254,7 @@ Page({
       curNav: _this.data.list[curClassifyIndex].child ? _this.data.list[curClassifyIndex].child[0].category_id : _this.data.list[curClassifyIndex].category_id,
       category_id: _this.data.list[curClassifyIndex].child ? _this.data.list[curClassifyIndex].child[0].category_id : _this.data.list[curClassifyIndex].category_id
     });
+    console.log(navid, "navid")
     this.getGoodsList(_this.data.curNav);
   },
   selectNav: function (t) {
@@ -259,6 +266,7 @@ Page({
       category_id: curNav
     });
     navid = curNav
+    console.log(navid,"navid")
     this.getGoodsList(curNav);
   },
 
