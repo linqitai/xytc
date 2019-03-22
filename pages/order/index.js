@@ -20,6 +20,9 @@ Page({
     this.setData({ dataType: options.type || wx.getStorageSync('type') || 'all' });
     // 获取订单列表
     this.getOrderList(this.data.dataType || wx.getStorageSync('type'));
+    if (options.type) {
+      wx.setStorageSync('type', options.type)
+    }
   },
 
   /**
