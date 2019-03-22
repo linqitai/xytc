@@ -106,7 +106,7 @@
           {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>
         </view> -->
         <!-- {{couponOptions.length==0?msg[0]}} -->
-        <view class="picker" wx:if="{{couponOptions.length==0}}">{{msg[0]}}</view>
+        <view class="picker" wx:if="{{couponOptions.length==0}}">{{post_pay_type==10?msg[0]:msg[1]}}</view>
         <picker bindchange="bindCouponPickerChange" value="{{couponIndex}}" range="{{couponOptions}}" wx:if="{{couponOptions.length}}">
           <view class="picker">
             {{couponOptions[couponIndex]}}<text class="iconfont icon-xiangyoujiantou"></text>

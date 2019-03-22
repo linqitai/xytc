@@ -479,11 +479,13 @@ Page({
       post_pay_type: e.detail.value
     })
     console.log(_this.data.counponEmpty,"_this.data.counponEmpty")
+    console.log(e.detail.value, "post_pay_type")
     if (_this.data.counponEmpty == false){
       if (e.detail.value == 20) {
         _this.setData({
           isHiddenCounpon: true
         })
+        
       } else {
         _this.setData({
           isHiddenCounpon: false
