@@ -90,7 +90,7 @@
 .goodsList .items .img .image{
   width: 110rpx;
   height: 110rpx;
-  background-color: #11877C;
+  background-color: #efefef;
   /* border-radius: 100%; */
   background-size: 100%;
 }
